@@ -40,6 +40,7 @@ As a unauthenticated user, I want to view Pokemon in the public forum and create
         * eraser icon
             * line width
         * color wheel
+        * (stretch goal) palette presets of previously used colors
         * undo/re-do buttons
         * clear entire canvas button
 
@@ -61,7 +62,7 @@ As an authenticated user, I want to view Pokemon in the public forum, post Pokem
 * Each pokemon in list will include an 'Edit' button and 'Delete' button. 
 * The authenticated user, upon selecting 'Edit' will be directed to the form and drawing tool creation set up, where the form and canvas will be pre-populated with the previous values of their saved pokemon. The authenticated user can change these values and re-save their pokemon. 
 * The authenticated user, upon selecting 'Delete' will be directed to a page that includes their pokemon details and prompts the user to confirm that they would like to delete this pokemon.
-* Upon confirmation, the pokemon will be deleted and the authenticated user will be redirected back to their profile list of pokemon. If the authenticated user cancels the deletion, they will be redirected back to their profile list of pokemon without deleting the pokemon. 
+* Upon confirmation, the pokemon will be deleted and the authenticated user will be redirected back to their profile list of pokemon. If the authenticated user cancels the deletion, they will be redirected back to their profile list of pokemon without deleting the pokemon. If the deleted pokemon was on the public forum, it will be taken out as well.
 * When the authenticated user is done using the app, they can select 'Logout' from the navigation bar and exit the application, being redirected to the homepage as an unauthenticated user. 
 
 
@@ -71,15 +72,22 @@ As an app moderator, I want to view Pokemon in the public forum, and hide Pokemo
 * Dependent upon: As a new user, I want to create an account.
 * Dependent upon: As an unauthenticated user, I want to log in, so I can use features that require authentication.
 * Dependent upon: I have been approved by an administrator to become a moderator and use features that require moderator authorization.
-*The moderator has all the rights and permissions of authenticated users, with the addition of hiding public forum pokemon that are deemed inappropriate.
+* The moderator has all the rights and permissions of authenticated users, with the addition of hiding public forum pokemon that are deemed inappropriate.
+* A moderator's icon has a moderator badge.
+* As a moderator, I am able to hide pokemon from the public forum by clicking the toggle if the pokemon does not meet community standards
+* Community standards:
+  * Only sfw pokemon are allowed
+  * No imagery with racist, homophobic or otherwise discriminatory undertones are allowed
+* When a moderator hides a pokemon from the public forum, the hidden pokemon is added to a list that only the administrator can view.
 
 ### The administrator:
 As an administrator, I want to view Pokemon in the public forum, and hide Pokemon from the public forum should they not meet public Pokemon criteria. I also want to add moderators and remove moderators. 
-* As an unauthenticated user, I want to log in, so I can use features that require authentication.
-
-(Stretch goals) I want to:
-* receive reports about flagged/hidden pokemon from mods
-* suspend accounts
-* remove accounts as necessary
+* Dependent upon: As an unauthenticated user, I want to log in, so I can use features that require authentication.
+* The administrator has all the rights and permissions of a moderator in addition to suspending and deleting accounts, as well as adding and removing moderators.
+* The administrator can see a list of pokemon that moderators have flagged and decide if a pokemon in the list meets community standards. 
+* If a user has more than 3 strikes (3 of their public pokemon have been removed from the public forum and all deemed by the administrator to not meet community standards), the administrator can suspend the user's account by clicking a suspend user button.
+* The administrator can track a list of accounts that have been suspended such that they can delete any of the suspended accounts if the owner gets suspended twice.
+* The administrator can make a user a moderator by clicking a make mod button on the user's profile
+* The administrator can remove moderator privileges from a current moderator if the moderator decides not to moderate anymore or the moderator abused moderator privileges by hiding pokemon needlessly by clicking a demote mod button on the moderator's profile.
 
 
