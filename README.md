@@ -67,7 +67,7 @@ As an authenticated user, I want to view Pokemon in the public forum, post Pokem
 
 
 
-### The moderator:
+### (Stretch Goal) The moderator:
 As an app moderator, I want to view Pokemon in the public forum, and hide Pokemon from the public forum should they not meet public Pokemon criteria. I also am an authenticated user.
 * Dependent upon: As a new user, I want to create an account.
 * Dependent upon: As an unauthenticated user, I want to log in, so I can use features that require authentication.
@@ -80,7 +80,7 @@ As an app moderator, I want to view Pokemon in the public forum, and hide Pokemo
   * No imagery with racist, homophobic or otherwise discriminatory undertones are allowed
 * When a moderator hides a pokemon from the public forum, the hidden pokemon is added to a list that only the administrator can view.
 
-### The administrator:
+### (Stretch Goal) The administrator:
 As an administrator, I want to view Pokemon in the public forum, and hide Pokemon from the public forum should they not meet public Pokemon criteria. I also want to add moderators and remove moderators. 
 * Dependent upon: As an unauthenticated user, I want to log in, so I can use features that require authentication.
 * The administrator has all the rights and permissions of a moderator in addition to suspending and deleting accounts, as well as adding and removing moderators.
