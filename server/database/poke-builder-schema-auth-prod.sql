@@ -45,11 +45,6 @@ insert into app_user_role(app_user_id, app_role_id) values
 	(1, 1),
     (2, 2);
 
-create table vibe (
-vibe_id int primary key auto_increment,
-vibe_name varchar(50) not null
-);
-
 create table ability (
 ability_id int primary key auto_increment,
 ability_name varchar(50) not null,
@@ -66,7 +61,7 @@ pokemon_id int not null,
 type_id_1 int not null,
 type_id_2 int null,
 constraint pk_poke_type
-	primary key (pokemon_id, type_id_1, type_id_2),
+	primary key (pokemon_id, type_id_1),
 constraint fk_poke_type_pokemon_id
 	foreign key (pokemon_id)
     references pokemon(pokemon_id),
@@ -116,15 +111,12 @@ pokemon_name varchar(100) not null,
 height int not null,
 weight int not null,
 birthday date not null,
-vibe_id int not null,
+vibe varchar(20) not null,
 user_id int not null,
 ability_id int not null,
 constraint fk_pokemon_ability
 	foreign key (ability_id)
     references ability(ability_id),
-constraint fk_pokemon_vibe
-	foreign key (vibe_id)
-    references vibe(vibe_id),
 constraint fk_pokemon_user
 	foreign key (user_id)
     references app_user (user_id)
