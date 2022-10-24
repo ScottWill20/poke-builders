@@ -143,23 +143,3 @@ constraint fk_poke_move_move_id_4
     references move(move_id)
 );
 
-<<<<<<< HEAD
-
-=======
-create table pokemon (
-pokemon_id int primary key auto_increment,
-pokemon_name varchar(100) not null,
-height int not null,
-weight int not null,
-birthday date not null,
-vibe varchar(20) not null,
-user_id int not null,
-ability_id int not null,
-constraint fk_pokemon_ability
-	foreign key (ability_id)
-    references ability(ability_id),
-constraint fk_pokemon_user
-	foreign key (user_id)
-    references app_user (user_id)
-);
->>>>>>> d6f691c89c6dffc95bac2dd6317897be35c555a6
