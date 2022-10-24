@@ -103,10 +103,27 @@
 - [ ] Create postMapping for authenticating users (1hr)
 
 ## Front-End tasks
+- Create a node project with `npm create-react-app`
+- Include links for Bootstrap CSS styling in index.html 
 - [ ] Create Navigation Component (3 hrs)
+    - Use `<Link>` elements to link between "pages"
 - [ ] Create Pokemon Creation component (3 hrs)
+    - `<canvas>` element
+    - buttons for drawing tools (pencil, eraser, undo, redo, color wheel)
+    - form for Pokemon characteristics
 - [ ] Create Homepage component (3 hrs)
+    - Nav bar with `Home`, `Create a Pokemon`, and `Create Account`/`Login`
+    - Display grid of all public Pokemon cards
 - [ ] Create User profile component (3 hrs)
+    - Display grid of all public and private Pokemon cards that belong to that user
+    - Each Pokemon card will include an `Edit` and `Delete` button
 - [ ] Create Login component (3 hrs)
+    - Login Form with inputs for email, password, and sign in button
 - [ ] Create Account Creation component (3 hrs)
+    - Create account form with inputs for:
+        - email
+        - username
+        - password
+        - birthday (?) optional 
+        - favorite Pokemon (choose from list)
 
