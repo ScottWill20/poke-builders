@@ -17,7 +17,7 @@ create table app_user (
 
 create table app_role (
 	app_role_id int primary key auto_increment,
-    `name` varchar(50) not null unique
+    `name` varchar(50) not null
 );
 
 create table app_user_role (
