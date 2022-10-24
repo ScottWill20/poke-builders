@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class Pokemon {
     private int id;
     private String name;
-    private int height;
-    private int weight;
+    private double height;
+    private double weight;
     private LocalDate birthday;
     private ArrayList<Type> types;
     private Vibe vibe;
@@ -49,19 +49,19 @@ public class Pokemon {
         this.name = name;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
