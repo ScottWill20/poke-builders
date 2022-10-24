@@ -109,14 +109,13 @@ insert into poke_type (pokemon_id, type_id_1, type_id_2) values
 create table move (
 move_id int primary key auto_increment,
 move_name varchar(100) not null,
-move_description varchar(200) not null,
-type_id int not null
+move_description varchar(200) not null
 );
 
-insert into move (move_name, move_description, type_id) values
-	("Accupressure","Sharply raise a random stat.", 1),
-    ("AquaJet","User attacks first.",4),
-    ("Aeromatic Mist","Raises Sp. Def of an ally.",3);
+insert into move (move_name, move_description) values
+	("Accupressure","Sharply raise a random stat."),
+    ("AquaJet","User attacks first."),
+    ("Aeromatic Mist","Raises Sp. Def of an ally.");
 
 create table poke_move (
 pokemon_id int not null,
