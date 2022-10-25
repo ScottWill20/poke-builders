@@ -1,7 +1,5 @@
 package learn.pokemon.domain;
 
-import learn.pokemon.models.Pokemon;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,5 +33,4 @@ public class Result<T> {
         messages.add(message);
         this.type = type;
     }
-
 }
