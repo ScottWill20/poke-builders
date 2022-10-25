@@ -37,6 +37,7 @@ public class UserJdbcRepository implements UserRepository{
         }
         return user;
     }
+  
    @Override
     public User findById(int id) {
         String sql = "select app_user_id, username, password_hash, enabled "
