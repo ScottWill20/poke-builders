@@ -10,7 +10,7 @@ public class Pokemon {
     private double height;
     private double weight;
     private LocalDate birthday;
-    private ArrayList<Type> types;
+    private Type type;
     private Vibe vibe;
     private User user;
     private ArrayList<Move> moves;
@@ -20,14 +20,14 @@ public class Pokemon {
     public Pokemon() {
     }
 
-    public Pokemon(int id, String name, int height, int weight, LocalDate birthday, ArrayList<Type> types,
+    public Pokemon(int id, String name, int height, int weight, LocalDate birthday, Type type,
                    Vibe vibe, User user, ArrayList<Move> moves, Ability ability, boolean isPrivate) {
         this.id = id;
         this.name = name;
         this.height = height;
         this.weight = weight;
         this.birthday = birthday;
-        this.types = types;
+        this.type = type;
         this.vibe = vibe;
         this.user = user;
         this.moves = moves;
@@ -75,12 +75,12 @@ public class Pokemon {
         this.birthday = birthday;
     }
 
-    public ArrayList<Type> getTypes() {
-        return types;
+    public Type getType() {
+        return type;
     }
 
-    public void setTypes(ArrayList<Type> types) {
-        this.types = types;
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public Vibe getVibe() {
