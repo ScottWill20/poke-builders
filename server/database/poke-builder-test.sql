@@ -74,13 +74,20 @@ constraint fk_poke_move_move_id
 delimiter //
 create procedure set_known_good_state()
 begin
-	truncate table poke_move;
-    truncate table pokemon;
-	truncate table app_user;
-    truncate table app_role;
-    truncate table app_user_role;
-    truncate table ability;
-    truncate table move;
+	delete from poke_move;
+    alter table poke_move auto_increment = 1;
+    delete from pokemon;
+    alter table pokemon auto_increment = 1;
+    delete from app_user;
+    alter table app_user auto_increment = 1;
+    delete from app_role;
+    alter table app_role auto_increment = 1;
+    delete from app_user_role;
+    alter table app_user_role auto_increment = 1;
+    delete from ability;
+    alter table ability auto_increment = 1;
+    delete from move;
+    alter table move auto_increment = 1;
 
 	insert into app_role (app_role_id, `name`) values
 	(1, 'USER'),
@@ -99,8 +106,8 @@ insert into app_user_role(app_user_id, app_role_id) values
     ("Cheek Pouch", "Restores HP as well as when the pokemon eats a berry");
     
     insert into pokemon (pokemon_name, height, weight, birthday, app_user_id, ability_id, `type`, vibe, private) values
-	("Snorlax", 10, 460, "2012-12-25", 1, 2, "Normal", "Naughty"),
-    ("Jigglypuff", 0.5, 5.5, "2017-06-20", 1, 1, "Fairy", "Bashful");
+	("Snorlax", 10, 460, "2012-12-25", 1, 2, "Normal", "Naughty", false),
+    ("Jigglypuff", 0.5, 5.5, "2017-06-20", 1, 1, "Fairy", "Bashful", true);
     
     insert into move (move_name, move_description) values
 	("Facade","This attack move doubles its power if the user is poisoned, burned, or paralyzed."),

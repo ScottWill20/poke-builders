@@ -34,6 +34,6 @@ public class PokemonJdbcRepositoryTest {
         // can't predict order
         // if delete is first, we're down to 7
         // if add is first, we may go as high as 10
-        assertTrue(pokemons.size() >= 7 && pokemons.size() <= 10);
+        assertTrue(pokemons.size() >= 1 && pokemons.size() <= 2);
     }
 }
