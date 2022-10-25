@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Result<T> {
-
     private final ArrayList<String> messages = new ArrayList<>();
     private ResultType type = ResultType.SUCCESS;
     private T payload;

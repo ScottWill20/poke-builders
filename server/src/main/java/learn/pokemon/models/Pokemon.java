@@ -15,12 +15,13 @@ public class Pokemon {
     private User user;
     private ArrayList<Move> moves;
     private Ability ability;
+    private boolean isPrivate;
 
     public Pokemon() {
     }
 
     public Pokemon(int id, String name, int height, int weight, LocalDate birthday, ArrayList<Type> types,
-                   Vibe vibe, User user, ArrayList<Move> moves, Ability ability) {
+                   Vibe vibe, User user, ArrayList<Move> moves, Ability ability, boolean isPrivate) {
         this.id = id;
         this.name = name;
         this.height = height;
@@ -31,6 +32,7 @@ public class Pokemon {
         this.user = user;
         this.moves = moves;
         this.ability = ability;
+        this.isPrivate = isPrivate;
     }
 
     public int getId() {
@@ -111,5 +113,13 @@ public class Pokemon {
 
     public void setAbility(Ability ability) {
         this.ability = ability;
+    }
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
     }
 }

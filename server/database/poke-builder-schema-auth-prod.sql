@@ -72,6 +72,9 @@ weight double not null,
 birthday date not null,
 app_user_id int not null,
 ability_id int not null,
+`type` varchar(15) not null,
+vibe varchar(20) not null,
+private boolean not null,
 constraint fk_pokemon_ability
 	foreign key (ability_id)
     references ability(ability_id),

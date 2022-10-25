@@ -37,6 +37,18 @@ public class UserJdbcRepository implements UserRepository{
         }
         return user;
     }
+  
+   @Override
+    public User findById(int id) {
+        String sql = "select app_user_id, username, password_hash, enabled "
+                + "from app_user "
+                + "where app_user_id = ?;";
+        User user = jdbcTemplate.query(sql, mapper, id).stream().findFirst().orElse(null);
+        if (user != null) {
+            attachAuthorities(user);
+        }
+        return user;
+    }
 
     private void attachAuthorities(User user) {
         String sql = "select ar.`name` "
