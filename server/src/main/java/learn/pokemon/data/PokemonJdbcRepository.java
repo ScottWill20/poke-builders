@@ -1,6 +1,7 @@
 package learn.pokemon.data;
 
 import learn.pokemon.data.mappers.PokemonMapper;
+import learn.pokemon.models.Move;
 import learn.pokemon.models.Pokemon;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,8 +25,8 @@ public class PokemonJdbcRepository implements PokemonRepository {
 
     @Override
     public List<Pokemon> findAllPublicPokemon() {
-        final String sql = "select pokemon_id, pokemon_name, height, `weight`, birthday, " +
-                "app_user_id, ability_id, `type`, `vibe` " +
+        final String sql = "select pokemon_id, pokemon_name, height, weight, birthday, " +
+                "app_user_id, ability_id, `type`, vibe " +
                 "from pokemon " +
                 "where private = false;";
         return jdbcTemplate.query(sql, new PokemonMapper());
@@ -32,8 +34,8 @@ public class PokemonJdbcRepository implements PokemonRepository {
 
     @Override
     public List<Pokemon> findByUserId(int userId) {
-        final String sql = "select pokemon_id, pokemon_name, height, `weight`, birthday, " +
-                "app_user_id, ability_id, `type`, `vibe`, `private` " +
+        final String sql = "select pokemon_id, pokemon_name, height, weight, birthday, " +
+                "app_user_id, ability_id, `type`, vibe, private " +
                 "from pokemon " +
                 "where app_user_id = ?;";
         return jdbcTemplate.query(sql, new PokemonMapper(), userId);
@@ -41,18 +43,24 @@ public class PokemonJdbcRepository implements PokemonRepository {
 
     @Override
     public Pokemon findByPokemonId(int pokemonId) {
-        final String sql = "select pokemon_id, pokemon_name, height, `weight`, birthday, " +
-                "app_user_id, ability_id, `type`, `vibe` " +
+        final String sql = "select pokemon_id, pokemon_name, height, weight, birthday, " +
+                "app_user_id, ability_id, `type`, vibe, private " +
                 "from pokemon " +
                 "where pokemon_id = ?;";
-        return jdbcTemplate.query(sql, new PokemonMapper(), pokemonId).stream()
+        Pokemon pokemon = jdbcTemplate.query(sql, new PokemonMapper(), pokemonId).stream()
                 .findFirst().orElse(null);
+
+        if (pokemon != null) {
+            attachMoves(pokemon);
+        }
+
+        return pokemon;
     }
 
     @Override
     public Pokemon createPokemon(Pokemon pokemon) {
-        final String sql = "insert into pokemon (pokemon_id, pokemon_name, height, `weight`, birthday, " +
-                "app_user_id, ability_id, `type`, `vibe`, `private`) "
+        final String sql = "insert into pokemon (pokemon_id, pokemon_name, height, weight, birthday, " +
+                "app_user_id, ability_id, `type`, vibe, private) "
                 + " values (?,?,?,?,?,?,?,?,?,?);";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
@@ -83,13 +91,13 @@ public class PokemonJdbcRepository implements PokemonRepository {
                 + "pokemon_id = ?, "
                 + "pokemon_name = ?, "
                 + "height = ?, "
-                + "`weight` = ?, "
+                + "weight = ?, "
                 + "birthday = ? "
                 + "app_user_id = ? "
                 + "ability_id = ? "
                 + "`type` = ? "
-                + "`vibe` = ? "
-                + "`private` = ? "
+                + "vibe = ? "
+                + "private = ? "
                 + "where pokemon_id = ?;";
 
         return jdbcTemplate.update(sql,
@@ -109,5 +117,16 @@ public class PokemonJdbcRepository implements PokemonRepository {
     public boolean deleteByPokemonId(int pokemonId) {
         jdbcTemplate.update("delete from poke_move where pokemon_id = ?;", pokemonId);
         return jdbcTemplate.update("delete from pokemon where pokemon_id = ?;", pokemonId) > 0;
+    }
+
+    //attachMoves
+    private void attachMoves(Pokemon pokemon) {
+        final String sql = "select m.move_id, m.move_name, m.move_description "
+                + "from move m "
+                + "inner join poke_move pm on pm.move_id = m.move_id "
+                + "inner join pokemon p on pm.pokemon_id = p.pokemon_id "
+                + "where pm.pokemon_id = ?;";
+        ArrayList<Move> moves = jdbcTemplate.query(sql, new MoveMapper(), pokemon.getId());
+        pokemon.setMoves(moves);
     }
 }
