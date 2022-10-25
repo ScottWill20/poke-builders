@@ -1,5 +1,7 @@
 package learn.pokemon.models;
 
+import org.springframework.stereotype.Component;
+
 public class Ability {
     private int id;
     private String name;

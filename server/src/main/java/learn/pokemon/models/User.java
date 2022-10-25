@@ -2,6 +2,7 @@ package learn.pokemon.models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,9 +12,9 @@ public class User implements UserDetails {
     private int userId;
     private String username;
     private String password;
-
     private boolean enabled;
     private List<GrantedAuthority> authorities = new ArrayList<>();
+
 
     public int getUserId() {
         return userId;

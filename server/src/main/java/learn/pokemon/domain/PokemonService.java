@@ -2,10 +2,12 @@ package learn.pokemon.domain;
 
 import learn.pokemon.data.PokemonRepository;
 import learn.pokemon.models.Pokemon;
+import org.springframework.stereotype.Service;
 
 import java.time.Year;
 import java.util.List;
 
+@Service
 public class PokemonService {
 
     private final PokemonRepository repository;
@@ -18,7 +20,7 @@ public class PokemonService {
     }
 
     public List<Pokemon> findByUserId(int userId) {
-        return repository.findByUserId(); // insert userId when PokemonJdbcRepository is complete
+        return repository.findByUserId(userId);
     }
 
     public Pokemon findByPokemonId(int pokemonId){
