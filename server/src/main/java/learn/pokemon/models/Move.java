@@ -1,5 +1,7 @@
 package learn.pokemon.models;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 
 public class Move {
