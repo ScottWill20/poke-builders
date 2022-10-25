@@ -1,5 +1,6 @@
 package learn.pokemon.data;
 
+import learn.pokemon.data.mappers.MoveMapper;
 import learn.pokemon.data.mappers.PokemonMapper;
 import learn.pokemon.models.Move;
 import learn.pokemon.models.Pokemon;
@@ -126,7 +127,7 @@ public class PokemonJdbcRepository implements PokemonRepository {
                 + "inner join poke_move pm on pm.move_id = m.move_id "
                 + "inner join pokemon p on pm.pokemon_id = p.pokemon_id "
                 + "where pm.pokemon_id = ?;";
-        ArrayList<Move> moves = jdbcTemplate.query(sql, new MoveMapper(), pokemon.getId());
-        pokemon.setMoves(moves);
+        List<Move> moves = jdbcTemplate.query(sql, new MoveMapper(), pokemon.getId());
+        pokemon.setMoves((ArrayList<Move>) moves);
     }
 }
