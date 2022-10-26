@@ -12,7 +12,7 @@ public class Move {
     public Move() {
     }
 
-    public Move(int id, String name, Type type, String description) {
+    public Move(int id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;

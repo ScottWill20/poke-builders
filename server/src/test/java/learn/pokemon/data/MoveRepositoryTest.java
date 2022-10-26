@@ -2,6 +2,7 @@ package learn.pokemon.data;
 
 import learn.pokemon.models.Move;
 import learn.pokemon.models.Pokemon;
+import learn.pokemon.models.Type;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,22 @@ public class MoveRepositoryTest {
     void shouldNotFindMoveByInvalidId() {
         Move move = repository.findByMoveId(999);
         assertNull(move);
+    }
+
+    @Test
+    void shouldCreateMove() {
+        Move move = createMove();
+        Move actual = repository.createMove(move);
+        assertNotNull(actual);
+        assertEquals(6, actual.getId());
+    }
+
+    private Move createMove() {
+        Move move = new Move();
+        move.setId(0);
+        move.setName("Pound");
+        move.setDescription("The target is physically pounded with a long tail, a foreleg, or the like.");
+        return move;
     }
 
 }
