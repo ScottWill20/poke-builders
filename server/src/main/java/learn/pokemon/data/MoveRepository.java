@@ -7,4 +7,5 @@ public interface MoveRepository {
 
     Move findByMoveId(int moveId);
 
+    Move createMove(Move move);
 }

@@ -55,7 +55,7 @@ constraint fk_pokemon_user
 create table move (
 move_id int primary key auto_increment,
 move_name varchar(100) not null,
-move_description varchar(200) not null
+move_description varchar(500) not null
 );
 
 create table poke_move (
