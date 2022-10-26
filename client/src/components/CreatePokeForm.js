@@ -2,12 +2,13 @@
 function CreatePokeForm() {
     return (
         <>
-        <h2>Create a Pokemon</h2>
-        <div>
+        {/* <h2>Create a Pokemon</h2> */}
+        <div className="errors-container">
             Errors will populate here.
         </div>
 
         <form>
+            <div className="text-input-container">
             <div className="form-group">
                 <label htmlFor="name">Name:</label>
                 <input id="name"
@@ -40,6 +41,16 @@ function CreatePokeForm() {
                 // onChange={handleChange}
                 required />
             </div>
+            <div className="form-group">
+                <label htmlFor="description">Description:</label>
+                <textarea id="description"
+                name="description"
+                // type="textarea"
+                className="form-control"
+                />
+            </div>
+            </div>
+            <div className="drop-downs-container">
             <div className="form-group">
                 <label htmlFor="nature">Nature:</label>
                 <select id="nature"
@@ -106,7 +117,13 @@ function CreatePokeForm() {
                 </select>
             </div>
             <div className="form-group">
-                <select class="form-select" multiple="multiple" aria-label="multiple select example">
+                <label htmlFor="moves">Moves:</label>
+                <select 
+                class="form-select form-control" 
+                multiple="multiple" 
+                aria-label="multiple select example"
+                name="moves"
+                id="moves">
                 <option selected disabled>Select Moves (4)</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
@@ -123,6 +140,7 @@ function CreatePokeForm() {
                 <label 
                 className="form-check-label" 
                 htmlFor="flexSwitchCheckChecked">private</label>
+            </div>
             </div>
         </form>
 

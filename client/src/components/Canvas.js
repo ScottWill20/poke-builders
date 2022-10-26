@@ -1,5 +1,4 @@
 import React, { useRef, useEffect} from 'react';
-import Immutable from 'react';
 
 const Canvas = ({draw, height, width}) => {
   const canvas = useRef();
@@ -8,7 +7,11 @@ const Canvas = ({draw, height, width}) => {
     draw(context);
   });
 return (
-    <canvas ref={canvas} height={height} width={width} id="canvas" />
+    <canvas 
+    ref={canvas} 
+    height={height} 
+    width={width} 
+    id="canvas" />
   );
 };
 

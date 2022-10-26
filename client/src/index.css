@@ -1,11 +1,11 @@
 body {
   margin: 0;
-  font-family: 'Space Mono', monospace;
+  font-family: 'Press Start 2P', cursive;
+  background-color: #4c5555;
 }
 
-#canvas {
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  cursor: pointer;
+input, textarea, select {
+  background-color: aliceblue !important;
 }
 
 #guide {
@@ -24,18 +24,146 @@ body {
   flex-direction: column;
 }
 
+.nav-bar {
+  display: flex;
+  background-color: #08BDBD;
+  border: 2px solid black;
+  border-radius: 30%;
+  margin-bottom: 1%;
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  margin-top: 2%;
+}
+
+.nav-container > li {
+  list-style: none;
+  margin-right: 5%;
+}
+
 #pokedex {
   height: 100vh;
   width: auto;
   display: flex;
-  border: 1px solid black;
-  border-radius: 10%;
+  /* border: 1px solid black;
+  border-radius: 5%; */
+  /* background-color: #F21B3F; */
+  text-decoration: black;
 }
 
 #left-grid {
+  height: 100%;
+  width: 50%;
+  display: grid;
+  grid-template-rows: 50% 25% 25%;
+  border: 1px solid black;
+  border-radius: 5%;
+  background-color: #F21B3F;
+}
 
+.canvas-container {
+  /* height: 50%;
+  width: 100%; */
+  display: flex;
+  /* border: 1px solid black;
+  border-radius: 5%; */
+  padding: 10%;
+}
+
+#canvas {
+  position: relative;
+  border: 2px solid black;
+  border-radius: 5%;
+  cursor: pointer;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: aliceblue;
+}
+
+.d-pad-container {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  border: 2px solid pink;
+}
+
+.d-pad {
+  display: flex;
+  padding-top: 10%;
+}
+
+#d-pad-right {
+  height: 50px;
+  width: 50px;
+  background-color: #FF9914;
+}
+
+#d-pad-left {
+  height: 50px;
+  width: 50px;
+  margin-right: 5px;
+  background-color: #FF9914;
+}
+
+.d-pad-svg {
+  z-index: 5;
+}
+
+.button-container {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  border: 2px solid green;
+  padding-top: 5%;
+}
+
+#submit-poke-btn {
+  height: 40%;
+  width: 30%;
+  padding: 2%;
+  background-color: #29BF12;
 }
 
 #right-grid {
+  height: 100%;
+  width: 50%;
+  display: grid;
+  grid-template-rows: 25% 75%;
+  border: 1px solid black;
+  border-radius: 5%;
+  background-color: #F21B3F;
+}
 
+.errors-container {
+  display: flex;
+  color: #ABFF4F;
+  margin-bottom: 5%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10%;
+  color: #FF9914;
+}
+
+.text-input-container {
+  padding: 10px;
+  margin-bottom: 5%;
+  background-color: #323838;
+  border-radius: 5%;
+}
+
+#description {
+  overflow-y: scroll;
+}
+
+.drop-downs-container {
+  padding: 10px;
+  background-color: #323838;
+  border-radius: 5%;
 }
