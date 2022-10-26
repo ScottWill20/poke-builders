@@ -45,7 +45,7 @@ function CreatePokeForm() {
                 <select id="nature"
                 name="nature"
                 className="form-control"
-                // value={pokemon.weight}
+                // value={pokemon.vibe}
                 // onChange={handleChange}
                 required >
                     <option selected disabled hidden>[select a nature]</option>
@@ -81,7 +81,7 @@ function CreatePokeForm() {
                 <select id="type"
                 name="type"
                 className="form-control"
-                // value={pokemon.weight}
+                // value={pokemon.type}
                 // onChange={handleChange}
                 required >
                     <option selected disabled hidden>[select a type]</option>
