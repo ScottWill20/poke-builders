@@ -42,14 +42,14 @@ public class PokemonJdbcRepositoryTest {
     @Test
     void shouldFindByUserId() {
         //check that two users with distinct pokemon have different lists
-        List<Pokemon> pokemons1 = repository.findByUserId(1);
+        List<Pokemon> pokemons1 = repository.findPokemonByUserId(1);
         assertNotNull(pokemons1);
         assertTrue(pokemons1.size() >= 3);
         for (Pokemon p: pokemons1) {
             assertEquals(1, p.getUser().getUserId());
         }
 
-        List<Pokemon> pokemons2 = repository.findByUserId(2);
+        List<Pokemon> pokemons2 = repository.findPokemonByUserId(2);
         assertNotNull(pokemons2);
         assertTrue(pokemons2.size() >= 1);
         for (Pokemon p: pokemons2) {
@@ -59,7 +59,7 @@ public class PokemonJdbcRepositoryTest {
 
     @Test
     void shouldNotFindByInvalidUserId() {
-        List<Pokemon> pokemons = repository.findByUserId(999);
+        List<Pokemon> pokemons = repository.findPokemonByUserId(999);
         assertNotNull(pokemons); //change to assertNull
         assertTrue(pokemons.isEmpty());
     }

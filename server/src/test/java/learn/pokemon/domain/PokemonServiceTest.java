@@ -45,13 +45,13 @@ public class PokemonServiceTest {
     @Test
     void shouldFindScottsPokemon() {
         scott.setUserId(1);
-        List<Pokemon> expected = repository.findByUserId(1);
+        List<Pokemon> expected = repository.findPokemonByUserId(1);
         Pokemon snorlax = makeSnorlax();
         expected.add(snorlax);
 
-        when(repository.findByUserId(1)).thenReturn(expected);
+        when(repository.findPokemonByUserId(1)).thenReturn(expected);
 
-        List<Pokemon> actual = service.findByUserId(1).getPayload();
+        List<Pokemon> actual = service.findPokemonByUserId(1).getPayload();
         assertEquals(expected,actual);
 
     }
@@ -140,6 +140,12 @@ public class PokemonServiceTest {
         // name over 100 characters
         result = service.updatePokemon(snorlax);
         assertEquals(ResultType.INVALID, result.getType());
+
+        snorlax.setName("Snorlax");
+        snorlax.setDescription("It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.");
+        // description over 100 characters
+        result = service.updatePokemon(snorlax);
+        assertEquals(ResultType.INVALID, result.getType());
     }
 
     @Test
@@ -165,6 +171,8 @@ public class PokemonServiceTest {
         Pokemon snorlax = new Pokemon();
         snorlax.setId(1);
         snorlax.setName("Snorlax");
+        snorlax.setDescription("It is not satisfied unless it eats over 880 pounds of food every day. When it is done eating, it goes promptly to sleep.");
+        snorlax.setUrl("https://www.serebii.net/swordshield/pokemon/143.png");
         snorlax.setHeight(10);
         snorlax.setWeight(460);
         snorlax.setBirthday(LocalDate.now());
@@ -181,6 +189,8 @@ public class PokemonServiceTest {
         Pokemon jigglypuff = new Pokemon();
         jigglypuff.setId(2);
         jigglypuff.setName("Jigglypuff");
+        jigglypuff.setDescription("Jigglypuff has top-notch lung capacity, even by comparison to other Pokémon. It won't stop singing its lullabies until its foes fall asleep.");
+        jigglypuff.setUrl("https://www.serebii.net/swordshield/pokemon/039.png");
         jigglypuff.setHeight(.5);
         jigglypuff.setWeight(5.5);
         jigglypuff.setBirthday(LocalDate.now());
