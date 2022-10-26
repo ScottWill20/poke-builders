@@ -78,12 +78,12 @@ begin
     alter table poke_move auto_increment = 1;
     delete from pokemon;
     alter table pokemon auto_increment = 1;
+    delete from app_user_role;
+    alter table app_user_role auto_increment = 1;
     delete from app_user;
     alter table app_user auto_increment = 1;
     delete from app_role;
     alter table app_role auto_increment = 1;
-    delete from app_user_role;
-    alter table app_user_role auto_increment = 1;
     delete from ability;
     alter table ability auto_increment = 1;
     delete from move;
