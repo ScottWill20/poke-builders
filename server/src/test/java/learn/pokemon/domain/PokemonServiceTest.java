@@ -51,7 +51,7 @@ public class PokemonServiceTest {
 
         when(repository.findByUserId(1)).thenReturn(expected);
 
-        List<Pokemon> actual = service.findByUserId(1);
+        List<Pokemon> actual = service.findByUserId(1).getPayload();
         assertEquals(expected,actual);
 
     }
