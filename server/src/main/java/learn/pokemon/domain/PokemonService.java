@@ -19,8 +19,16 @@ public class PokemonService {
         return repository.findAllPublicPokemon();
     }
 
-    public List<Pokemon> findByUserId(int userId) {
-        return repository.findByUserId(userId);
+    public Result<List<Pokemon>> findByUserId(int userId) {
+        //if user doesn't exist, we return not found
+        Result<List<Pokemon>> result = new Result<>();
+        List<Pokemon> pokemonList = repository.findByUserId(userId);
+        if (pokemonList == null) {
+            result.addMessage(String.format("User with %s id not found", userId), ResultType.NOT_FOUND);
+            return result;
+        }
+        result.setPayload(pokemonList);
+        return result;
     }
 
     public Pokemon findByPokemonId(int pokemonId){

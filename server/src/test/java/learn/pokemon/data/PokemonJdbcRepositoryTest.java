@@ -60,7 +60,7 @@ public class PokemonJdbcRepositoryTest {
     @Test
     void shouldNotFindByInvalidUserId() {
         List<Pokemon> pokemons = repository.findByUserId(999);
-        assertNotNull(pokemons);
+        assertNotNull(pokemons); //change to assertNull
         assertTrue(pokemons.isEmpty());
     }
 

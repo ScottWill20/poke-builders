@@ -39,6 +39,9 @@ public class PokemonJdbcRepository implements PokemonRepository {
 
     @Override
     public List<Pokemon> findByUserId(int userId) {
+        //return null if user doesn't exist. return empty list if user exists
+        if (userRepository.findById(userId) == null)
+            return null;
         final String sql = "select pokemon_id, pokemon_name, height, weight, birthday, " +
                 "app_user_id, ability_id, `type`, vibe, private " +
                 "from pokemon " +
