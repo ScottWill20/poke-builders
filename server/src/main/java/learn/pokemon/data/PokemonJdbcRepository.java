@@ -1,21 +1,16 @@
 package learn.pokemon.data;
 
-import learn.pokemon.data.mappers.AbilityMapper;
 import learn.pokemon.data.mappers.MoveMapper;
 import learn.pokemon.data.mappers.PokemonMapper;
-import learn.pokemon.models.Ability;
 import learn.pokemon.models.Move;
 import learn.pokemon.models.Pokemon;
-import learn.pokemon.models.User;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;

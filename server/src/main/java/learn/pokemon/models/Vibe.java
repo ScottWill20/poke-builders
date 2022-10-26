@@ -43,4 +43,14 @@ public enum Vibe {
     public String getName() {
         return name;
     }
+
+    public static Vibe getVibeByName(String name) {
+        for (Vibe vibe : Vibe.values()) {
+            if (vibe.getName().equalsIgnoreCase(name)) {
+                return vibe;
+            }
+        }
+        String message = String.format("%s vibe does not exist.", name);
+        throw new RuntimeException(message);
+    }
 }

@@ -14,12 +14,23 @@ public class AbilityJdbcRepository implements AbilityRepository{
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Override
     public Ability findById(int abilityId) {
         final String sql = "select ability_id, ability_name, ability_description " +
                 "from ability " +
                 "where ability_id = ?;";
 
         return jdbcTemplate.query(sql, new AbilityMapper(), abilityId).stream()
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public Ability findByName(String abilityName) {
+        final String sql = "select ability_id, ability_name, ability_description " +
+                "from ability " +
+                "where ability_name = ?;";
+
+        return jdbcTemplate.query(sql, new AbilityMapper(), abilityName).stream()
                 .findFirst().orElse(null);
     }
 }

@@ -31,9 +31,26 @@ public class PokemonJdbcRepositoryTest {
         List<Pokemon> pokemons = repository.findAllPublicPokemon();
         assertNotNull(pokemons);
 
-        // can't predict order
-        // if delete is first, we're down to 7
-        // if add is first, we may go as high as 10
         assertTrue(pokemons.size() >= 1 && pokemons.size() <= 2);
+    }
+
+    @Test
+    void shouldFindByUserId() {
+        //check that two users with distinct pokemon have different lists
+    }
+
+    @Test
+    void shouldNotFindByInvalidUserId() {
+        //unhappy path for userId find
+    }
+
+    @Test
+    void shouldFindByPokemonId() {
+
+    }
+
+    @Test
+    void shouldNotFindByPokemonId() {
+        
     }
 }
