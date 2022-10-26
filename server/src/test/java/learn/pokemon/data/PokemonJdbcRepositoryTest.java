@@ -2,6 +2,7 @@ package learn.pokemon.data;
 
 import learn.pokemon.models.Pokemon;
 import learn.pokemon.models.Type;
+import learn.pokemon.models.User;
 import learn.pokemon.models.Vibe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -60,8 +61,7 @@ public class PokemonJdbcRepositoryTest {
     @Test
     void shouldNotFindByInvalidUserId() {
         List<Pokemon> pokemons = repository.findByUserId(999);
-        assertNotNull(pokemons); //change to assertNull
-        assertTrue(pokemons.isEmpty());
+        assertNull(pokemons); //change to assertNull
     }
 
     @Test
@@ -94,7 +94,11 @@ public class PokemonJdbcRepositoryTest {
     void shouldCreatePokemon() {
         Pokemon pokemon = new Pokemon();
         pokemon.setName("Jolteon");
-
+        pokemon.setHeight(0.8);
+        pokemon.setWeight(24.5);
+        pokemon.setBirthday(LocalDate.of(2018, 5, 21));
+        pokemon.setUser(makeUser());
+        pokemon.setType(Type.ELECTRIC);
     }
 
     @Test
@@ -105,5 +109,11 @@ public class PokemonJdbcRepositoryTest {
     @Test
     void shouldDeletePokemon() {
 
+    }
+
+    private User makeUser() {
+       User user = new User();
+       user.setUserId(3);
+       return user;
     }
 }

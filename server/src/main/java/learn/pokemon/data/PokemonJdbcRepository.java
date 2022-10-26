@@ -2,12 +2,15 @@ package learn.pokemon.data;
 
 import learn.pokemon.data.mappers.MoveMapper;
 import learn.pokemon.data.mappers.PokemonMapper;
+import learn.pokemon.models.Ability;
 import learn.pokemon.models.Move;
+import learn.pokemon.models.PokeMove;
 import learn.pokemon.models.Pokemon;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -21,11 +24,13 @@ public class PokemonJdbcRepository implements PokemonRepository {
     private final JdbcTemplate jdbcTemplate;
     private final UserRepository userRepository;
     private final AbilityRepository abilityRepository;
+    private final MoveRepository moveRepository;
 
-    public PokemonJdbcRepository(JdbcTemplate jdbcTemplate, UserRepository userRepository, AbilityRepository abilityRepository) {
+    public PokemonJdbcRepository(JdbcTemplate jdbcTemplate, UserRepository userRepository, AbilityRepository abilityRepository, MoveRepository moveRepository) {
         this.jdbcTemplate = jdbcTemplate;
         this.userRepository = userRepository;
         this.abilityRepository = abilityRepository;
+        this.moveRepository = moveRepository;
     }
 
     @Override
@@ -67,6 +72,9 @@ public class PokemonJdbcRepository implements PokemonRepository {
 
     @Override
     public Pokemon createPokemon(Pokemon pokemon) {
+//        if (userRepository.findById(pokemon.getUser().getUserId()) == null)
+//            return null;
+        storeMovesAndAbility(pokemon.getMoves(), pokemon.getAbility());
         final String sql = "insert into pokemon (pokemon_id, pokemon_name, height, weight, birthday, " +
                 "app_user_id, ability_id, `type`, vibe, private) "
                 + " values (?,?,?,?,?,?,?,?,?,?);";
@@ -89,12 +97,15 @@ public class PokemonJdbcRepository implements PokemonRepository {
         if (rowsAffected <= 0) {
             return null;
         }
+
         pokemon.setId(Objects.requireNonNull(keyHolder.getKey()).intValue());
+        updatePokeMove(pokemon);
         return pokemon;
     }
 
     @Override
     public boolean updatePokemon(Pokemon pokemon) {
+        storeMovesAndAbility(pokemon.getMoves(), pokemon.getAbility());
         final String sql = "update pokemon set "
                 + "pokemon_id = ?, "
                 + "pokemon_name = ?, "
@@ -107,8 +118,7 @@ public class PokemonJdbcRepository implements PokemonRepository {
                 + "vibe = ? "
                 + "private = ? "
                 + "where pokemon_id = ?;";
-
-        return jdbcTemplate.update(sql,
+        boolean updatePokemon = jdbcTemplate.update(sql,
                 pokemon.getId(),
                 pokemon.getName(),
                 pokemon.getHeight(),
@@ -119,10 +129,16 @@ public class PokemonJdbcRepository implements PokemonRepository {
                 pokemon.getType().getName(),
                 pokemon.getVibe().getName(),
                 pokemon.isPrivate()) > 0;
+
+        return updatePokemon && updatePokeMove(pokemon);
     }
 
+
+
     @Override
+    @Transactional
     public boolean deleteByPokemonId(int pokemonId) {
+        //only delete poke_move data and pokemon data
         jdbcTemplate.update("delete from poke_move where pokemon_id = ?;", pokemonId);
         return jdbcTemplate.update("delete from pokemon where pokemon_id = ?;", pokemonId) > 0;
     }
@@ -136,5 +152,49 @@ public class PokemonJdbcRepository implements PokemonRepository {
                 + "where pm.pokemon_id = ?;";
         List<Move> moves = jdbcTemplate.query(sql, new MoveMapper(), pokemon.getId());
         pokemon.setMoves((ArrayList<Move>) moves);
+    }
+
+    private void storeMovesAndAbility(List<Move> moves, Ability ability) {
+        storeMoves(moves);
+        storeAbility(ability);
+    }
+
+    private void storeMoves(List<Move> moves) {
+        for (Move m : moves) {
+            if (moveRepository.findByMoveId(m.getId()) == null) {
+                //add move to move table
+                moveRepository.createMove(m);
+            }
+        } //at this point, all moves exist in move table
+    }
+
+    private void storeAbility(Ability ability) {
+        if (abilityRepository.findByAbilityId(ability.getId()) == null) {
+            //add ability to ability table
+            abilityRepository.createAbility(ability);
+        }
+    }
+
+
+    private boolean updatePokeMove(Pokemon pokemon) {
+        jdbcTemplate.update("delete from poke_move where pokemon_id = ?;", pokemon.getId());
+        final String sql = "insert into poke_move (pokemon_id, move_id) " +
+                " values (?, ?);";
+        for (Move m: pokemon.getMoves()) {
+            PokeMove pokeMove = new PokeMove(pokemon.getId(), m.getId());
+
+            KeyHolder keyHolder = new GeneratedKeyHolder();
+            int rowsAffected = jdbcTemplate.update(connection -> {
+                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, pokeMove.getPokemonId());
+                ps.setInt(2, pokeMove.getMoveId());
+                return ps;
+            }, keyHolder);
+
+            if (rowsAffected <= 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
