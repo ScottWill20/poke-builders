@@ -103,17 +103,22 @@ insert into app_user_role(app_user_id, app_role_id) values
     
     insert into ability (ability_name, ability_description) values
 	("Adaptability", "Powers up moves of the same type as the pokemon"),
-    ("Cheek Pouch", "Restores HP as well as when the pokemon eats a berry");
+    ("Cheek Pouch", "Restores HP as well as when the pokemon eats a berry"),
+    ("Water Absorb", "Restores HP if hit by a Water-type move instead of taking damage.");
     
     insert into pokemon (pokemon_name, height, weight, birthday, app_user_id, ability_id, `type`, vibe, private) values
 	("Snorlax", 10, 460, "2012-12-25", 1, 2, "Normal", "Naughty", false),
-    ("Jigglypuff", 0.5, 5.5, "2017-06-20", 1, 1, "Fairy", "Bashful", true);
+    ("Jigglypuff", 0.5, 5.5, "2017-06-20", 1, 1, "Fairy", "Bashful", true),
+    ("Eevee", 0.3, 6.5, "2022-09-01", 2, 1, "Normal", "Mild", false),
+    ("Vaporeon", 1, 29, "2020-09-01", 1, 3, "Water", "Jolly", true),
+    ("Ditto", 0.3, 4, "2002-09-01", 2, 1, "Normal", "Impish", false);
     
     insert into move (move_name, move_description) values
 	("Facade","This attack move doubles its power if the user is poisoned, burned, or paralyzed."),
     ("Yawn","The user lets loose a huge yawn that lulls the target into falling asleep on the next turn."),
     ("Body Slam","The user drops onto the target with its full body weight. This may also leave the target with paralysis."),
-    ("Flamethrower","The target is scorched with an intense blast of fire. This may also leave the target with a burn.");
+    ("Flamethrower","The target is scorched with an intense blast of fire. This may also leave the target with a burn."),
+    ("Charm", "The user gazes at the target rather charmingly, making it less wary. This harshly lowers the target’s Attack stat.");
     
     insert into poke_move(pokemon_id, move_id) values
     (1, 1),
@@ -123,7 +128,8 @@ insert into app_user_role(app_user_id, app_role_id) values
     (2, 2), 
     (2, 3), 
     (2, 1),
-    (2, 4);
+    (2, 4),
+    (3, 5);
 
 end //
 delimiter ;

@@ -31,7 +31,7 @@ public class PokemonJdbcRepository implements PokemonRepository {
     @Override
     public List<Pokemon> findAllPublicPokemon() {
         final String sql = "select pokemon_id, pokemon_name, height, weight, birthday, " +
-                "app_user_id, ability_id, `type`, vibe " +
+                "app_user_id, ability_id, `type`, vibe, private " +
                 "from pokemon " +
                 "where private = false;";
         return jdbcTemplate.query(sql, new PokemonMapper(userRepository, abilityRepository));
