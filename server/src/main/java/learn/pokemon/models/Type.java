@@ -35,4 +35,14 @@ public enum Type {
     public String getName() {
         return name;
     }
+
+    public static Type getTypeByName(String name) {
+        for (Type type : Type.values()) {
+            if (type.getName().equalsIgnoreCase(name)) {
+                return type;
+            }
+        }
+        String message = String.format("%s type does not exist.", name);
+        throw new RuntimeException(message);
+    }
 }

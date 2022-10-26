@@ -19,18 +19,22 @@ import java.util.Objects;
 @Repository
 public class PokemonJdbcRepository implements PokemonRepository {
     private final JdbcTemplate jdbcTemplate;
+    private final UserRepository userRepository;
+    private final AbilityRepository abilityRepository;
 
-    public PokemonJdbcRepository(JdbcTemplate jdbcTemplate) {
+    public PokemonJdbcRepository(JdbcTemplate jdbcTemplate, UserRepository userRepository, AbilityRepository abilityRepository) {
         this.jdbcTemplate = jdbcTemplate;
+        this.userRepository = userRepository;
+        this.abilityRepository = abilityRepository;
     }
 
     @Override
     public List<Pokemon> findAllPublicPokemon() {
         final String sql = "select pokemon_id, pokemon_name, height, weight, birthday, " +
-                "app_user_id, ability_id, `type`, vibe " +
+                "app_user_id, ability_id, `type`, vibe, private " +
                 "from pokemon " +
                 "where private = false;";
-        return jdbcTemplate.query(sql, new PokemonMapper());
+        return jdbcTemplate.query(sql, new PokemonMapper(userRepository, abilityRepository));
     }
 
     @Override
@@ -39,7 +43,7 @@ public class PokemonJdbcRepository implements PokemonRepository {
                 "app_user_id, ability_id, `type`, vibe, private " +
                 "from pokemon " +
                 "where app_user_id = ?;";
-        return jdbcTemplate.query(sql, new PokemonMapper(), userId);
+        return jdbcTemplate.query(sql, new PokemonMapper(userRepository, abilityRepository), userId);
     }
 
     @Override
@@ -48,7 +52,7 @@ public class PokemonJdbcRepository implements PokemonRepository {
                 "app_user_id, ability_id, `type`, vibe, private " +
                 "from pokemon " +
                 "where pokemon_id = ?;";
-        Pokemon pokemon = jdbcTemplate.query(sql, new PokemonMapper(), pokemonId).stream()
+        Pokemon pokemon = jdbcTemplate.query(sql, new PokemonMapper(userRepository, abilityRepository), pokemonId).stream()
                 .findFirst().orElse(null);
 
         if (pokemon != null) {
