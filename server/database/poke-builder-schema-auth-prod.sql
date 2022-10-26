@@ -112,7 +112,7 @@ insert into poke_type (pokemon_id, type_id_1, type_id_2) values
 create table move (
 move_id int primary key auto_increment,
 move_name varchar(100) not null,
-move_description varchar(200) not null
+move_description varchar(500) not null
 );
 
 insert into move (move_name, move_description) values

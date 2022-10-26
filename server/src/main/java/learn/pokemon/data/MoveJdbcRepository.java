@@ -1,10 +1,15 @@
 package learn.pokemon.data;
 
 import learn.pokemon.data.mappers.MoveMapper;
-import learn.pokemon.data.mappers.PokemonMapper;
 import learn.pokemon.models.Move;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.util.Objects;
 
 @Repository
 public class MoveJdbcRepository implements MoveRepository {
@@ -35,4 +40,25 @@ public class MoveJdbcRepository implements MoveRepository {
                 .findFirst().orElse(null);
     }
 
+    @Override
+    public Move createMove(Move move) {
+        final String sql = "insert into move (move_id, move_name, move_description) "
+                + "values (?, ?, ?);";
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int rowsAffected = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, move.getId());
+            ps.setString(2, move.getName());
+            ps.setString(3, move.getDescription());
+            return ps;
+        }, keyHolder);
+
+        if (rowsAffected <= 0) {
+            return null;
+        }
+
+        move.setId(Objects.requireNonNull(keyHolder.getKey()).intValue());
+        return move;
+    }
 }
