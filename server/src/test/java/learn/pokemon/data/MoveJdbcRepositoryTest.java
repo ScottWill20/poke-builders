@@ -1,8 +1,6 @@
 package learn.pokemon.data;
 
 import learn.pokemon.models.Move;
-import learn.pokemon.models.Pokemon;
-import learn.pokemon.models.Type;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class MoveRepositoryTest {
+public class MoveJdbcRepositoryTest {
 
     @Autowired
     MoveJdbcRepository repository;
@@ -31,7 +29,7 @@ public class MoveRepositoryTest {
     }
 
     @Test
-    void shouldNotFindByInvalidName() {
+    void shouldNotFindMoveByInvalidName() {
         Move move = repository.findByMoveName("Skull Bash");
         assertNull(move);
     }
