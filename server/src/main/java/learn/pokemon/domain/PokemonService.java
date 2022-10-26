@@ -19,10 +19,10 @@ public class PokemonService {
         return repository.findAllPublicPokemon();
     }
 
-    public Result<List<Pokemon>> findByUserId(int userId) {
+    public Result<List<Pokemon>> findPokemonByUserId(int userId) {
         //if user doesn't exist, we return not found
         Result<List<Pokemon>> result = new Result<>();
-        List<Pokemon> pokemonList = repository.findByUserId(userId);
+        List<Pokemon> pokemonList = repository.findPokemonByUserId(userId);
         if (pokemonList == null) {
             result.addMessage(String.format("User with %s id not found", userId), ResultType.NOT_FOUND);
             return result;
@@ -85,6 +85,10 @@ public class PokemonService {
         }
         if (pokemon.getName().length() > 100) {
             result.addMessage("name cannot be longer than 100 characters", ResultType.INVALID);
+        }
+        if (pokemon.getDescription().length() > 2000) {
+            result.addMessage("description cannot be longer than 2000 characters", ResultType.INVALID);
+
         }
         if (pokemon.getHeight() == 0 || pokemon.getHeight() > 9999999) {
             result.addMessage("height cannot be zero and must be less than 10,000,000", ResultType.INVALID);
