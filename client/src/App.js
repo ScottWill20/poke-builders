@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import CreatePokeDraw from "./components/CreatePokeDraw";
+import Pokedex from "./components/Pokedex";
+import Navigation from "./components/Navigation";
+import Loader from "./components/Loader";
+import HomePage from "./components/HomePage";
+import CreateAccount from "./components/CreateAccount";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    {/* <h1>PokeBuilder</h1> */}
+    <Navigation />
+    <div className="container">
+      {/* <HomePage /> */}
+      {/* <Pokedex /> */}
+      {/* <Loader /> */}
+      <CreateAccount />
     </div>
+    
+    </>
   );
 }
 
