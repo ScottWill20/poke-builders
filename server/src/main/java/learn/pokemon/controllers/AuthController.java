@@ -85,7 +85,7 @@ public class AuthController {
 
         // happy path...
         HashMap<String, Integer> map = new HashMap<>();
-        map.put("appUserId", result.getPayload().getUserId());
+        map.put("userId", result.getPayload().getUserId());
 
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }

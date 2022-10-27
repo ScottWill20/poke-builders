@@ -26,7 +26,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.PUT, "/api/pokemon/*").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/pokemon/*").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET, "/api/pokemon/section/*").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers(HttpMethod.POST, "/authenticate", "/encode").permitAll()
+                .antMatchers(HttpMethod.POST, "/authenticate", "/encode", "/create_account").permitAll()
                 .antMatchers("/**").denyAll()
                 .and()
                 .addFilter(new JwtRequestFilter(manager(config), converter))

@@ -115,14 +115,14 @@ POST http://localhost:8080/authenticate HTTP/1.1
 Content-Type: application/json
 
 {
-  "userId": 2,
-  "email": "Delanie@email.com",
-  "avatar": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png",
-      "username": "delanie",
-      "password_hash": "$2a$10$ZeuvKvI3TAx5b4Q5MTnQk.nwnt0XdWayRN2Th/.ljhDC7gibbpMKu",
+  "userId": 4,
+  "email": "testmail@maltest.com",
+  "avatar": "the last airbender",
+      "username": "Aang",
+      "password": "$2a$10$gzA.iVz1wQXQ3509j1xcBu1n2qZ2qNuCfVLMlPeHbkR4.ly82Nooa",
       "enabled": true,
       "authorities": [
-          "ADMIN"
+          "USER"
       ],
       "accountNonExpired": true,
       "accountNonLocked": true,
@@ -139,3 +139,14 @@ Content-Type: application/json
 }
 
 "$2a$10$jJ0esKTZtvzBy9NMIOMNouwlyD/n28bSmJuuiO1AtAgbtGxkR6Dg2"
+
+###
+POST http://localhost:8080/create_account HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "testmail@maltest.com",
+  "avatar": "the last airbender",
+  "username": "Aang",
+  "password": "SokkaRulez"
+}
