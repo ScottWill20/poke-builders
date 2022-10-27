@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Canvas from './Canvas';
 import DrawArea from './Canvas';
@@ -15,19 +16,19 @@ function CreatePokeDraw() {
             <div>
                 {/* <div id="guide"></div>
                 <canvas width="450" height="450" id="canvas"></canvas> */}
-                <Canvas draw={draw} height={700} width={500} />
+                {/* <Canvas draw={draw} height={700} width={500} /> */}
                 {/* <DrawArea /> */}
             </div>
             <div>
                 <label for="colorInput">Set Color: </label>
                 <input type="color" id="colorInput" />
             </div>
-            <div>
+            {/* <div>
                 <label for="toggleGuide">Show Guide: </label>
                 <input type="checkbox" id="toggleGuide" checked />
-            </div>
+            </div> */}
             <div>
-                <button type="button" id="clearButton">Clear</button>
+                <motion.button whileTap={{ scale: 0.9 }} type="button" id="clearButton">Clear</motion.button>
             </div>
         </>
     );

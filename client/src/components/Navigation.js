@@ -1,12 +1,14 @@
+import { motion } from 'framer-motion';
+
 function Navigation() {
     return (
         <>
         <nav className="nav-bar">
             <ul className="nav-container">
-                <li><h1>PokeBuilder</h1></li>
-                <li>Create a Pokemon</li>
+                <motion.li whileHover={{ scale: 1.1 }}><h1>PokeBuilder</h1></motion.li>
+                <motion.li whileHover={{ scale: 1.1 }}>Create a Pokemon</motion.li>
             </ul>
-        </nav>
+        </nav> 
         </>
     );
 }

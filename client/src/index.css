@@ -68,9 +68,11 @@ input, textarea, select {
   /* height: 50%;
   width: 100%; */
   display: flex;
+  flex-direction: column;
   /* border: 1px solid black;
   border-radius: 5%; */
   padding: 10%;
+  padding-bottom: 0;
 }
 
 #canvas {
@@ -82,6 +84,12 @@ input, textarea, select {
   height: 100%;
   width: 100%;
   background-color: aliceblue;
+}
+
+.canvas-controls {
+  /* border: 2px solid black; */
+  margin-top: 2%;
+  
 }
 
 .d-pad-container {
@@ -166,4 +174,19 @@ input, textarea, select {
   padding: 10px;
   background-color: #323838;
   border-radius: 5%;
+}
+
+.loader {
+  /* width: 25px;
+  height: 25px; */
+  margin: 40px auto;
+  background: white;
+}
+
+#pokeball-big-circle {
+
+}
+
+#pokeball-small-circle {
+  z-index: 5;
 }

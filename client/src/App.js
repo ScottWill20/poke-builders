@@ -1,7 +1,7 @@
-import CreatePokeForm from "./components/CreatePokeForm";
 import CreatePokeDraw from "./components/CreatePokeDraw";
 import Pokedex from "./components/Pokedex";
 import Navigation from "./components/Navigation";
+import Loader from "./components/Loader";
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
     <Navigation />
     <div className="container">
       <Pokedex />
+      <Loader />
     </div>
     
     </>
