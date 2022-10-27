@@ -35,7 +35,7 @@ public class PokemonJdbcRepository implements PokemonRepository {
 
     @Override
     public List<Pokemon> findAllPublicPokemon() {
-        final String sql = "select pokemon_id, pokemon_name, height, weight, birthday, " +
+        final String sql = "select pokemon_id, pokemon_name, pokemon_description, url, height, weight, birthday, " +
                 "app_user_id, ability_id, `type`, vibe, private " +
                 "from pokemon " +
                 "where private = false;";
@@ -47,7 +47,7 @@ public class PokemonJdbcRepository implements PokemonRepository {
         //return null if user doesn't exist. return empty list if user exists
         if (userRepository.findById(userId) == null)
             return null;
-        final String sql = "select pokemon_id, pokemon_name, height, weight, birthday, " +
+        final String sql = "select pokemon_id, pokemon_name, pokemon_description, url, height, weight, birthday, " +
                 "app_user_id, ability_id, `type`, vibe, private " +
                 "from pokemon " +
                 "where app_user_id = ?;";
@@ -57,7 +57,7 @@ public class PokemonJdbcRepository implements PokemonRepository {
     @Override
     @Transactional
     public Pokemon findByPokemonId(int pokemonId) {
-        final String sql = "select pokemon_id, pokemon_name, height, weight, birthday, " +
+        final String sql = "select pokemon_id, pokemon_name, pokemon_description, url, height, weight, birthday, " +
                 "app_user_id, ability_id, `type`, vibe, private " +
                 "from pokemon " +
                 "where pokemon_id = ?;";
@@ -84,21 +84,23 @@ public class PokemonJdbcRepository implements PokemonRepository {
 
     private Pokemon createPokemonHelper(Pokemon pokemon) {
         //just do the create here.
-        final String sql = "insert into pokemon (pokemon_name, height, weight, birthday, " +
+        final String sql = "insert into pokemon (pokemon_name, pokemon_description, url, height, weight, birthday, " +
                 "app_user_id, ability_id, `type`, vibe, private) "
-                + " values (?,?,?,?,?,?,?,?,?);";
+                + " values (?,?,?,?,?,?,?,?,?,?,?);";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, pokemon.getName());
-            ps.setDouble(2, pokemon.getHeight());
-            ps.setDouble(3, pokemon.getWeight());
-            ps.setDate(4, pokemon.getBirthday() == null ? null : Date.valueOf(pokemon.getBirthday()));
-            ps.setInt(5, pokemon.getUser().getUserId());
-            ps.setInt(6, pokemon.getAbility().getId());
-            ps.setString(7, pokemon.getType().getName());
-            ps.setString(8, pokemon.getVibe().getName());
-            ps.setBoolean(9, pokemon.isPrivate());
+            ps.setString(2, pokemon.getDescription());
+            ps.setString(3, pokemon.getUrl());
+            ps.setDouble(4, pokemon.getHeight());
+            ps.setDouble(5, pokemon.getWeight());
+            ps.setDate(6, pokemon.getBirthday() == null ? null : Date.valueOf(pokemon.getBirthday()));
+            ps.setInt(7, pokemon.getUser().getUserId());
+            ps.setInt(8, pokemon.getAbility().getId());
+            ps.setString(9, pokemon.getType().getName());
+            ps.setString(10, pokemon.getVibe().getName());
+            ps.setBoolean(11, pokemon.isPrivate());
             return ps;
         }, keyHolder);
 
@@ -115,6 +117,8 @@ public class PokemonJdbcRepository implements PokemonRepository {
         storeMovesAndAbility(pokemon);
         final String sql = "update pokemon set "
                 + "pokemon_name = ?, "
+                + "pokemon_description = ?, "
+                + "url = ?,"
                 + "height = ?, "
                 + "weight = ?, "
                 + "birthday = ?, "
@@ -126,6 +130,8 @@ public class PokemonJdbcRepository implements PokemonRepository {
                 + "where pokemon_id = ?;";
         boolean updatePokemon = jdbcTemplate.update(sql,
                 pokemon.getName(),
+                pokemon.getDescription(),
+                pokemon.getUrl(),
                 pokemon.getHeight(),
                 pokemon.getWeight(),
                 pokemon.getBirthday(),

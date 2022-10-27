@@ -58,7 +58,7 @@ public class PokemonJdbcRepositoryTest {
 
     @Test
     void shouldNotFindByInvalidUserId() {
-        List<Pokemon> pokemons = repository.findByUserId(999);
+        List<Pokemon> pokemons = repository.findPokemonByUserId(999);
         assertNull(pokemons); //change to assertNull
     }
 
@@ -92,6 +92,8 @@ public class PokemonJdbcRepositoryTest {
     void shouldCreatePokemonWithNewMovesAndAbility() {
         Pokemon pokemon = new Pokemon();
         pokemon.setName("Jolteon");
+        pokemon.setDescription("Test desc");
+        pokemon.setUrl("Test url");
         pokemon.setHeight(0.8);
         pokemon.setWeight(24.5);
         pokemon.setBirthday(LocalDate.of(2018, 5, 21));
@@ -121,6 +123,8 @@ public class PokemonJdbcRepositoryTest {
     void shouldCreatePokemonUsingExistingMovesAndAbilities() {
         Pokemon pokemon = new Pokemon();
         pokemon.setName("Omanyte");
+        pokemon.setDescription("Test desc");
+        pokemon.setUrl("Test url");
         pokemon.setHeight(0.4);
         pokemon.setWeight(7.5);
         pokemon.setBirthday(LocalDate.of(2018, 5, 21));
@@ -146,6 +150,8 @@ public class PokemonJdbcRepositoryTest {
         Pokemon pokemon = new Pokemon();
         pokemon.setId(4);
         pokemon.setName("Vaporeon");
+        pokemon.setDescription("Test desc");
+        pokemon.setUrl("Test url");
         pokemon.setHeight(1);
         pokemon.setWeight(29);
         pokemon.setBirthday(LocalDate.now());
