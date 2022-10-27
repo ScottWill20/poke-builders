@@ -8,6 +8,8 @@ import java.util.List;
 public class Pokemon {
     private int id;
     private String name;
+    private String description;
+    private String url;
     private double height;
     private double weight;
     private LocalDate birthday;
@@ -21,10 +23,12 @@ public class Pokemon {
     public Pokemon() {
     }
 
-    public Pokemon(int id, String name, int height, int weight, LocalDate birthday, Type type,
-                   Vibe vibe, User user, List<Move> moves, Ability ability, boolean isPrivate) {
+    public Pokemon(int id, String name, String description, String url, int height, int weight, LocalDate birthday, Type type,
+                   Vibe vibe, User user, ArrayList<Move> moves, Ability ability, boolean isPrivate) {
         this.id = id;
         this.name = name;
+        this.description = description;
+        this.url = url;
         this.height = height;
         this.weight = weight;
         this.birthday = birthday;
@@ -50,6 +54,21 @@ public class Pokemon {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public double getHeight() {

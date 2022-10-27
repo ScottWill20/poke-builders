@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PokemonRepository {
     List<Pokemon> findAllPublicPokemon();
-    List<Pokemon> findByUserId(int userId);
+    List<Pokemon> findPokemonByUserId(int userId);
     Pokemon findByPokemonId(int pokemonId);
     Pokemon createPokemon(Pokemon pokemon);
     boolean updatePokemon(Pokemon pokemon);
