@@ -12,9 +12,9 @@ function App() {
     <Navigation />
     <div className="container">
       {/* <HomePage /> */}
-      {/* <Pokedex /> */}
+      <Pokedex />
       {/* <Loader /> */}
-      <CreateAccount />
+      {/* <CreateAccount /> */}
     </div>
     
     </>
