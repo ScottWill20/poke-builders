@@ -55,6 +55,7 @@ public class PokemonJdbcRepository implements PokemonRepository {
     }
 
     @Override
+    @Transactional
     public Pokemon findByPokemonId(int pokemonId) {
         final String sql = "select pokemon_id, pokemon_name, height, weight, birthday, " +
                 "app_user_id, ability_id, `type`, vibe, private " +
@@ -71,55 +72,59 @@ public class PokemonJdbcRepository implements PokemonRepository {
     }
 
     @Override
+    @Transactional
     public Pokemon createPokemon(Pokemon pokemon) {
 //        if (userRepository.findById(pokemon.getUser().getUserId()) == null)
 //            return null;
-        storeMovesAndAbility(pokemon.getMoves(), pokemon.getAbility());
-        final String sql = "insert into pokemon (pokemon_id, pokemon_name, height, weight, birthday, " +
+        storeMovesAndAbility(pokemon);
+        Pokemon result = createPokemonHelper(pokemon);
+        updatePokeMove(result);
+        return result;
+    }
+
+    private Pokemon createPokemonHelper(Pokemon pokemon) {
+        //just do the create here.
+        final String sql = "insert into pokemon (pokemon_name, height, weight, birthday, " +
                 "app_user_id, ability_id, `type`, vibe, private) "
-                + " values (?,?,?,?,?,?,?,?,?,?);";
+                + " values (?,?,?,?,?,?,?,?,?);";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, pokemon.getId());
-            ps.setString(2, pokemon.getName());
-            ps.setDouble(3, pokemon.getHeight());
-            ps.setDouble(4, pokemon.getWeight());
-            ps.setDate(5, pokemon.getBirthday() == null ? null : Date.valueOf(pokemon.getBirthday()));
-            ps.setInt(6, pokemon.getUser().getUserId());
-            ps.setInt(7, pokemon.getAbility().getId());
-            ps.setString(8, pokemon.getType().getName());
-            ps.setString(9, pokemon.getVibe().getName());
-            ps.setBoolean(10, pokemon.isPrivate());
+            ps.setString(1, pokemon.getName());
+            ps.setDouble(2, pokemon.getHeight());
+            ps.setDouble(3, pokemon.getWeight());
+            ps.setDate(4, pokemon.getBirthday() == null ? null : Date.valueOf(pokemon.getBirthday()));
+            ps.setInt(5, pokemon.getUser().getUserId());
+            ps.setInt(6, pokemon.getAbility().getId());
+            ps.setString(7, pokemon.getType().getName());
+            ps.setString(8, pokemon.getVibe().getName());
+            ps.setBoolean(9, pokemon.isPrivate());
             return ps;
         }, keyHolder);
 
         if (rowsAffected <= 0) {
             return null;
         }
-
         pokemon.setId(Objects.requireNonNull(keyHolder.getKey()).intValue());
-        updatePokeMove(pokemon);
         return pokemon;
     }
 
     @Override
+    @Transactional
     public boolean updatePokemon(Pokemon pokemon) {
-        storeMovesAndAbility(pokemon.getMoves(), pokemon.getAbility());
+        storeMovesAndAbility(pokemon);
         final String sql = "update pokemon set "
-                + "pokemon_id = ?, "
                 + "pokemon_name = ?, "
                 + "height = ?, "
                 + "weight = ?, "
-                + "birthday = ? "
-                + "app_user_id = ? "
-                + "ability_id = ? "
-                + "`type` = ? "
-                + "vibe = ? "
+                + "birthday = ?, "
+                + "app_user_id = ?, "
+                + "ability_id = ?, "
+                + "`type` = ?, "
+                + "vibe = ?, "
                 + "private = ? "
                 + "where pokemon_id = ?;";
         boolean updatePokemon = jdbcTemplate.update(sql,
-                pokemon.getId(),
                 pokemon.getName(),
                 pokemon.getHeight(),
                 pokemon.getWeight(),
@@ -128,7 +133,8 @@ public class PokemonJdbcRepository implements PokemonRepository {
                 pokemon.getAbility().getId(),
                 pokemon.getType().getName(),
                 pokemon.getVibe().getName(),
-                pokemon.isPrivate()) > 0;
+                pokemon.isPrivate(),
+                pokemon.getId()) > 0;
 
         return updatePokemon && updatePokeMove(pokemon);
     }
@@ -151,28 +157,38 @@ public class PokemonJdbcRepository implements PokemonRepository {
                 + "inner join pokemon p on pm.pokemon_id = p.pokemon_id "
                 + "where pm.pokemon_id = ?;";
         List<Move> moves = jdbcTemplate.query(sql, new MoveMapper(), pokemon.getId());
-        pokemon.setMoves((ArrayList<Move>) moves);
+        pokemon.setMoves(moves);
     }
 
-    private void storeMovesAndAbility(List<Move> moves, Ability ability) {
-        storeMoves(moves);
-        storeAbility(ability);
+    private void storeMovesAndAbility(Pokemon pokemon) {
+        pokemon.setMoves(storeMoves(pokemon.getMoves()));
+        pokemon.setAbility(storeAbility(pokemon.getAbility()));
     }
 
-    private void storeMoves(List<Move> moves) {
-        for (Move m : moves) {
-            if (moveRepository.findByMoveId(m.getId()) == null) {
+    private List<Move> storeMoves(List<Move> moves) {
+        for (int i = 0; i < moves.size(); i++) {
+            Move inList = moveRepository.findByMoveName(moves.get(i).getName());
+            if (inList == null) {
                 //add move to move table
-                moveRepository.createMove(m);
+                moves.set(i, moveRepository.createMove(moves.get(i)));
+            }
+            else {
+                moves.get(i).setId(inList.getId());
             }
         } //at this point, all moves exist in move table
+        return moves;
     }
 
-    private void storeAbility(Ability ability) {
-        if (abilityRepository.findByAbilityId(ability.getId()) == null) {
+    private Ability storeAbility(Ability ability) {
+        Ability inList = abilityRepository.findByAbilityName(ability.getName());
+        if (inList == null) {
             //add ability to ability table
-            abilityRepository.createAbility(ability);
+            ability = abilityRepository.createAbility(ability);
         }
+        else {
+            ability.setId(inList.getId());
+        }
+        return ability;
     }
 
 
@@ -180,9 +196,10 @@ public class PokemonJdbcRepository implements PokemonRepository {
         jdbcTemplate.update("delete from poke_move where pokemon_id = ?;", pokemon.getId());
         final String sql = "insert into poke_move (pokemon_id, move_id) " +
                 " values (?, ?);";
+
+
         for (Move m: pokemon.getMoves()) {
             PokeMove pokeMove = new PokeMove(pokemon.getId(), m.getId());
-
             KeyHolder keyHolder = new GeneratedKeyHolder();
             int rowsAffected = jdbcTemplate.update(connection -> {
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

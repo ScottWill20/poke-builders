@@ -1,15 +1,13 @@
 package learn.pokemon.data;
 
-import learn.pokemon.models.Pokemon;
-import learn.pokemon.models.Type;
-import learn.pokemon.models.User;
-import learn.pokemon.models.Vibe;
+import learn.pokemon.models.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -91,7 +89,7 @@ public class PokemonJdbcRepositoryTest {
     }
 
     @Test
-    void shouldCreatePokemon() {
+    void shouldCreatePokemonWithNewMovesAndAbility() {
         Pokemon pokemon = new Pokemon();
         pokemon.setName("Jolteon");
         pokemon.setHeight(0.8);
@@ -99,21 +97,88 @@ public class PokemonJdbcRepositoryTest {
         pokemon.setBirthday(LocalDate.of(2018, 5, 21));
         pokemon.setUser(makeUser());
         pokemon.setType(Type.ELECTRIC);
+        pokemon.setVibe(Vibe.BRAVE);
+        pokemon.setPrivate(true);
+        List<Move> moveList = new ArrayList<>();
+        moveList.add(new Move(0, "Yawn","The user lets loose a huge yawn that lulls the target into falling asleep on the next turn."));
+        moveList.add(new Move(0, "Thunderbolt", "A strong electric blast crashes down on the target. This may also leave the target with paralysis."));
+        moveList.add(new Move(0, "Charm", "The user gazes at the target rather charmingly, making it less wary. This harshly lowers the target’s Attack stat."));
+        moveList.add(new Move(0, "Rain-Dance", "The user summons a heavy rain that falls for five turns, powering up Water-type moves. It lowers the power of Fire-type moves."));
+        pokemon.setMoves(moveList);
+        Ability ability = new Ability(0, "Volt-Absorb", "Restores HP if hit by an Electric-type move instead of taking damage.");
+        pokemon.setAbility(ability);
+
+        Pokemon created = repository.createPokemon(pokemon);
+        assertNotNull(created);
+        assertEquals("Jolteon", created.getName());
+        for (Move m : created.getMoves()) {
+            assertNotEquals(0, m.getId());
+        }
+        assertNotEquals(0, created.getAbility().getId());
+    }
+
+    @Test
+    void shouldCreatePokemonUsingExistingMovesAndAbilities() {
+        Pokemon pokemon = new Pokemon();
+        pokemon.setName("Omanyte");
+        pokemon.setHeight(0.4);
+        pokemon.setWeight(7.5);
+        pokemon.setBirthday(LocalDate.of(2018, 5, 21));
+        pokemon.setUser(makeUser());
+        pokemon.setType(Type.ROCK);
+        pokemon.setVibe(Vibe.BRAVE);
+        pokemon.setPrivate(true);
+        pokemon.setMoves(getExistingMoves());
+        pokemon.setAbility(new Ability(0, "Water Absorb", "Restores HP if hit by a Water-type move instead of taking damage."));
+        Pokemon created = repository.createPokemon(pokemon);
+        assertNotNull(created);
+        assertEquals("Omanyte", created.getName());
+        for (Move m : created.getMoves()) {
+            assertNotEquals(0, m.getId());
+        }
+        assertNotEquals(0, created.getAbility().getId());
     }
 
     @Test
     void shouldUpdatePokemon() {
+        //("Vaporeon", 1, 29, "2020-09-01", 1, 3, "Water", "Jolly", true)
+        //change birthday and private and vibe.
+        Pokemon pokemon = new Pokemon();
+        pokemon.setId(4);
+        pokemon.setName("Vaporeon");
+        pokemon.setHeight(1);
+        pokemon.setWeight(29);
+        pokemon.setBirthday(LocalDate.now());
+        User user = new User();
+        user.setUserId(1);
+        pokemon.setUser(user);
+        pokemon.setType(Type.WATER);
+        pokemon.setVibe(Vibe.BRAVE);
+        pokemon.setPrivate(false);
+        pokemon.setMoves(getExistingMoves());
+        pokemon.setAbility(new Ability(0, "Adaptability", "Powers up moves of the same type as the pokemon"));
 
+        assertTrue(repository.updatePokemon(pokemon));
     }
 
     @Test
     void shouldDeletePokemon() {
-
+        assertTrue(repository.deleteByPokemonId(3));
+        assertFalse(repository.deleteByPokemonId(3));
     }
 
     private User makeUser() {
        User user = new User();
-       user.setUserId(3);
+       user.setUserId(2);
        return user;
+    }
+
+    private List<Move> getExistingMoves() {
+        List<Move> moves = new ArrayList<>();
+        moves.add(new Move(0, "Body Slam","The user drops onto the target with its full body weight. This may also leave the target with paralysis."));
+        moves.add(new Move(0, "Flamethrower", "The target is scorched with an intense blast of fire. This may also leave the target with a burn."));
+        moves.add(new Move(0, "Yawn","The user lets loose a huge yawn that lulls the target into falling asleep on the next turn."));
+        moves.add(new Move(0, "Charm", "The user gazes at the target rather charmingly, making it less wary. This harshly lowers the target’s Attack stat."));
+        return moves;
     }
 }

@@ -7,7 +7,7 @@ public class PokeMove {
     public PokeMove() {
     }
 
-    public PokeMove(int moveId, int pokemonId) {
+    public PokeMove(int pokemonId, int moveId) {
         this.moveId = moveId;
         this.pokemonId = pokemonId;
     }
@@ -26,5 +26,13 @@ public class PokeMove {
 
     public void setPokemonId(int pokemonId) {
         this.pokemonId = pokemonId;
+    }
+
+    @Override
+    public String toString() {
+        return "PokeMove{" +
+                "moveId=" + moveId +
+                ", pokemonId=" + pokemonId +
+                '}';
     }
 }
