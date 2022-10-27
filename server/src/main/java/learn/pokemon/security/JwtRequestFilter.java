@@ -21,17 +21,25 @@ public class JwtRequestFilter extends BasicAuthenticationFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain chain) throws IOException, ServletException {
+
         String authorization = request.getHeader("Authorization");
         if (authorization != null && authorization.startsWith("Bearer ")) {
-            User user = converter.tokenToUser(authorization);
+            User user = converter.getUserFromToken(authorization);
             if (user == null) {
-                response.setStatus(403);
+                response.setStatus(403); // Forbidden
             } else {
-                UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+
+                // Update the "principal" from the username to `user`
+                UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                        user, null, user.getAuthorities());
+
                 SecurityContextHolder.getContext().setAuthentication(token);
             }
         }
+
         chain.doFilter(request, response);
     }
 }

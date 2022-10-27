@@ -8,6 +8,8 @@ drop table if exists app_user;
 
 create table app_user (
 	app_user_id int primary key auto_increment,
+    email varchar(250) not null,
+    avatar varchar(300) not null,
     username varchar(50) not null,
     password_hash varchar(1024) not null,
     enabled boolean not null default true
@@ -35,13 +37,14 @@ insert into app_role (app_role_id, `name`) values
 	(1, 'USER'),
     (2, 'ADMIN');
     
-insert into app_user (app_user_id, username, password_hash) values
-	(1, 'user', '$2a$10$O07BeyVEy.eGy9zmJQR/WeIDdb5Q6PMDbTZlUXOMQ0B.EAkbiuUK6'),
-    (2, 'admin', '$2a$10$z8mwVv2mOjkWkFuzxYUFcO6SH1FaEftCw4M2Ltv6/5x7nigwEJKIO');
-    
+insert into app_user (app_user_id, email, avatar, username, password_hash) values
+	(1, 'Jane@email.com', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/134.png', 'jane', '$2a$10$O07BeyVEy.eGy9zmJQR/WeIDdb5Q6PMDbTZlUXOMQ0B.EAkbiuUK6'),
+    (2, 'Delanie@email.com', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png', 'delanie', '$2a$10$z8mwVv2mOjkWkFuzxYUFcO6SH1FaEftCw4M2Ltv6/5x7nigwEJKIO'),
+    (3, 'Scott@email.com', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/009.png', 'scott', '');
 insert into app_user_role(app_user_id, app_role_id) values
-	(1, 1),
-    (2, 2);
+	(1, 2),
+    (2, 2),
+    (3, 2);
 
 create table ability (
 ability_id int primary key auto_increment,
