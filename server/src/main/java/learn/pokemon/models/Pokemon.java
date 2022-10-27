@@ -3,6 +3,7 @@ package learn.pokemon.models;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Pokemon {
     private int id;
@@ -15,7 +16,7 @@ public class Pokemon {
     private Type type;
     private Vibe vibe;
     private User user;
-    private ArrayList<Move> moves;
+    private List<Move> moves;
     private Ability ability;
     private boolean isPrivate;
 
@@ -118,11 +119,11 @@ public class Pokemon {
         this.user = user;
     }
 
-    public ArrayList<Move> getMoves() {
+    public List<Move> getMoves() {
         return moves;
     }
 
-    public void setMoves(ArrayList<Move> moves) {
+    public void setMoves(List<Move> moves) {
         this.moves = moves;
     }
 

@@ -96,6 +96,7 @@ public class PokemonService {
         if (pokemon.getWeight() == 0 || pokemon.getWeight() > 9999999) {
             result.addMessage("weight cannot be zero and must be less than 10,000,000", ResultType.INVALID);
         }
+        //pokemon user exists
         return result;
     }
 }
