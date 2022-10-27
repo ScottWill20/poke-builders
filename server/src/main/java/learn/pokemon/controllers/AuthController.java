@@ -36,7 +36,7 @@ public class AuthController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticate(@RequestBody User user) {
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
         try {
             Authentication authentication = manager.authenticate(token);
             if (authentication.isAuthenticated()) {
@@ -53,7 +53,7 @@ public class AuthController {
 
     @PostMapping("/encode")
     public void encode(@RequestBody HashMap<String, String> values) {
-        String encodedValue = encoder.encode(values.get("value"));
+        String encodedValue = encoder.encode(values.get("password"));
         System.out.println(encodedValue);
     }
 

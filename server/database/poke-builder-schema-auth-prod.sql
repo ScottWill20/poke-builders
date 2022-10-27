@@ -39,7 +39,7 @@ insert into app_role (app_role_id, `name`) values
     
 insert into app_user (app_user_id, email, avatar, username, password_hash) values
 	(1, 'Jane@email.com', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/134.png', 'jane', '$2a$10$O07BeyVEy.eGy9zmJQR/WeIDdb5Q6PMDbTZlUXOMQ0B.EAkbiuUK6'),
-    (2, 'Delanie@email.com', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png', 'delanie', '$2a$10$z8mwVv2mOjkWkFuzxYUFcO6SH1FaEftCw4M2Ltv6/5x7nigwEJKIO'),
+    (2, 'Delanie@email.com', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png', 'delanie', '$2a$10$jJ0esKTZtvzBy9NMIOMNouwlyD/n28bSmJuuiO1AtAgbtGxkR6Dg2'),
     (3, 'Scott@email.com', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/009.png', 'scott', '');
 insert into app_user_role(app_user_id, app_role_id) values
 	(1, 2),
@@ -156,14 +156,14 @@ constraint fk_poke_move_move_id_4
     references move(move_id)
 );
 
-insert into poke_move(pokemon_id, move_id) values
-    (1, 1),
-    (1, 2),
-    (1, 3),
-    (1, 4),
-    (2, 2), 
-    (2, 3), 
-    (2, 1),
-    (2, 4),
-    (3, 5);
+-- insert into poke_move(pokemon_id, move_id) values
+--     (1, 1),
+--     (1, 2),
+--     (1, 3),
+--     (1, 4),
+--     (2, 2), 
+--     (2, 3), 
+--     (2, 1),
+--     (2, 4),
+--     (3, 5);
 
