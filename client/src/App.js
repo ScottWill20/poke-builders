@@ -7,13 +7,8 @@ import CreateAccount from "./components/CreateAccount";
 import PokeGrid from "./components/PokeGrid";
 import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AuthContext from "./contexts/AuthContext";
-
 function App() {
-
-
-
-
-
+  
   return (
     // <AuthContext.Provider value={auth}>
       <Router>

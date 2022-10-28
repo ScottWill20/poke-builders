@@ -1,5 +1,10 @@
+import { useState } from "react";
 
 function CreatePokeForm() {
+
+    const [abilities, setAbilities] = useState([]);
+    const [moves, setMoves] = useState([]);
+
     return (
         <>
         {/* <h2>Create a Pokemon</h2> */}
