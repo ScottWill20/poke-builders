@@ -11,10 +11,10 @@ function App() {
     {/* <h1>PokeBuilder</h1> */}
     <Navigation />
     <div className="container">
-      {/* <HomePage /> */}
+      <HomePage />
       {/* <Pokedex /> */}
       {/* <Loader /> */}
-      <CreateAccount />
+      {/* <CreateAccount /> */}
     </div>
     
     </>

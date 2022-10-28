@@ -24,6 +24,12 @@ input, textarea, select {
   flex-direction: column;
 }
 
+.create-account-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
 .nav-bar {
   display: flex;
   background-color: #08BDBD;
