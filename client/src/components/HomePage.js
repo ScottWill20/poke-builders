@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import PokeCard from "./PokeCard";
 import PokeGrid from "./PokeGrid";
 

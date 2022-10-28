@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 function PokeCard( {pokemon} ) { // pass in pokemon name, username, and img as props
 
-    // const { user } = useContext(AuthContext);
+// const { user } = useContext(AuthContext);
 
     return (
         <div className="col">
@@ -23,7 +23,6 @@ function PokeCard( {pokemon} ) { // pass in pokemon name, username, and img as p
                 <h4>@username</h4> */}
             </motion.div>
         </div>
-
     );
 }
 
