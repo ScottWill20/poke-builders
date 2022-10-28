@@ -4,21 +4,31 @@ import Loader from "./components/Loader";
 import HomePage from "./components/HomePage";
 import CreateAccount from "./components/CreateAccount";
 import CreatePokemon from "./components/CreatePokemon";
+import PokeGrid from "./components/PokeGrid";
+import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import AuthContext from "./contexts/AuthContext";
 
 function App() {
+  
   return (
-    <>
-    {/* <h1>PokeBuilder</h1> */}
-    <Navigation />
-    <div className="container">
-      {/* <HomePage /> */}
-      {/* <Pokedex /> */}
-      <Loader />
-      {/* <CreateAccount /> */}
-      <CreatePokemon />
-    </div>
-    
-    </>
+    // <AuthContext.Provider value={auth}>
+      <Router>
+      {/* <h1>PokeBuilder</h1> */}
+        <Navigation />
+          <div className="container">
+            <Switch>
+              {/* <HomePage /> */}
+              {/* <Pokedex /> */}
+              {/* <Loader /> */}
+              {/* <CreateAccount /> */}
+              <Route exact path="/">
+                <HomePage />
+              </Route>
+            </Switch>
+          </div>
+      </Router>
+    // </AuthContext.Provider>
+
   );
 }
 

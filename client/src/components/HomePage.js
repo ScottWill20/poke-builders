@@ -1,21 +1,11 @@
 import { motion } from "framer-motion";
 import PokeCard from "./PokeCard";
+import PokeGrid from "./PokeGrid";
 
 function HomePage() { // pass in a list of public pokemon as props
     // will also need a mapper to determine number of total pokemon cards 
     return (
-        <>
-        <div className="poke-grid" layout>
-            <PokeCard />
-            <PokeCard />
-            <PokeCard />
-            <PokeCard />
-            <PokeCard />
-            <PokeCard />
-            <PokeCard />
-            <PokeCard />
-        </div>
-        </>
+        <PokeGrid />
     );
 }
 
