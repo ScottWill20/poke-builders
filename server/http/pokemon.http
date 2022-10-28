@@ -119,7 +119,7 @@ Content-Type: application/json
   "email": "testmail@maltest.com",
   "avatar": "the last airbender",
       "username": "Aang",
-      "password": "$2a$10$gzA.iVz1wQXQ3509j1xcBu1n2qZ2qNuCfVLMlPeHbkR4.ly82Nooa",
+      "password": "SokkaRulez",
       "enabled": true,
       "authorities": [
           "USER"
