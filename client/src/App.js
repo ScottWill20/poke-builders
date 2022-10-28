@@ -1,9 +1,9 @@
-import CreatePokeDraw from "./components/CreatePokeDraw";
 import Pokedex from "./components/Pokedex";
 import Navigation from "./components/Navigation";
 import Loader from "./components/Loader";
 import HomePage from "./components/HomePage";
 import CreateAccount from "./components/CreateAccount";
+import CreatePokemon from "./components/CreatePokemon";
 
 function App() {
   return (
@@ -11,10 +11,11 @@ function App() {
     {/* <h1>PokeBuilder</h1> */}
     <Navigation />
     <div className="container">
-      <HomePage />
+      {/* <HomePage /> */}
       {/* <Pokedex /> */}
-      {/* <Loader /> */}
+      <Loader />
       {/* <CreateAccount /> */}
+      <CreatePokemon />
     </div>
     
     </>
