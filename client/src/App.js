@@ -1,12 +1,13 @@
-import CreatePokeDraw from "./components/CreatePokeDraw";
 import Pokedex from "./components/Pokedex";
 import Navigation from "./components/Navigation";
 import Loader from "./components/Loader";
 import HomePage from "./components/HomePage";
 import CreateAccount from "./components/CreateAccount";
+import CreatePokemon from "./components/CreatePokemon";
 import PokeGrid from "./components/PokeGrid";
 import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AuthContext from "./contexts/AuthContext";
+
 function App() {
   
   return (
@@ -27,6 +28,7 @@ function App() {
           </div>
       </Router>
     // </AuthContext.Provider>
+
   );
 }
 

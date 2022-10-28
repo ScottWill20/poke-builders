@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import Canvas from "./Canvas";
 import CreatePokeForm from "./CreatePokeForm";
-import CreatePokeDraw from "./CreatePokeDraw";
 
 function Pokedex(){
 
@@ -29,7 +28,7 @@ function Pokedex(){
                     {/* replace with our Canvas component */}
                     {/* user profile should be carousel */}
                     <div className="canvas-controls">
-                        <CreatePokeDraw />
+                        {/* <CreatePokeDraw /> */}
                     </div>
                 </div>
                 <div className="d-pad-container">
