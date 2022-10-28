@@ -138,8 +138,6 @@ Content-Type: application/json
   "password": "P@ssw0rd!"
 }
 
-"$2a$10$jJ0esKTZtvzBy9NMIOMNouwlyD/n28bSmJuuiO1AtAgbtGxkR6Dg2"
-
 ###
 POST http://localhost:8080/create_account HTTP/1.1
 Content-Type: application/json
