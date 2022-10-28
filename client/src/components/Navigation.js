@@ -5,7 +5,7 @@ function Navigation() {
         <>
         <nav className="nav-bar navbar navbar-expand-lg">
         <motion.h1 className="nav-container mr-5" whileHover={{ scale: 1.1 }}><h1>PokeBuilder</h1></motion.h1>
-        <button class="navbar-toggler" 
+        <button className="navbar-toggler" 
             type="button" 
             data-toggle="collapse" 
             data-target="#navbarSupportedContent" 
@@ -13,7 +13,7 @@ function Navigation() {
             aria-expanded="false" 
             aria-label="Toggle navigation"
             >
-                <span class="navbar-toggler-icon"></span>
+                <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="nav-container navbar-nav mr-auto">

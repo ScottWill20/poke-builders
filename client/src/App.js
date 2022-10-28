@@ -11,8 +11,8 @@ function App() {
     {/* <h1>PokeBuilder</h1> */}
     <Navigation />
     <div className="container">
-      {/* <HomePage /> */}
-      <Pokedex />
+      <HomePage />
+      {/* <Pokedex /> */}
       {/* <Loader /> */}
       {/* <CreateAccount /> */}
     </div>
