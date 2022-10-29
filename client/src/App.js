@@ -7,11 +7,33 @@ import CreatePokemon from "./components/CreatePokemon";
 import PokeGrid from "./components/PokeGrid";
 import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AuthContext from "./contexts/AuthContext";
+import User from "./contexts/UserContext";
 
 function App() {
+
+  const user_default = {
+    userId: 0,
+    username: "",
+    password: ""
+  }
+
+  const [user, setUser] = useState(user_default);
+
+  const login = setUser;
+  const logout = () => {
+    setUser();
+    localStorage.removeItem("jwt");
+  }
+
+  const auth = {
+    user,
+    login, 
+    logout
+  }
   
   return (
-    // <AuthContext.Provider value={auth}>
+      <AuthContext.Provider value={auth}>
+        <User.Provider value={user}>
       <Router>
       {/* <h1>PokeBuilder</h1> */}
         <Navigation />
@@ -28,7 +50,8 @@ function App() {
             </Switch>
           </div>
       </Router>
-    // </AuthContext.Provider>
+      </User.Provider>
+     </AuthContext.Provider>
 
   );
 }
