@@ -51,11 +51,11 @@ public class AuthController {
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
-    @PostMapping("/encode")
-    public void encode(@RequestBody HashMap<String, String> values) {
-        String encodedValue = encoder.encode(values.get("password"));
-        System.out.println(encodedValue);
-    }
+//    @PostMapping("/encode")
+//    public void encode(@RequestBody HashMap<String, String> values) {
+//        String encodedValue = encoder.encode(values.get("password"));
+//        System.out.println(encodedValue);
+//    }
 
     // NEW
     @PostMapping("/refresh_token")
@@ -68,7 +68,7 @@ public class AuthController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
-    @PostMapping("/create_account")
+    @PostMapping("/register")
     public ResponseEntity<?> createAccount(@RequestBody Map<String, String> credentials) {
 
         String email = credentials.get("email");
