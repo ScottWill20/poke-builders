@@ -27,8 +27,8 @@ function App() {
               {/* <Loader /> */}
               {/* <CreateAccount /> */}
               <Route exact path="/">
-                {/* <HomePage />
-                <Loader /> */}
+                <HomePage />
+                {/* <Loader /> */}
               </Route>
             </Switch>
           </div>
