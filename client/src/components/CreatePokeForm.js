@@ -81,24 +81,24 @@ function CreatePokeForm() {
                 // onChange={handleChange}
                 required >
                     <option selected disabled hidden>[select a type]</option>
-                    <option value="normal">normal</option>
-                    <option value="fire">fire</option>
-                    <option value="water">water</option>
-                    <option value="grass">grass</option>
-                    <option value="electric">electric</option>
-                    <option value="ice">ice</option>
-                    <option value="fighting">fighting</option>
-                    <option value="poison">poison</option>
-                    <option value="ground">ground</option>
-                    <option value="flying">flying</option>
-                    <option value="psychic">psychic</option>
-                    <option value="bug">bug</option>
-                    <option value="rock">rock</option>
-                    <option value="ghost">ghost</option>
-                    <option value="dark">dark</option>
-                    <option value="dragon">dragon</option>
-                    <option value="steel">steel</option>
-                    <option value="fairy">fairy</option>
+                    <option value="normal">NORMAL</option>
+                    <option value="fire">FIRE</option>
+                    <option value="water">WATER</option>
+                    <option value="grass">GRASS</option>
+                    <option value="electric">ELECTRIC</option>
+                    <option value="ice">ICE</option>
+                    <option value="fighting">FIGHTING</option>
+                    <option value="poison">POISON</option>
+                    <option value="ground">GROUND</option>
+                    <option value="flying">FLYING</option>
+                    <option value="psychic">PSYCHIC</option>
+                    <option value="bug">BUG</option>
+                    <option value="rock">ROCK</option>
+                    <option value="ghost">GHOST</option>
+                    <option value="dark">DARK</option>
+                    <option value="dragon">DRAGON</option>
+                    <option value="steel">STEEL</option>
+                    <option value="fairy">FAIRY</option>
                 </select>
             </div>
             <div className="form-group">
@@ -110,31 +110,31 @@ function CreatePokeForm() {
                 // onChange={handleChange}
                 required >
                     <option selected disabled hidden>[select a nature]</option>
-                    <option value="hardy">hardy</option>
-                    <option value="lonely">lonely</option>
-                    <option value="brave">brave</option>
-                    <option value="adamant">adamant</option>
-                    <option value="naughty">naughty</option>
-                    <option value="bold">bold</option>
-                    <option value="docile">docile</option>
-                    <option value="relaxed">relaxed</option>
-                    <option value="impish">impish</option>
-                    <option value="lax">lax</option>
-                    <option value="timid">timid</option>
-                    <option value="hasty">hasty</option>
-                    <option value="serious">serious</option>
-                    <option value="jolly">jolly</option>
-                    <option value="naive">naive</option>
-                    <option value="modest">modest</option>
-                    <option value="mild">mild</option>
-                    <option value="quiet">quiet</option>
-                    <option value="bashful">bashful</option>
-                    <option value="rash">rash</option>
-                    <option value="calm">calm</option>
-                    <option value="gentle">gentle</option>
-                    <option value="sassy">sassy</option>
-                    <option value="careful">careful</option>
-                    <option value="quirky">quirky</option>
+                    <option value="hardy">HARDY</option>
+                    <option value="lonely">LONELY</option>
+                    <option value="brave">BRAVE</option>
+                    <option value="adamant">ADAMANT</option>
+                    <option value="naughty">NAUGHTY</option>
+                    <option value="bold">BOLD</option>
+                    <option value="docile">DOCILE</option>
+                    <option value="relaxed">RELAXED</option>
+                    <option value="impish">IMPISH</option>
+                    <option value="lax">LAX</option>
+                    <option value="timid">TIMID</option>
+                    <option value="hasty">HASTY</option>
+                    <option value="serious">SERIOUS</option>
+                    <option value="jolly">JOLLY</option>
+                    <option value="naive">NAIVE</option>
+                    <option value="modest">MODEST</option>
+                    <option value="mild">MILD</option>
+                    <option value="quiet">QUIET</option>
+                    <option value="bashful">BASHFUL</option>
+                    <option value="rash">RASH</option>
+                    <option value="calm">CALM</option>
+                    <option value="gentle">GENTLE</option>
+                    <option value="sassy">SASSY</option>
+                    <option value="careful">CAREFUL</option>
+                    <option value="quirky">QUIRKY</option>
                 </select>
             </div>
             <div className="form-group">
