@@ -36,6 +36,8 @@ input, textarea, select {
   border: 2px solid black;
   border-radius: 30%;
   margin-bottom: 1%;
+  padding-left: 5%;
+  padding-right: 8%;
 }
 
 .nav-container {
@@ -47,7 +49,7 @@ input, textarea, select {
 
 .nav-container > li {
   list-style: none;
-  margin-right: 5%;
+  margin-right: 8%;
 }
 
 a:link, a:visited, a:active {
@@ -56,7 +58,7 @@ a:link, a:visited, a:active {
 }
 
 a:hover {
-  color: #F21B3F;
+  color: #ff5656;
 }
 
 .poke-grid {
@@ -184,6 +186,14 @@ a:hover {
   color: #ABFF4F;
   margin-bottom: 5%;
 }
+
+div.fourohfour-page {
+  display:grid;
+  margin-top: 3%;
+  justify-content: center;
+}
+
+
 
 .form-container {
   display: flex;

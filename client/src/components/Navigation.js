@@ -15,20 +15,21 @@ function Navigation() {
             data-toggle="collapse" 
             data-target="#navbarSupportedContent" 
             aria-controls="navbarSupportedContent" 
-            aria-expanded="false" 
+            aria-expanded="true" 
             aria-label="Toggle navigation"
             >
-                <span className="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
             </button>
+
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="nav-container navbar-nav mr-auto">
-            <Link to="/create-pokemon">
-                <motion.li className="nav-item" whileHover={{ scale: 1.1 }}>Create New Pokemon</motion.li></Link>
-            <Link to="/register">
-                <motion.li className="nav-item" whileHover={{ scale: 1.1 }}>Create Account</motion.li></Link>
-            <Link to="/login">
-                <motion.li className="nav-item" whileHover={{ scale: 1.1 }}>Login</motion.li></Link>
-            </ul>
+                <ul className="nav-container navbar-nav mr-auto">
+                    <Link to="/create-pokemon">
+                        <motion.li className="nav-item" whileHover={{ scale: 1.1 }}>New Pokemon</motion.li></Link>
+                    <Link to="/register">
+                        <motion.li className="nav-item" whileHover={{ scale: 1.1 }}>Create Account</motion.li></Link>
+                    <Link to="/login">
+                        <motion.li className="nav-item" whileHover={{ scale: 1.1 }}>Login</motion.li></Link>
+                </ul>
             
             </div>
         </nav> 

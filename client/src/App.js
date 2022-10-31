@@ -13,6 +13,7 @@ import Login from "./components/Login";
 import UserProfile from "./components/UserProfile";
 import Register from "./components/Register";
 import CreatePokeForm from "./components/CreatePokeForm";
+import NotFound from "./components/NotFound";
 
 function App() {
 
@@ -60,6 +61,9 @@ function App() {
               </Route>
               <Route exact path="/profile">
                 <UserProfile/>
+              </Route>
+              <Route>
+                <NotFound />
               </Route>
             </Switch>
           </div>
