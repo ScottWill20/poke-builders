@@ -12,6 +12,10 @@ import User from "./contexts/UserContext";
 import Login from "./components/Login";
 import UserProfile from "./components/UserProfile";
 import Register from "./components/Register";
+import {getMoveDescription, ListMoveNames} from "./services/pokeAPI";
+import CreatePokeForm from "./components/CreatePokeForm";
+
+// ListMoveNames().then(a => console.log(a));
 
 function App() {
 
@@ -43,13 +47,14 @@ function App() {
         <Navigation />
           <div className="container">
             <Switch>
+              <CreatePokeForm />
               {/* <HomePage /> */}
               {/* <Pokedex /> */}
               {/* <Loader /> */}
               {/* <CreateAccount /> */}
               <Route exact path="/">
                 <HomePage />
-                <Loader />
+                {/* <Loader /> */}
               </Route>
               <Route exact path="/login">
                 <Login/>

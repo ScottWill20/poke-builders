@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { motion } from "framer-motion";
 import { findAllPublicPokemon } from "../services/pokemon";
 import PokeCard from "./PokeCard";
 
@@ -15,9 +16,16 @@ function PokeGrid({}) {
 
     return (
         <>
-        <div className="row row-cols-4 g-2">
+        <motion.div 
+        drag 
+        dragPropagation 
+        dragConstraints={{ left: 0, right: 300, top: 0, bottom: 300 }}
+        dragElastic={0.2} 
+        dragSnapToOrigin={true}
+        dragMomentum={true}
+        className="row row-cols-4 g-2">
             {pokemon.map(p => <PokeCard key={p.pokemonId} pokemon={p} />)}
-        </div>
+        </motion.div>
         </>
     );
 }

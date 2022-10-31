@@ -148,16 +148,17 @@ input, textarea, select {
   display: flex;
   position: relative;
   justify-content: center;
-  border: 2px solid green;
-  padding-top: 5%;
+  /* border: 2px solid green; */
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 
-#submit-poke-btn {
+/* #submit-poke-btn {
   height: 40%;
   width: 30%;
   padding: 2%;
   background-color: #29BF12;
-}
+} */
 
 #right-grid {
   height: 100%;
