@@ -24,14 +24,6 @@ export async function getPokemonSprites(name) {
     return imgUrl;
   }
 
-export async function findAllAbilitesPokeAPI() {
-    const response = await fetch(`${POKEAPI_BASE_URL}/ability?limit=327`);
-    if (response.ok) {
-        return response.json();
-    } else {
-        return Promise.reject();
-    }
-}
 
 export async function findAllMovesPokeAPI() {
     const response = await fetch(`${POKEAPI_BASE_URL}/move?limit=844`);
@@ -46,7 +38,7 @@ export async function findAllMovesPokeAPI() {
 export async function ListMoveNames() {
     const listMoves = await findAllMovesPokeAPI();
 
-    return listMoves.results.map(b => b.name);
+    return listMoves.results.map(b => b.name.toUpperCase());
 
 }
 
@@ -69,4 +61,20 @@ export async function getMoveDescription(move) {
 
     return flavorText[0].flavor_text;
 }
+
+export async function findAllAbilitesPokeAPI() {
+    const response = await fetch(`${POKEAPI_BASE_URL}/ability?limit=327`);
+    if (response.ok) {
+        return response.json();
+    } else {
+        return Promise.reject();
+    }
+}
+
+export async function ListAbilityNames() {
+    const listAbility = await findAllAbilitesPokeAPI();
+
+    return listAbility.results.map(b => b.name.toUpperCase());
+}
+
 
