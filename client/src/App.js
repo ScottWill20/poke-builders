@@ -7,6 +7,10 @@ import CreatePokemon from "./components/CreatePokemon";
 import PokeGrid from "./components/PokeGrid";
 import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AuthContext from "./contexts/AuthContext";
+import {getMoveDescription, ListMoveNames} from "./services/pokeAPI";
+import CreatePokeForm from "./components/CreatePokeForm";
+
+// ListMoveNames().then(a => console.log(a));
 
 function App() {
   
@@ -17,6 +21,7 @@ function App() {
         <Navigation />
           <div className="container">
             <Switch>
+              <CreatePokeForm />
               {/* <HomePage /> */}
               {/* <Pokedex /> */}
               {/* <Loader /> */}

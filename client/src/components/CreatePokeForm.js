@@ -1,9 +1,25 @@
-import { useState } from "react";
-
+import { React, useState, useEffect } from "react";
+import Select from "react-select";
+import { ListMoveNames } from "../services/pokeAPI";
+import { ListAbilityNames } from"../services/pokeAPI";
+import { motion } from "framer-motion";
 function CreatePokeForm() {
 
     const [abilities, setAbilities] = useState([]);
     const [moves, setMoves] = useState([]);
+
+
+    useEffect(() => {
+        ListMoveNames()
+        .then(setMoves)
+        .catch(console.log());
+
+        ListAbilityNames()
+        .then(setAbilities)
+        .catch(console.log());
+
+    });
+
 
     return (
         <>
@@ -57,6 +73,35 @@ function CreatePokeForm() {
             </div>
             <div className="drop-downs-container">
             <div className="form-group">
+                <label htmlFor="type">Type:</label>
+                <select id="type"
+                name="type"
+                className="form-control"
+                // value={pokemon.type}
+                // onChange={handleChange}
+                required >
+                    <option selected disabled hidden>[select a type]</option>
+                    <option value="normal">normal</option>
+                    <option value="fire">fire</option>
+                    <option value="water">water</option>
+                    <option value="grass">grass</option>
+                    <option value="electric">electric</option>
+                    <option value="ice">ice</option>
+                    <option value="fighting">fighting</option>
+                    <option value="poison">poison</option>
+                    <option value="ground">ground</option>
+                    <option value="flying">flying</option>
+                    <option value="psychic">psychic</option>
+                    <option value="bug">bug</option>
+                    <option value="rock">rock</option>
+                    <option value="ghost">ghost</option>
+                    <option value="dark">dark</option>
+                    <option value="dragon">dragon</option>
+                    <option value="steel">steel</option>
+                    <option value="fairy">fairy</option>
+                </select>
+            </div>
+            <div className="form-group">
                 <label htmlFor="nature">Nature:</label>
                 <select id="nature"
                 name="nature"
@@ -93,48 +138,32 @@ function CreatePokeForm() {
                 </select>
             </div>
             <div className="form-group">
-                <label htmlFor="type">Type:</label>
-                <select id="type"
-                name="type"
-                className="form-control"
-                // value={pokemon.type}
-                // onChange={handleChange}
-                required >
-                    <option selected disabled hidden>[select a type]</option>
-                    <option value="normal">normal</option>
-                    <option value="fire">fire</option>
-                    <option value="water">water</option>
-                    <option value="grass">grass</option>
-                    <option value="electric">electric</option>
-                    <option value="ice">ice</option>
-                    <option value="fighting">fighting</option>
-                    <option value="poison">poison</option>
-                    <option value="ground">ground</option>
-                    <option value="flying">flying</option>
-                    <option value="psychic">psychic</option>
-                    <option value="bug">bug</option>
-                    <option value="rock">rock</option>
-                    <option value="ghost">ghost</option>
-                    <option value="dark">dark</option>
-                    <option value="dragon">dragon</option>
-                    <option value="steel">steel</option>
-                    <option value="fairy">fairy</option>
-                </select>
+                <label htmlFor="ability">Ability:</label>
+                <Select 
+                    placeholder={".Select..."}
+                    name="ability"
+                    options = {abilities.map(ability => {
+                        return (
+                            { value: ability, label: ability }
+                        )
+                    })}
+                    className="basic-multi-select"
+                    classNamePrefix="select" />
             </div>
             <div className="form-group">
                 <label htmlFor="moves">Moves:</label>
-                <select 
-                class="form-select form-control" 
-                multiple="multiple" 
-                aria-label="multiple select example"
-                name="moves"
-                id="moves">
-                <option selected disabled>Select Moves (4)</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                    <option value="4">Four</option>
-                </select>
+                <Select 
+                    placeholder={".Select..."}
+                    // onChange={(v) => v.length > 4 ? <p>Only your first 4 selections will be saved!</p> : v}
+                    isMulti
+                    name="moves"
+                    options = {moves.map(move => {
+                        return (
+                            { value: move, label: move }
+                        )
+                    })}
+                    className="basic-multi-select"
+                    classNamePrefix="select" />
             </div>
             <div className="form-check form-switch">
                 <input 
@@ -147,6 +176,9 @@ function CreatePokeForm() {
                 htmlFor="flexSwitchCheckChecked">private</label>
             </div>
             </div>
+            <div className="button-container">
+                    <motion.submit whileTap={{ scale: 0.9 }} className="nes-btn is-success" id="submit-poke-btn">Submit Pokemon</motion.submit>
+                </div>
         </form>
 
         </>
