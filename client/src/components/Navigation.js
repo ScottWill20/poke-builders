@@ -5,9 +5,11 @@ function Navigation() {
     return (
         <>
         <nav className="nav-bar navbar navbar-expand-lg">
-        <motion.h1 className="nav-container mr-5" whileHover={{ scale: 1.1 }}>
-            <Link to="/"><h1>PokeBuilder</h1></Link>
+        <Link to="/">
+            <motion.h1 className="nav-container mr-5" whileHover={{ scale: 1.1 }}>
+            <h1>PokeBuilder</h1>
             </motion.h1>
+        </Link>
         <button className="navbar-toggler" 
             type="button" 
             data-toggle="collapse" 
@@ -20,9 +22,12 @@ function Navigation() {
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="nav-container navbar-nav mr-auto">
-                <motion.li className="nav-item" whileHover={{ scale: 1.1 }}><Link to="/create-pokemon">Create a Pokemon</Link></motion.li>
-                <motion.li className="nav-item" whileHover={{ scale: 1.1 }}><Link to="/register">Create Account</Link></motion.li>
-                <motion.li className="nav-item" whileHover={{ scale: 1.1 }}><Link to="/login">Login</Link></motion.li>
+            <Link to="/create-pokemon">
+                <motion.li className="nav-item" whileHover={{ scale: 1.1 }}>Create New Pokemon</motion.li></Link>
+            <Link to="/register">
+                <motion.li className="nav-item" whileHover={{ scale: 1.1 }}>Create Account</motion.li></Link>
+            <Link to="/login">
+                <motion.li className="nav-item" whileHover={{ scale: 1.1 }}>Login</motion.li></Link>
             </ul>
             
             </div>

@@ -44,7 +44,6 @@ function App() {
         <Navigation />
           <div className="container">
             <Switch>
-              {/* <CreatePokeForm /> */}
               {/* <Pokedex /> */}
               {/* <Loader /> */}
               <Route exact path="/">
