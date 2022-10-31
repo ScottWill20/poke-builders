@@ -13,3 +13,7 @@ GET {{url}}/move?limit=844 HTTP/1.1
 ###
 
 GET {{url}}/pokemon/eevee/ HTTP/1.1
+
+###
+
+GET {{url}}/move/ HTTP/1.1
