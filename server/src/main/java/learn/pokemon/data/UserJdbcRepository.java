@@ -4,11 +4,13 @@ import learn.pokemon.data.mappers.UserMapper;
 import learn.pokemon.models.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -68,7 +70,7 @@ public class UserJdbcRepository implements UserRepository{
 
         user.setUserId(keyHolder.getKey().intValue());
 
-//        updateRoles(user);
+        updateRoles(user);
 
         return user;
 
@@ -76,7 +78,7 @@ public class UserJdbcRepository implements UserRepository{
 
 //    @Override
 //    @Transactional
-//    public boolean update(AppUser user) {
+//    public boolean update(User user) {
 //
 //        final String sql = "update app_user set "
 //                + "username = ?, "
@@ -84,7 +86,7 @@ public class UserJdbcRepository implements UserRepository{
 //                + "where app_user_id = ?";
 //
 //        boolean updated = jdbcTemplate.update(sql,
-//                user.getUsername(), user.isEnabled(), user.getAppUserId()) > 0;
+//                user.getUsername(), user.isEnabled(), user.getUserId()) > 0;
 //
 //        if (updated) {
 //            updateRoles(user);
@@ -93,22 +95,22 @@ public class UserJdbcRepository implements UserRepository{
 //        return updated;
 //    }
 //
-//    private void updateRoles(AppUser user) {
-//        // delete all roles, then re-add
-//        jdbcTemplate.update("delete from app_user_role where app_user_id = ?;", user.getAppUserId());
-//
-//        Collection<GrantedAuthority> authorities = user.getAuthorities();
-//
-//        if (authorities == null) {
-//            return;
-//        }
-//
-//        for (GrantedAuthority role : authorities) {
-//            String sql = "insert into app_user_role (app_user_id, app_role_id) "
-//                    + "select ?, app_role_id from app_role where `name` = ?;";
-//            jdbcTemplate.update(sql, user.getAppUserId(), role.getAuthority());
-//        }
-//    }
+    private void updateRoles(User user) {
+        // delete all roles, then re-add
+        jdbcTemplate.update("delete from app_user_role where app_user_id = ?;", user.getUserId());
+
+        Collection<GrantedAuthority> authorities = user.getAuthorities();
+
+        if (authorities == null) {
+            return;
+        }
+
+        for (GrantedAuthority role : authorities) {
+            String sql = "insert into app_user_role (app_user_id, app_role_id) "
+                    + "select ?, app_role_id from app_role where `name` = ?;";
+            jdbcTemplate.update(sql, user.getUserId(), role.getAuthority());
+        }
+    }
 //
     private List<String> getRolesByEmail(String email) {
         final String sql = "select r.name "

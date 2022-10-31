@@ -29,7 +29,16 @@ export async function findAllPublicPokemon() {
 }
 
 export async function findPokemonByUserId(userId) {
-    const response = await fetch(`${POKEMON_API_URL}/user/${userId}`);
+    console.log("Token is here, right?", localStorage.getItem("jwt_token"))
+    const init = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("jwt_token")}`
+        }
+    };
+
+    const response = await fetch(`${POKEMON_API_URL}/user/${userId}`, init);
     if (response.ok) {
         return response.json();
     } else {
