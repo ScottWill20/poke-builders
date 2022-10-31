@@ -1,5 +1,24 @@
+import { useState, useEffect } from "react";
+import Loader from "../components/Loader";
+
 const POKEMON_API_URL = 'http://localhost:8080/api/pokemon';
 
+export async function Loading(){  
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadData = async () => {
+            await new Promise((r) => setTimeout(r, 2000));
+            setLoading((loading) => !loading);
+        };
+    
+        loadData();
+    }, []);
+
+    if(loading){
+        return <Loader />;
+      }
+}
 export async function findAllPublicPokemon() {
     const response = await fetch(POKEMON_API_URL);
     if (response.ok) {

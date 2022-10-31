@@ -23,7 +23,7 @@ function App() {
               {/* <CreateAccount /> */}
               <Route exact path="/">
                 <HomePage />
-                <Loader />
+                {/* <Loader /> */}
               </Route>
             </Switch>
           </div>
