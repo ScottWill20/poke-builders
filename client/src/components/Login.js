@@ -5,21 +5,21 @@ import AuthContext from "../contexts/AuthContext";
 
 function Login() {
 
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [hasErr, setHassErr] = useState(false);
 
     const {login} = useContext(AuthContext);
     const history = useHistory();
 
-    const handleUsernameChange = (evt) => setUsername(evt.target.value);
+    const handleEmailChange = (evt) => setEmail(evt.target.value);
     const handlePasswordChange = (evt) => setPassword(evt.target.value);
 
     function handleSubmit(evt) {
         evt.preventDefault();
-        console.log(username, password);
+
         const user = {
-            username,
+            email,
             password
         };
         authenticate(user)
@@ -33,9 +33,9 @@ function Login() {
     return (
         <form onSubmit={handleSubmit}>
             <div className="mb-2">
-                <label htmlFor="username" className="form-label">Username</label>
-                <input type="text" id="username" name="username"  className="form-control"
-                value={username} onChange={handleUsernameChange}></input>
+                <label htmlFor="email" className="form-label">email</label>
+                <input type="text" id="email" name="email"  className="form-control"
+                value={email} onChange={handleEmailChange}></input>
             </div>
             <div>
                 <label htmlFor="password" className="form-label">Password</label>

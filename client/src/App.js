@@ -5,9 +5,13 @@ import HomePage from "./components/HomePage";
 import CreateAccount from "./components/CreateAccount";
 import CreatePokemon from "./components/CreatePokemon";
 import PokeGrid from "./components/PokeGrid";
+import { useState } from "react";
 import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AuthContext from "./contexts/AuthContext";
 import User from "./contexts/UserContext";
+import Login from "./components/Login";
+import UserProfile from "./components/UserProfile";
+import Register from "./components/Register";
 
 function App() {
 
@@ -46,6 +50,15 @@ function App() {
               <Route exact path="/">
                 <HomePage />
                 <Loader />
+              </Route>
+              <Route exact path="/login">
+                <Login/>
+              </Route>
+              <Route exact path="/register">
+                <Register/>
+              </Route>
+              <Route exact path="/profile">
+                <UserProfile/>
               </Route>
             </Switch>
           </div>

@@ -4,15 +4,18 @@
 import { useEffect, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { findPokemonByUserId } from "../services/pokemon";
+import PokeCard from "./PokeCard";
 import User from "../contexts/UserContext";
+import AuthContext from "../contexts/AuthContext";
 
-function UserProfile({ loggedOn }) {
-    //const [user, setUser] = useState(loggedOn);
-    const user = useContext(User);
-    const [pokemon, setPokemon] = useState();
+
+function UserProfile() {
+    const {user} = useContext(AuthContext);
+    const [pokemon, setPokemon] = useState([]);
     const history = useHistory();
 
     useEffect(() => {
+        console.log("User? ", user);
         findPokemonByUserId(user.userId)
             .then(setPokemon)
             .catch(() => history.push("/error"));
@@ -26,3 +29,5 @@ function UserProfile({ loggedOn }) {
         </>
     );
 }
+
+export default UserProfile;
