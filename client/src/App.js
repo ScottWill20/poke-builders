@@ -10,7 +10,7 @@ import AuthContext from "./contexts/AuthContext";
 import {getMoveDescription, ListMoveNames} from "./services/pokeAPI";
 import CreatePokeForm from "./components/CreatePokeForm";
 
-ListMoveNames().then(a => console.log(a));
+// ListMoveNames().then(a => console.log(a));
 
 function App() {
   
