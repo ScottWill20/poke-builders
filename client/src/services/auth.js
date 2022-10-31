@@ -13,15 +13,11 @@ export async function authenticate(credentials) {
   const response = await fetch(`${url}/authenticate`, init);
   if (response.status === 200) {
     const json = await response.json();
-    console.log("Here???");
-    console.log("Jason: ", json.jwt);
     setToken(json.jwt);
     return makeUser(json.jwt);
   } else if (response.status === 403) {
-    console.log("Forbiden?");
     return ['Bad credentials'];
   } else {
-    console.log("Or something else");
     return Promise.reject(['Something unexpected happened!']);
   }
 };
@@ -87,7 +83,6 @@ const makeUser = (jwtToken) => {
 const decodeToken = (jwtToken) => {
   const tokenParts = jwtToken.split('.');
   if (tokenParts.length === 3) {
-    console.log("Is this the user? Hilarious! ", atob(tokenParts[1]));
     return atob(tokenParts[1]);
   }
   console.error('Invalid token');

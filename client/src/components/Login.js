@@ -25,6 +25,7 @@ function Login() {
         authenticate(user)
             .then(u => {
                 login(u);
+                console.log(u);
                 history.push("/profile");
             })
             .catch(() => setHassErr(true));
