@@ -7,6 +7,7 @@ function CreatePokeForm() {
 
     const [abilities, setAbilities] = useState([]);
     const [moves, setMoves] = useState([]);
+    const [selectedOptions, setSelectedOptions] = useState([]);
 
 
     useEffect(() => {
@@ -154,7 +155,7 @@ function CreatePokeForm() {
                 <label htmlFor="moves">Moves:</label>
                 <Select 
                     placeholder={".Select..."}
-                    // onChange={(v) => v.length > 4 ? <p>Only your first 4 selections will be saved!</p> : v}
+                    onChange={(o) => setSelectedOptions(o)}
                     isMulti
                     name="moves"
                     options = {moves.map(move => {
@@ -163,7 +164,8 @@ function CreatePokeForm() {
                         )
                     })}
                     className="basic-multi-select"
-                    classNamePrefix="select" />
+                    classNamePrefix="select" 
+                    isOptionDisabled={() => selectedOptions.length === 4}/>
             </div>
             <div className="form-check form-switch">
                 <input 
