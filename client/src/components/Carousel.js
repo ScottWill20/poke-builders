@@ -1,30 +1,46 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { findPokemonByUserId } from "../services/pokemon";
 
-function Carousel() {
+function Carousel(src) {
 
-    const [index, setIndex] = useState(0);
+    // const [index, setIndex] = useState(0);
+    // const [userPokemon, setUserPokemon] = useState([]);
+    // // const pokemon = [...userPokemon];
+    // // console.log(pokemon);
 
-    function handlePageLeft(event) {
-        if(index === 0){
-            setIndex(array.length - 1);
-        } else {
-            setIndex(index - 1);
-        }
-    }
+    // useEffect(() => {
+    //     setUserPokemon(src);
+    // }, [userPokemon]);
 
-    function handlePageRight(event) {
-        if(index === array.length - 1){
-            setIndex(0);
-        } else {
-            setIndex(index + 1);
-        }
-    }
+    // function handlePageLeft(event) {
+    //     if(index === 0){
+    //         setIndex(userPokemon.length - 1);
+    //     } else {
+    //         setIndex(index - 1);
+    //     }
+    // }
+
+    // function handlePageRight(event) {
+    //     if(index === userPokemon.length - 1){
+    //         setIndex(0);
+    //     } else {
+    //         setIndex(index + 1);
+    //     }
+    // }
 
     return (
-        <div className="carousel-container">
-            <button className=""
-            <img src={array[index].url} alt={array[index].description} />
-        </div>
+        <>
+        {/* <div className="carousel-container">
+            <img src={src} />
+        </div> */}
+        {/* <div className="d-pad-container">
+        <nav className="d-pad">
+            <motion.button  whileTap={{ scale: 0.9 }} className="btn btn-warning" id="d-pad-left" onClick={handlePageLeft}></motion.button>
+            <motion.button whileTap={{ scale: 0.9 }} className="btn btn-warning" id="d-pad-right" onClick={handlePageRight}></motion.button>
+        </nav>
+    </div> */}
+    </>
     );
 }
 
