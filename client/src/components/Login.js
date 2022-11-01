@@ -24,10 +24,13 @@ function Login() {
         };
         authenticate(user)
             .then(u => {
+                if (Array.isArray(u)) {
+                    setHassErr(true);
+                } else {
                 login(u);
                 console.log("What is this?", u);
                 history.push("/profile");
-            })
+            }})
             .catch(() => setHassErr(true));
     }
 

@@ -30,11 +30,26 @@ input, textarea, select {
   margin-top: 10%;
 }
 
+.form, .container-fluid {
+  outline-color: black;
+  outline-width: 6px;
+  margin-top: 2%;
+  background-color:#323838;
+  border-radius: 10px;
+  color: #FF9914;
+
+}
+
+.mb-3 {
+  margin-top: 1%;
+}
+
 .nav-bar {
   display: flex;
   background-color: #08BDBD;
   border: 2px solid black;
   margin-bottom: 1%;
+  border-radius: 20px;
   padding-left: 5%;
   padding-right: 8%;
 }
@@ -42,22 +57,36 @@ input, textarea, select {
 .nav-container {
   display: flex;
   flex-direction: row;
-  justify-content: left;
+  justify-content: center;
   margin-top: 2%;
 }
 
-.nav-container > li {
-  list-style: none;
-  margin-right: 8%;
+nav ul {
+  margin: 10px;
+  padding: 12px 0px 10px 10px;
+  text-align: center;
 }
 
-a:link, a:visited, a:active {
+#nav-title:hover {
+  color: #ff5656;
+}
+
+#nav-title {
+  color: white;
+}
+
+.nav-hover:hover {
+  color: #ff5656;
+  text-decoration: none;
+}
+
+.nav-hover {
   color: white;
   text-decoration: none;
 }
 
 a:hover {
-  color: #ff5656;
+  text-decoration: none;
 }
 
 .poke-grid {
@@ -111,7 +140,7 @@ a:hover {
 #canvas {
   position: relative;
   border: 2px solid black;
-  border-radius: 5%;
+  border-radius: 10px;
   cursor: pointer;
   justify-content: center;
   height: 100%;
@@ -192,8 +221,6 @@ div.fourohfour-page {
   justify-content: center;
 }
 
-
-
 .form-container {
   display: flex;
   flex-direction: column;
@@ -205,7 +232,7 @@ div.fourohfour-page {
   padding: 10px;
   margin-bottom: 5%;
   background-color: #323838;
-  border-radius: 5%;
+  border-radius: 10px;
 }
 
 #description {
@@ -215,7 +242,7 @@ div.fourohfour-page {
 .drop-downs-container {
   padding: 10px;
   background-color: #323838;
-  border-radius: 5%;
+  border-radius: 10px;
 }
 
 .loader {
