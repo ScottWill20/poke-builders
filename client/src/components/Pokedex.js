@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Canvas from "./Canvas";
-import Carousel from './Carousel';
 import CreatePokeForm from "./CreatePokeForm";
 import PokeCard from './PokeCard';
 

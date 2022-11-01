@@ -8,7 +8,6 @@ import { motion } from "framer-motion";
 import PokeCard from "./PokeCard";
 import User from "../contexts/UserContext";
 import AuthContext from "../contexts/AuthContext";
-import Carousel from "./Carousel";
 import Pokedex from "./Pokedex";
 import Loader from "./Loader";
 
