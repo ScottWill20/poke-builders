@@ -15,11 +15,14 @@ function UserProfile() {
     const history = useHistory();
 
     useEffect(() => {
-        console.log("User? ", user);
-        findPokemonByUserId(user.userId)
+        if (user) {
+            console.log("User? ", user);
+            findPokemonByUserId(user.userId)
             .then(setPokemon)
             .catch(() => history.push("/error"));
-    }, [history]);
+        }
+        
+    }, [user]);
 
     return (
         <>

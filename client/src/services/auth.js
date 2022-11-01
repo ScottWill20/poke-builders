@@ -36,10 +36,12 @@ export const refreshToken = async () => {
     }
   };
 
-  const response = await fetch(`${url}/refresh_token`, init);
+  const response = await fetch(`${url}/refresh`, init);
   if (response.status === 200) {
     const json = await response.json();
     setToken(json.jwt_token);
+    const user = makeUser(json.jwt_token);
+    console.log("From refresh", user);
     return makeUser(json.jwt_token);
   } else if (response.status === 403) {
     return ['Bad credentials'];

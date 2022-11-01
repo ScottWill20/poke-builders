@@ -25,7 +25,7 @@ function Login() {
         authenticate(user)
             .then(u => {
                 login(u);
-                console.log(u);
+                console.log("What is this?", u);
                 history.push("/profile");
             })
             .catch(() => setHassErr(true));
