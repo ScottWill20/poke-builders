@@ -1,13 +1,35 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useParams } from "react";
 import Select from "react-select";
 import { ListMoveNames } from "../services/pokeAPI";
 import { ListAbilityNames } from"../services/pokeAPI";
 import { motion } from "framer-motion";
+import { updatePokemon } from "../services/pokemon";
+import { createPokemon } from "../services/pokemon";
+import { findByPokemonId } from "../services/pokemon";
+
 function CreatePokeForm() {
 
+    const POKE_DEFAULT = {
+        name: "",
+        height: 0,
+        weight: 0,
+        description: "",
+        type: "",
+        vibe: "",
+        ability: "",
+        moves: [],
+        private: true
+    }
+
+    // const endpoint = "http://localhost:8080/api/pokemon";
     const [abilities, setAbilities] = useState([]);
     const [moves, setMoves] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
+
+    const [pokemon, setPokemon] = useState(POKE_DEFAULT);
+    // const [editPokemonId, setEditPokemonId] = useState(0);
+    // const [errors, setErrors] = useState([]);
+    // const { id } = useParams();
 
 
     useEffect(() => {
@@ -21,15 +43,54 @@ function CreatePokeForm() {
 
     });
 
+    // useEffect(() => {
+    //     if (id) {
+    //       setEditPokemonId(id);
+    //     //   findByPokemonId(id);
+    //         // .then(res => res.json())
+    //         // .then(data => setPokemon(data));
+    //         setPokemon(findByPokemonId(id));
+    //     }
+    //   }, [id]);
+
+    // const handleChange = (event) => {
+    //     const newPokemon = { ...pokemon };
+    //     newPokemon[event.target.name] = event.target.value;
+    //     setPokemon(newPokemon);
+    // }
+
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     if(editPokemonId === 0) {
+    //         createPokemon(pokemon);
+    //     } else {
+    //         updatePokemon(pokemon);
+    //     }
+    // };
+
+    // const resetState = () => {
+    //     setPokemon(POKE_DEFAULT);
+    //     setEditPokemonId(0);
+    //     setErrors([]);
+    // };
+
 
     return (
         <>
-        {/* <h2>Create a Pokemon</h2> */}
+        {/* {errors.length > 0 && (
         <div className="errors-container">
-            Errors will populate here.
+          <h3>The following errors occured:</h3>
+          <ul>
+            {errors.map((error) => {
+              return <li>{error}</li>;
+            })}
+          </ul>
         </div>
+      )} */}
 
-        <form>
+        <form 
+        // onSubmit={handleSubmit}
+        >
             <div className="text-input-container">
             <div className="form-group">
                 <label htmlFor="name">Name:</label>
@@ -37,7 +98,7 @@ function CreatePokeForm() {
                 name="name"
                 type="text"
                 className="form-control"
-                // value={pokemon.name}
+                value={pokemon.name}
                 // onChange={handleChange}
                 required />
             </div>
@@ -48,7 +109,7 @@ function CreatePokeForm() {
                 type="number"
                 step="0.1"
                 className="form-control"
-                // value={pokemon.height}
+                value={pokemon.height}
                 // onChange={handleChange}
                 required />
             </div>
@@ -59,7 +120,7 @@ function CreatePokeForm() {
                 type="number"
                 step="0.1"
                 className="form-control"
-                // value={pokemon.weight}
+                value={pokemon.weight}
                 // onChange={handleChange}
                 required />
             </div>
@@ -78,7 +139,7 @@ function CreatePokeForm() {
                 <select id="type"
                 name="type"
                 className="form-control"
-                // value={pokemon.type}
+                value={pokemon.type}
                 // onChange={handleChange}
                 required >
                     <option selected disabled hidden>[select a type]</option>
@@ -107,7 +168,7 @@ function CreatePokeForm() {
                 <select id="nature"
                 name="nature"
                 className="form-control"
-                // value={pokemon.vibe}
+                value={pokemon.vibe}
                 // onChange={handleChange}
                 required >
                     <option selected disabled hidden>[select a nature]</option>
@@ -149,7 +210,10 @@ function CreatePokeForm() {
                         )
                     })}
                     className="basic-multi-select"
-                    classNamePrefix="select" />
+                    classNamePrefix="select"
+                    value={pokemon.ability}
+                    onChange={(o) => setSelectedOptions(o)}
+                    />
             </div>
             <div className="form-group">
                 <label htmlFor="moves">Moves:</label>
@@ -165,14 +229,20 @@ function CreatePokeForm() {
                     })}
                     className="basic-multi-select"
                     classNamePrefix="select" 
-                    isOptionDisabled={() => selectedOptions.length === 4}/>
+                    isOptionDisabled={() => selectedOptions.length === 4}
+                    value={pokemon.moves}
+                    // onChange={handleChange}
+                    />
             </div>
             <div className="form-check form-switch">
                 <input 
                 className="form-check-input" 
                 type="checkbox" 
                 id="flexSwitchCheckChecked" 
-                name="flexSwitchCheckChecked" checked />
+                name="flexSwitchCheckChecked" 
+                value={pokemon.private}
+                // onChange={handleChange}
+                />
                 <label 
                 className="form-check-label" 
                 htmlFor="flexSwitchCheckChecked">private</label>

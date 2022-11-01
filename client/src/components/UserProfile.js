@@ -10,6 +10,7 @@ import User from "../contexts/UserContext";
 import AuthContext from "../contexts/AuthContext";
 import Carousel from "./Carousel";
 import Pokedex from "./Pokedex";
+import Loader from "./Loader";
 
 
 function UserProfile() {
@@ -19,11 +20,13 @@ function UserProfile() {
     const history = useHistory();
 
     useEffect(() => {
-        console.log("User? ", user);
-        findPokemonByUserId(user.userId)
-            .then(setPokemon)
-            .catch(() => history.push("/error"));
-    }, [history]);
+        if(user){
+            console.log("User? ", user);
+            findPokemonByUserId(user.userId)
+                .then(setPokemon)
+                .catch(() => history.push("/error"));
+        }
+    }, [user]);
 
     useEffect(() => {
         setIndex(index);
@@ -47,7 +50,9 @@ function UserProfile() {
             setIndex(index + 1);
         }
     }
-
+    if(!pokemon.length) {
+        return <Loader />;
+    }
     return (
         <>
             <div>
