@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect, React } from 'react';
 import { Link } from 'react-router-dom';
 import { registerUser } from '../services/auth';
 import ErrorList from './ErrorList';
 import { useHistory } from "react-router-dom";
 import SuccessMessage from './SuccessMessage';
+import Select from "react-select";
+import { getPokemonSprites, ListPokemonNames } from "../services/pokeAPI";
 
 function Register() {
   const [credentials, setCredentials] = useState({
@@ -15,8 +17,16 @@ function Register() {
     avatar: ''
   });
   const [errors, setErrors] = useState([]);
+  const [pokemon, setPokemon] = useState([]);
   const [successMessage, setSuccessMessage] = useState('');
   const history = useHistory();
+
+  useEffect(() => {
+    ListPokemonNames()
+    .then(setPokemon)
+    .catch(console.log());
+    
+});
 
   const handleChange = (evt) => {
     const nextCredentials = { ...credentials };
@@ -32,7 +42,16 @@ function Register() {
       return;
     }
 
-    registerUser(credentials)
+    console.log(credentials.favPokemon.value.toLowerCase());
+
+    getPokemonSprites(credentials.favPokemon.value.toLowerCase())
+    .then(imageURL => {
+      const temp = {...credentials}
+      temp.avatar = imageURL;
+
+      delete temp.favPokemon;
+
+      registerUser(temp)
       .then(data => {
         if (Array.isArray(data)) {
           setErrors(data);
@@ -42,7 +61,21 @@ function Register() {
         }
       })
       .catch(console.error);
-  };
+  })
+}
+ 
+
+  //   registerUser(credentials)
+  //     .then(data => {
+  //       if (Array.isArray(data)) {
+  //         setErrors(data);
+  //       } else {
+  //         // setSuccessMessage('Registration successful!');
+  //         history.push("/login");
+  //       }
+  //     })
+  //     .catch(console.error);
+  // };
 
   return <>
     <section className="form container-fluid">
@@ -98,17 +131,21 @@ function Register() {
               placeholder="Confirm password"
               required />
           </div>
-          <div className="mb-3">
-            <label htmlFor="favPokemon" className="form-label">Favorite Pokemon</label>
-            <input
-              type="text"
-              name="favPokemon"
-              value={credentials.favPokemon}
-              onChange={handleChange}
-              className="form-control"
-              id="favPokemon"
-              placeholder="Favorite Pokemon"
-              required />
+          <div className="form-group">
+              <label htmlFor="favPokemon">Favorite Pokemon:</label>
+              <Select 
+                  placeholder={".Select..."}
+                  name="favPokemon"
+                  options = {pokemon.map(pokemon => {
+                      return (
+                          { value: pokemon, label: pokemon }
+                      )
+                  })}
+                  className="basic-multi-select"
+                  classNamePrefix="select"
+                  onChange={(o) => credentials.favPokemon=o}
+                  id="favPokemon"
+                  required />
           </div>
           <div className="mb-3">
             <button type="submit" className="btn btn-primary m-3">Save</button>

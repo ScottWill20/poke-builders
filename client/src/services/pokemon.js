@@ -63,7 +63,7 @@ export async function findByPokemonId(pokemonId) {
     }
 }
 
-async function createPokemon(pokemon) {
+export async function createPokemon(pokemon) {
     const init = {
         method: "POST",
         headers: {
@@ -84,7 +84,7 @@ async function createPokemon(pokemon) {
     } 
 }
 
-async function updatePokemon(pokemon) {
+export async function updatePokemon(pokemon) {
 
     const init = {
         method: "PUT",

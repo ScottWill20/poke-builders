@@ -13,6 +13,7 @@ import UserProfile from "./components/UserProfile";
 import Register from "./components/Register";
 import CreatePokeForm from "./components/CreatePokeForm";
 import { refreshToken } from "./services/auth";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [user, setUser] = useState();
@@ -42,7 +43,6 @@ function App() {
         <Navigation />
           <div className="container">
             <Switch>
-              {/* <CreatePokeForm /> */}
               {/* <Pokedex /> */}
               {/* <Loader /> */}
               <Route exact path="/">
@@ -59,6 +59,9 @@ function App() {
               </Route>
               <Route exact path="/profile">
                 <UserProfile/>
+              </Route>
+              <Route>
+                <NotFound />
               </Route>
             </Switch>
           </div>

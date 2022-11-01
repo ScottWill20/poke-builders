@@ -34,8 +34,9 @@ input, textarea, select {
   display: flex;
   background-color: #08BDBD;
   border: 2px solid black;
-  border-radius: 30%;
   margin-bottom: 1%;
+  padding-left: 5%;
+  padding-right: 8%;
 }
 
 .nav-container {
@@ -47,7 +48,16 @@ input, textarea, select {
 
 .nav-container > li {
   list-style: none;
-  margin-right: 5%;
+  margin-right: 8%;
+}
+
+a:link, a:visited, a:active {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ff5656;
 }
 
 .poke-grid {
@@ -69,7 +79,7 @@ input, textarea, select {
 /*POKEDEX*/
 #pokedex {
   height: 100vh;
-  width: auto;
+  width: 60vw;
   display: flex;
   /* border: 1px solid black;
   border-radius: 5%; */
@@ -176,6 +186,14 @@ input, textarea, select {
   margin-bottom: 5%;
 }
 
+div.fourohfour-page {
+  display:grid;
+  margin-top: 3%;
+  justify-content: center;
+}
+
+
+
 .form-container {
   display: flex;
   flex-direction: column;
@@ -207,10 +225,26 @@ input, textarea, select {
   /* background: white; */
 }
 
-#pokeball-big-circle {
+/* #pokeball-big-circle {
 
 }
 
 #pokeball-small-circle {
   z-index: 5;
+} */
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-img-container {
+  height: 50%;
+  width: 100%;
+}
+
+.carousel-img-container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
