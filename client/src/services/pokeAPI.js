@@ -1,12 +1,18 @@
 const POKEAPI_BASE_URL = 'https://pokeapi.co/api/v2';
 
-export async function findAllPokemonPokeAPI() {
-    const response = await fetch(`${POKEAPI_BASE_URL}/pokemon`);
+export async function findAllPokemonNamesPokeAPI() {
+    const response = await fetch(`${POKEAPI_BASE_URL}/pokemon?limit=905`);
     if (response.ok) {
         return response.json();
     } else {
         return Promise.reject();
     }
+}
+
+export async function ListPokemonNames() {
+    const listPokemon = await findAllPokemonNamesPokeAPI();
+
+    return listPokemon.results.map(p => p.name.toUpperCase());
 }
 
 export async function findPokemonURLByName(name) {
@@ -21,6 +27,7 @@ export async function findPokemonURLByName(name) {
 export async function getPokemonSprites(name) {
     const pokemon = await findPokemonURLByName(name);
     const imgUrl = pokemon.sprites.front_default;
+    console.log(imgUrl);
     return imgUrl;
   }
 

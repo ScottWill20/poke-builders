@@ -34,7 +34,6 @@ input, textarea, select {
   display: flex;
   background-color: #08BDBD;
   border: 2px solid black;
-  border-radius: 30%;
   margin-bottom: 1%;
   padding-left: 5%;
   padding-right: 8%;
