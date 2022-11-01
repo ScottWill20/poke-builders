@@ -35,14 +35,14 @@ function Login() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div className="mb-2">
-                <label htmlFor="email" className="form-label">email</label>
+        <form className="login-container" onSubmit={handleSubmit}>
+            <div className="form-group">
+                <label htmlFor="email" className="form-label">Email:</label>
                 <input type="text" id="email" name="email"  className="form-control"
                 value={email} onChange={handleEmailChange}></input>
             </div>
-            <div>
-                <label htmlFor="password" className="form-label">Password</label>
+            <div className="form-group">
+                <label htmlFor="password" className="form-label">Password:</label>
                 <input type="password" id="password" name="password" className="form-control"
                 value={password} onChange={handlePasswordChange}></input>
             </div>

@@ -84,7 +84,7 @@ function Register() {
       {!successMessage && <div>
         <form onSubmit={handleSubmit}>
         <div className="mb-3">
-            <label htmlFor="email" className="form-label">Email</label>
+            <label htmlFor="email" className="form-label">Email:</label>
             <input
               type="email"
               name="email"
@@ -96,7 +96,7 @@ function Register() {
               required />
           </div>
           <div className="mb-3">
-            <label htmlFor="username" className="form-label">Username</label>
+            <label htmlFor="username" className="form-label">Username:</label>
             <input
               type="text"
               name="username"
@@ -108,7 +108,7 @@ function Register() {
               required />
           </div>
           <div className="mb-3">
-            <label htmlFor="password" className="form-label">Password</label>
+            <label htmlFor="password" className="form-label">Password:</label>
             <input
               type="password"
               name="password"
@@ -120,7 +120,7 @@ function Register() {
               required />
           </div>
           <div className="mb-3">
-            <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+            <label htmlFor="confirmPassword" className="form-label">Confirm Password:</label>
             <input
               type="password"
               name="confirmPassword"
@@ -128,7 +128,7 @@ function Register() {
               onChange={handleChange}
               className="form-control"
               id="confirmPassword"
-              placeholder="Confirm password"
+              placeholder="Confirm Password"
               required />
           </div>
           <div className="form-group">

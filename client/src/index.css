@@ -6,6 +6,11 @@ body {
 
 input, textarea, select {
   background-color: aliceblue !important;
+  color: black !important;
+}
+
+Insert {
+  color: black !important;
 }
 
 #guide {
@@ -40,6 +45,15 @@ input, textarea, select {
 
 }
 
+.login-container {
+  outline-color: black;
+  outline-width: 6px;
+  margin-top: 2%;
+  background-color:#323838;
+  border-radius: 10px;
+  color: #FF9914;
+}
+
 .mb-3 {
   margin-top: 1%;
 }
@@ -67,6 +81,10 @@ nav ul {
   text-align: center;
 }
 
+nav li {
+  margin: 1%;
+}
+
 #nav-title:hover {
   color: #ff5656;
 }
@@ -86,6 +104,7 @@ nav ul {
 }
 
 a:hover {
+  color: #ff5656;
   text-decoration: none;
 }
 
