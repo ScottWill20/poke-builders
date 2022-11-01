@@ -7,7 +7,7 @@ function Navigation() {
         <nav className="nav-bar navbar navbar-expand-lg">
         <Link to="/">
             <motion.h1 className="nav-container mr-5" whileHover={{ scale: 1.1 }}>
-            <h1>PokeBuilder</h1>
+            PokeBuilder
             </motion.h1>
         </Link>
         <button className="navbar-toggler" 

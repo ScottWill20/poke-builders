@@ -79,9 +79,6 @@ function CreatePokeForm({handleClick, handleChange}) {
         </div>
       )} */}
 
-        <form 
-        // onSubmit={handleSubmit}
-        >
             <div className="text-input-container">
             <div className="form-group">
                 <label htmlFor="name">Name:</label>
@@ -91,8 +88,6 @@ function CreatePokeForm({handleClick, handleChange}) {
                 className="form-control"
                 value={pokemonData.name}
                 onChange={handleFormUpdate}
-                value={pokemon.name}
-                // onChange={handleChange}
                 required />
             </div>
             <div className="form-group">
@@ -104,8 +99,6 @@ function CreatePokeForm({handleClick, handleChange}) {
                 className="form-control"
                 value={pokemonData.height}
                 onChange={handleFormUpdate}
-                value={pokemon.height}
-                // onChange={handleChange}
                 required />
             </div>
             <div className="form-group">
@@ -117,8 +110,6 @@ function CreatePokeForm({handleClick, handleChange}) {
                 className="form-control"
                 value={pokemonData.weight}
                 onChange={handleFormUpdate}
-                value={pokemon.weight}
-                // onChange={handleChange}
                 required />
             </div>
             <div className="form-group">
@@ -140,8 +131,6 @@ function CreatePokeForm({handleClick, handleChange}) {
                 className="form-control"
                 value={pokemonData.type}
                 onChange={handleFormUpdate}
-                value={pokemon.type}
-                // onChange={handleChange}
                 required >
                     <option value="" selected disabled hidden>[select a type]</option>
                     <option value="normal">NORMAL</option>
@@ -171,8 +160,6 @@ function CreatePokeForm({handleClick, handleChange}) {
                 className="form-control"
                 value={pokemonData.nature}
                 onChange={handleFormUpdate}
-                value={pokemon.vibe}
-                // onChange={handleChange}
                 required >
                     <option value="" selected disabled hidden>[select a nature]</option>
                     <option value="hardy">HARDY</option>
@@ -216,8 +203,6 @@ function CreatePokeForm({handleClick, handleChange}) {
                     onChange={(o) => pokemonData.ability=o}
                     className="basic-multi-select"
                     classNamePrefix="select"
-                    value={pokemon.ability}
-                    onChange={(o) => setSelectedOptions(o)}
                     />
             </div>
             <div className="form-group">
@@ -237,8 +222,6 @@ function CreatePokeForm({handleClick, handleChange}) {
                     className="basic-multi-select"
                     classNamePrefix="select" 
                     isOptionDisabled={() => selectedOptions.length === 4}
-                    value={pokemon.moves}
-                    // onChange={handleChange}
                     />
             </div>
             <div className="form-check form-switch">
