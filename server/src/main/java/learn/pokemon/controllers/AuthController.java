@@ -58,7 +58,7 @@ public class AuthController {
 //    }
 
     // NEW
-    @PostMapping("/refresh_token")
+    @PostMapping("/refresh")
     public ResponseEntity<Map<String, String>> refreshToken(@AuthenticationPrincipal User user) {
         String jwtToken = converter.getTokenFromUser(user);
 
