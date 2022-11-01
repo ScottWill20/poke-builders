@@ -7,7 +7,19 @@ import { updatePokemon } from "../services/pokemon";
 import { createPokemon } from "../services/pokemon";
 import { findByPokemonId } from "../services/pokemon";
 
-function CreatePokeForm() {
+function CreatePokeForm({handleClick, handleChange}) {
+
+    const formDataDef = {
+        name: ``,
+        height: ``,
+        weight: ``,
+        description: ``,
+        type: ``,
+        nature: ``,
+        ability: ``,
+        moves: [],
+        private: false
+    }
 
     const POKE_DEFAULT = {
         name: "",
@@ -25,6 +37,7 @@ function CreatePokeForm() {
     const [abilities, setAbilities] = useState([]);
     const [moves, setMoves] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
+    const [pokemonData, setPokemonData] = useState(formDataDef);
 
     const [pokemon, setPokemon] = useState(POKE_DEFAULT);
     // const [editPokemonId, setEditPokemonId] = useState(0);
@@ -43,37 +56,15 @@ function CreatePokeForm() {
 
     });
 
-    // useEffect(() => {
-    //     if (id) {
-    //       setEditPokemonId(id);
-    //     //   findByPokemonId(id);
-    //         // .then(res => res.json())
-    //         // .then(data => setPokemon(data));
-    //         setPokemon(findByPokemonId(id));
-    //     }
-    //   }, [id]);
-
-    // const handleChange = (event) => {
-    //     const newPokemon = { ...pokemon };
-    //     newPokemon[event.target.name] = event.target.value;
-    //     setPokemon(newPokemon);
-    // }
-
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     if(editPokemonId === 0) {
-    //         createPokemon(pokemon);
-    //     } else {
-    //         updatePokemon(pokemon);
-    //     }
-    // };
-
-    // const resetState = () => {
-    //     setPokemon(POKE_DEFAULT);
-    //     setEditPokemonId(0);
-    //     setErrors([]);
-    // };
-
+    const handleFormUpdate = (evt) => {
+        const newPokemonData = {...pokemonData};
+        newPokemonData[evt.target.name] = evt.target.value;
+        newPokemonData.ability = pokemonData.ability;
+        newPokemonData.moves = pokemonData.moves;
+        setPokemonData(newPokemonData);
+        console.log(newPokemonData);
+        handleChange(newPokemonData);
+    }
 
     return (
         <>
@@ -98,6 +89,8 @@ function CreatePokeForm() {
                 name="name"
                 type="text"
                 className="form-control"
+                value={pokemonData.name}
+                onChange={handleFormUpdate}
                 value={pokemon.name}
                 // onChange={handleChange}
                 required />
@@ -109,6 +102,8 @@ function CreatePokeForm() {
                 type="number"
                 step="0.1"
                 className="form-control"
+                value={pokemonData.height}
+                onChange={handleFormUpdate}
                 value={pokemon.height}
                 // onChange={handleChange}
                 required />
@@ -120,6 +115,8 @@ function CreatePokeForm() {
                 type="number"
                 step="0.1"
                 className="form-control"
+                value={pokemonData.weight}
+                onChange={handleFormUpdate}
                 value={pokemon.weight}
                 // onChange={handleChange}
                 required />
@@ -130,6 +127,8 @@ function CreatePokeForm() {
                 name="description"
                 // type="textarea"
                 className="form-control"
+                value={pokemonData.description}
+                onChange={handleFormUpdate}
                 />
             </div>
             </div>
@@ -139,10 +138,12 @@ function CreatePokeForm() {
                 <select id="type"
                 name="type"
                 className="form-control"
+                value={pokemonData.type}
+                onChange={handleFormUpdate}
                 value={pokemon.type}
                 // onChange={handleChange}
                 required >
-                    <option selected disabled hidden>[select a type]</option>
+                    <option value="" selected disabled hidden>[select a type]</option>
                     <option value="normal">NORMAL</option>
                     <option value="fire">FIRE</option>
                     <option value="water">WATER</option>
@@ -168,10 +169,12 @@ function CreatePokeForm() {
                 <select id="nature"
                 name="nature"
                 className="form-control"
+                value={pokemonData.nature}
+                onChange={handleFormUpdate}
                 value={pokemon.vibe}
                 // onChange={handleChange}
                 required >
-                    <option selected disabled hidden>[select a nature]</option>
+                    <option value="" selected disabled hidden>[select a nature]</option>
                     <option value="hardy">HARDY</option>
                     <option value="lonely">LONELY</option>
                     <option value="brave">BRAVE</option>
@@ -209,6 +212,8 @@ function CreatePokeForm() {
                             { value: ability, label: ability }
                         )
                     })}
+                    
+                    onChange={(o) => pokemonData.ability=o}
                     className="basic-multi-select"
                     classNamePrefix="select"
                     value={pokemon.ability}
@@ -219,7 +224,9 @@ function CreatePokeForm() {
                 <label htmlFor="moves">Moves:</label>
                 <Select 
                     placeholder={".Select..."}
-                    onChange={(o) => setSelectedOptions(o)}
+                    onChange={(o) => {
+                        setSelectedOptions(o);
+                        pokemonData.moves = o;}}
                     isMulti
                     name="moves"
                     options = {moves.map(move => {
@@ -249,9 +256,8 @@ function CreatePokeForm() {
             </div>
             </div>
             <div className="button-container">
-                    <motion.submit whileTap={{ scale: 0.9 }} className="nes-btn is-success" id="submit-poke-btn">Submit Pokemon</motion.submit>
+                    <motion.button whileTap={{ scale: 0.9 }} className="nes-btn is-success" id="submit-poke-btn" type="submit" onSubmit={handleClick}>Submit Pokemon</motion.button>
                 </div>
-        </form>
 
         </>
     );

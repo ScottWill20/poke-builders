@@ -2,10 +2,9 @@ import Pokedex from "./components/Pokedex";
 import Navigation from "./components/Navigation";
 import Loader from "./components/Loader";
 import HomePage from "./components/HomePage";
-import CreateAccount from "./components/CreateAccount";
 import CreatePokemon from "./components/CreatePokemon";
 import PokeGrid from "./components/PokeGrid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AuthContext from "./contexts/AuthContext";
 import User from "./contexts/UserContext";
@@ -13,22 +12,21 @@ import Login from "./components/Login";
 import UserProfile from "./components/UserProfile";
 import Register from "./components/Register";
 import CreatePokeForm from "./components/CreatePokeForm";
+import { refreshToken } from "./services/auth";
 import NotFound from "./components/NotFound";
 
 function App() {
+  const [user, setUser] = useState();
 
-  const user_default = {
-    userId: 0,
-    username: "",
-    password: ""
-  }
-
-  const [user, setUser] = useState(user_default);
+  useEffect(() => {
+    refreshToken()
+    .then(setUser).catch(logout);
+  }, []);
 
   const login = setUser;
   const logout = () => {
     setUser();
-    localStorage.removeItem("jwt");
+    localStorage.removeItem("jwt_token");
   }
 
   const auth = {

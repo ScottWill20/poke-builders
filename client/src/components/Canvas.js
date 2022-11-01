@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-function Canvas() {
+function Canvas( {handleChange}) {
 
   const [drawing, setDrawing] = useState(false);
   const [color, setColor] = useState(null);
@@ -39,6 +39,7 @@ function Canvas() {
   const stopDraw = () => {
     contextRef.current.closePath();
     setDrawing(false);
+    handleChange(canvasRef.current.toDataURL());
   }
 
   const draw = ({ nativeEvent }) => {
@@ -89,7 +90,6 @@ return (
       <input type="range" id="range-slider" min="1" max="100" className="slider" value={rangeSlider} onChange={e => setRangeSlider(e.target.value)} />
       <span>{rangeSlider}</span>
     </div>
-    <button onClick={save}>Save</button>
     </>
   );
 };
