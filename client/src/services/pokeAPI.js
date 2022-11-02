@@ -59,9 +59,9 @@ export async function findMoveByName(name) {
 }
 
 export async function getMoveDescription(move) {
-    const pokemove = await findMoveByName(move);
+    const pokeMove = await findMoveByName(move.toLowerCase());
     
-    const flavorText = pokemove.flavor_text_entries.filter(a => 
+    const flavorText = pokeMove.flavor_text_entries.filter(a => 
         a.language.name === 'en' &&
         a.version_group.name === 'sword-shield');
 
@@ -84,4 +84,25 @@ export async function ListAbilityNames() {
     return listAbility.results.map(b => b.name.toUpperCase());
 }
 
+export async function findAbilityByName(name) {
+    const response = await fetch(`${POKEAPI_BASE_URL}/ability/${name}`);
+    if (response.ok) {
+        return response.json();
+    } else {
+        return Promise.reject();
+    }
+}
+
+
+
+export async function getAbilityDescription(ability) {
+    const pokeAbility = await findAbilityByName(ability.toLowerCase());
+    
+    const flavorText = pokeAbility.flavor_text_entries.filter(a => 
+        a.language.name === 'en' &&
+        a.version_group.name === 'sword-shield');
+
+
+    return flavorText[0].flavor_text;
+}
 
