@@ -68,7 +68,7 @@ export async function createPokemon(pokemon) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("jwt")}`
+            "Authorization": `Bearer ${localStorage.getItem("jwt_token")}`
         },
         body: JSON.stringify(pokemon)
     };
@@ -90,7 +90,7 @@ export async function updatePokemon(pokemon) {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("jwt")}`
+            "Authorization": `Bearer ${localStorage.getItem("jwt_token")}`
         },
         body: JSON.stringify(pokemon)
     };
@@ -114,7 +114,7 @@ export async function deleteByPokemonId(pokemonId) {
     const init = {
         method: "DELETE",
         headers: {
-            "Authorization": `Bearer ${localStorage.getItem("jwt")}`
+            "Authorization": `Bearer ${localStorage.getItem("jwt_token")}`
         }
     };
     const response = await fetch(`${POKEMON_API_URL}/${pokemonId}`, init);

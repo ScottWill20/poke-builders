@@ -23,7 +23,7 @@ function PokeGrid({}) {
         dragElastic={0.2} 
         dragSnapToOrigin={true}
         dragMomentum={true}
-        className="row row-cols-4 g-2">
+        className="row row-cols-4 gx-2">
             {pokemon.map(p => <PokeCard key={p.pokemonId} pokemon={p} />)}
         </motion.div>
         </>
