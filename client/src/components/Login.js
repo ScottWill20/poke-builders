@@ -24,22 +24,26 @@ function Login() {
         };
         authenticate(user)
             .then(u => {
+                if (Array.isArray(u)) {
+                    setHassErr(true);
+                } else {
                 login(u);
                 console.log("What is this?", u);
                 history.push("/profile");
-            })
+            }})
             .catch(() => setHassErr(true));
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div className="mb-2">
-                <label htmlFor="email" className="form-label">email</label>
+        <>
+        <form className="login-container" onSubmit={handleSubmit}>
+            <div className="form-group">
+                <label htmlFor="email" className="form-label">Email:</label>
                 <input type="text" id="email" name="email"  className="form-control"
                 value={email} onChange={handleEmailChange}></input>
             </div>
-            <div>
-                <label htmlFor="password" className="form-label">Password</label>
+            <div className="form-group">
+                <label htmlFor="password" className="form-label">Password:</label>
                 <input type="password" id="password" name="password" className="form-control"
                 value={password} onChange={handlePasswordChange}></input>
             </div>
@@ -47,10 +51,15 @@ function Login() {
                 Bad Credentials. :(
             </div>}
             <div>
-                <button className="btn btn-primary me-2" type="submit">Login</button>
-                <Link className="btn btn-warning" to="/">Cancel</Link>
+                <button className="nes-btn is-primary mb-3" type="submit">Login</button>
+                <Link className="nes-btn is-warning mb-3" to="/">Cancel</Link>
+            </div>
+            <div className="alert alert-info">
+                 Don't have an account? Create one <Link to="/register">here</Link>.
             </div>
         </form>
+
+      </>
     );
 }
 

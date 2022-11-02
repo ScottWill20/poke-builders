@@ -6,6 +6,11 @@ body {
 
 input, textarea, select {
   background-color: aliceblue !important;
+  color: black !important;
+}
+
+Insert {
+  color: black !important;
 }
 
 /* #guide {
@@ -30,11 +35,37 @@ input, textarea, select {
   margin-top: 10%;
 }
 
+.form, .container-fluid {
+  outline-color: black;
+  outline-width: 6px;
+  margin-top: 2%;
+  background-color:#323838;
+  border-radius: 10px;
+  color: #FF9914;
+
+}
+
+.login-container {
+  padding: 1.5%;
+  outline-color: black;
+  outline-width: 6px;
+  margin-top: 2%;
+  background-color:#323838;
+  border-radius: 10px;
+  color: #FF9914;
+}
+
+
+.mb-3 {
+  margin-top: 1%;
+}
+
 .nav-bar {
   display: flex;
   background-color: #08BDBD;
   border: 2px solid black;
   margin-bottom: 1%;
+  border-radius: 20px;
   padding-left: 5%;
   padding-right: 8%;
 }
@@ -42,22 +73,41 @@ input, textarea, select {
 .nav-container {
   display: flex;
   flex-direction: row;
-  justify-content: left;
+  justify-content: center;
   margin-top: 2%;
 }
 
-.nav-container > li {
-  list-style: none;
-  margin-right: 8%;
+nav ul {
+  margin: 10px;
+  padding: 12px 0px 10px 10px;
+  text-align: center;
 }
 
-a:link, a:visited, a:active {
+nav li {
+  margin: 1%;
+}
+
+#nav-title:hover {
+  color: #ff5656;
+}
+
+#nav-title {
+  color: white;
+}
+
+.nav-hover:hover {
+  color: #ff5656;
+  text-decoration: none;
+}
+
+.nav-hover {
   color: white;
   text-decoration: none;
 }
 
 a:hover {
   color: #ff5656;
+  text-decoration: none;
 }
 
 .poke-grid {
@@ -131,7 +181,7 @@ a:hover {
 #canvas {
   position: relative;
   border: 2px solid black;
-  border-radius: 5%;
+  border-radius: 10px;
   cursor: pointer;
   justify-content: center;
   height: 100%;
@@ -224,8 +274,6 @@ div.fourohfour-page {
   justify-content: center;
 }
 
-
-
 .form-container {
   display: flex;
   flex-direction: column;
@@ -234,10 +282,11 @@ div.fourohfour-page {
 }
 
 .text-input-container {
-  padding: 10px;
+  padding: 15px;
   margin-bottom: 5%;
   background-color: #323838;
-  border-radius: 5px;
+  border-radius: 10px;
+  color: #ff9914;
 }
 
 #description {
@@ -245,9 +294,10 @@ div.fourohfour-page {
 }
 
 .drop-downs-container {
-  padding: 10px;
+  padding: 15px;
   background-color: #323838;
-  border-radius: 5px;
+  border-radius: 10px;
+  color: #FF9914;
 }
 
 .loader {
@@ -255,6 +305,39 @@ div.fourohfour-page {
   height: 25px; */
   margin: 40px auto;
   /* background: white; */
+}
+
+#colorInputLabel {
+  color: #FF9914;
+}
+
+#colorInput {
+
+}
+
+#lineWidthLabel {
+  color: #FF9914;
+}
+
+#rangeSliderNumber {
+  color: #FF9914;
+
+}
+
+#radio {
+  color: #FF9914;
+}
+
+.canvasDrawTool {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1%;
+  margin: 1%;
+}
+
+.canvasEdit {
+  display: block;
+  justify-content: space-evenly;
 }
 
 /* #pokeball-big-circle {

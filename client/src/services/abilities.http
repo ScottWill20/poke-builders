@@ -16,4 +16,4 @@ GET {{url}}/pokemon/eevee/ HTTP/1.1
 
 ###
 
-GET {{url}}/ability/ HTTP/1.1
+GET {{url}}/ability/cloud-nine HTTP/1.1
