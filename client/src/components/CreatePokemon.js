@@ -82,26 +82,7 @@ function CreatePokemon({currentPokemon, canvas}) {
                 toPost.moves.push(move.value.substring(0, 1).toUpperCase().concat(move.value.substring(1)));
             })
 
-            // const moveOne = {...MOVEDEF};
-            // moveOne.name = formData.moves[0].value;
-            // let temp = moveOne.name.substring(0, 1).toUpperCase().concat(moveOne.name.substring(1));
-            // toPost.moves.push(temp);
-
-            // const moveTwo = {...MOVEDEF};
-            // console.log("The moves", formData.moves);
-            // moveTwo.name = formData.moves[1].value;
-            // temp = moveTwo.name.substring(0, 1).toUpperCase().concat(moveTwo.name.substring(1));
-            // toPost.moves.push(temp);
-
-            // const moveThree = {...MOVEDEF};
-            // moveThree.name = formData.moves[2].value;
-            // temp = moveThree.name.substring(0, 1).toUpperCase().concat(moveThree.name.substring(1));
-            // toPost.moves.push(temp);
-
-            // const moveFour = {...MOVEDEF};
-            // moveFour.name = formData.moves[3].value;
-            // temp = moveFour.name.substring(0, 1).toUpperCase().concat(moveFour.name.substring(1));
-            // toPost.moves.push(temp);
+            
             console.log("From form: ", formData.private);
             toPost.private = formData.private;
 
@@ -110,7 +91,7 @@ function CreatePokemon({currentPokemon, canvas}) {
             toPost.user = user;
 
             if (toPost.id) {
-                updatePokemon(toPost).then(u=> console.log(u));
+                updatePokemon(toPost).then(() => window.location.reload());
             }
             else {
                     createPokemon(toPost).then(() => history.push("/profile"));
