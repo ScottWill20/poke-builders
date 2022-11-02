@@ -77,29 +77,35 @@ function CreatePokemon({currentPokemon, canvas}) {
             toPost.ability = {...ABILITYDEF}
             toPost.ability.name = formData.ability.label;
 
-            const moveOne = {...MOVEDEF};
-            moveOne.name = formData.moves[0].value;
-            let temp = moveOne.name.substring(0, 1).toUpperCase().concat(moveOne.name.substring(1));
-            toPost.moves.push(temp);
+            toPost.moves = [];
+            formData.moves.forEach(move => {
+                toPost.moves.push(move.value.substring(0, 1).toUpperCase().concat(move.value.substring(1)));
+            })
 
-            const moveTwo = {...MOVEDEF};
-            console.log("The moves", formData.moves);
-            moveTwo.name = formData.moves[1].value;
-            temp = moveTwo.name.substring(0, 1).toUpperCase().concat(moveTwo.name.substring(1));
-            toPost.moves.push(temp);
+            // const moveOne = {...MOVEDEF};
+            // moveOne.name = formData.moves[0].value;
+            // let temp = moveOne.name.substring(0, 1).toUpperCase().concat(moveOne.name.substring(1));
+            // toPost.moves.push(temp);
 
-            const moveThree = {...MOVEDEF};
-            moveThree.name = formData.moves[2].value;
-            temp = moveThree.name.substring(0, 1).toUpperCase().concat(moveThree.name.substring(1));
-            toPost.moves.push(temp);
+            // const moveTwo = {...MOVEDEF};
+            // console.log("The moves", formData.moves);
+            // moveTwo.name = formData.moves[1].value;
+            // temp = moveTwo.name.substring(0, 1).toUpperCase().concat(moveTwo.name.substring(1));
+            // toPost.moves.push(temp);
 
-            const moveFour = {...MOVEDEF};
-            moveFour.name = formData.moves[3].value;
-            temp = moveFour.name.substring(0, 1).toUpperCase().concat(moveFour.name.substring(1));
-            toPost.moves.push(temp);
+            // const moveThree = {...MOVEDEF};
+            // moveThree.name = formData.moves[2].value;
+            // temp = moveThree.name.substring(0, 1).toUpperCase().concat(moveThree.name.substring(1));
+            // toPost.moves.push(temp);
+
+            // const moveFour = {...MOVEDEF};
+            // moveFour.name = formData.moves[3].value;
+            // temp = moveFour.name.substring(0, 1).toUpperCase().concat(moveFour.name.substring(1));
+            // toPost.moves.push(temp);
             console.log("From form: ", formData.private);
             toPost.private = formData.private;
 
+            console.log("Form?", formData);
             console.log(toPost);
             toPost.user = user;
 
