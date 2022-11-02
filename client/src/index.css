@@ -61,9 +61,9 @@ a:hover {
 }
 
 .poke-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 25%);
-  grid-template-rows: auto;
+  /* display: grid; */
+  /* grid-template-columns: repeat(4, 25%); 
+  grid-template-rows: auto;  */
   grid-gap: 20px;
 }
 
@@ -96,6 +96,25 @@ a:hover {
   border-right: 2px solid black;
   border-radius: 10px;
   background-color: #F21B3F;
+}
+
+.user-profile-pic-border {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  height: 60px;
+  width: 60px;
+  border: solid black;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.user-profile-pic {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: solid black;
 }
 
 .canvas-container {
@@ -218,7 +237,7 @@ div.fourohfour-page {
   padding: 10px;
   margin-bottom: 5%;
   background-color: #323838;
-  border-radius: 5%;
+  border-radius: 5px;
 }
 
 #description {
@@ -228,7 +247,7 @@ div.fourohfour-page {
 .drop-downs-container {
   padding: 10px;
   background-color: #323838;
-  border-radius: 5%;
+  border-radius: 5px;
 }
 
 .loader {

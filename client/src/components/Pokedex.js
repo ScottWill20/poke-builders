@@ -61,6 +61,8 @@ function Pokedex({ PokeCard }){
         id="pokedex"
         >
             <div id="left-grid">
+                <div className='user-profile-pic-border'></div>
+                <img className='user-profile-pic'/>
                 <div className="carousel-container">
                     <div className="carousel-img-container">
                         {PokeCard}
