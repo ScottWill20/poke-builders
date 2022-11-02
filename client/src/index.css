@@ -275,9 +275,37 @@ div.fourohfour-page {
   /* background: white; */
 }
 
+#colorInputLabel {
+  color: #FF9914;
+}
+
+#colorInput {
+
+}
+
+#lineWidthLabel {
+  color: #FF9914;
+}
+
+#rangeSliderNumber {
+  color: #FF9914;
+
+}
 
 #radio {
   color: #FF9914;
+}
+
+.canvasDrawTool {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1%;
+  margin: 1%;
+}
+
+.canvasEdit {
+  display: block;
+  justify-content: space-evenly;
 }
 
 /* #pokeball-big-circle {

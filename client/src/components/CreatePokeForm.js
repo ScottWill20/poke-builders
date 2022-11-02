@@ -240,22 +240,26 @@ function CreatePokeForm({handleClick, handleChange}) {
 
 
             {/* <div className="form-check">
-                <label htmlFor="private">Do you want your Pokemon to be private?</label>
+                <label htmlFor="private">Make Pokemon private?</label>
                 <br></br>
                 <label>
                     <input type="radio" 
                     className="nes-radio is-dark" 
-                    name="answer-dark" 
-                    value={pokemon.private}/>
+                    name="private" 
+                    value={true}
+                    checked={pokemonData.private === true}
+                    onChange={handleFormUpdate}/>
                     <span id="radio">Yes</span>
                 </label>
 
                 <label>
                     <input type="radio" 
                     className="nes-radio is-dark" 
-                    name="answer-dark" 
-                    value={!pokemon.private}
-                    checked />
+                    name="private" 
+                    value={false}
+                    checked={pokemonData.private === false}
+                    onChange={handleFormUpdate}
+                    />
                     <span id="radio">No</span>
                 </label>
             </div> */}

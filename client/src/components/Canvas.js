@@ -78,17 +78,21 @@ return (
     onMouseMove={draw}
     id="canvas" 
     />
-    <div>
-        <motion.button whileTap={{ scale: 0.9 }} onClick={clear} type="button" id="clearButton">Clear</motion.button>
-    </div>
-    <div>
-        <label htmlFor="colorInput">Set Color: </label>
-        <input type="color" id="colorInput" value={color} onChange={e => setColor(e.target.value)} />
-    </div>
-    <div>
-      <label htmlFor='lineWidth'>Line width:</label>
-      <input type="range" id="range-slider" min="1" max="100" className="slider" value={rangeSlider} onChange={e => setRangeSlider(e.target.value)} />
-      <span>{rangeSlider}</span>
+    <div className='canvasDrawTool'>
+      <div>
+          <motion.button whileTap={{ scale: 0.9 }} onClick={clear} type="button" className='nes-btn'>Clear</motion.button>
+      </div>
+      <div className='canvasEdit'>
+        <div>
+            <label id='colorInputLabel' htmlFor="colorInput">Set Color: </label>
+            <input type="color" id="colorInput" value={color} onChange={e => setColor(e.target.value)} />
+        </div>
+        <div>
+          <label id= 'lineWidthLabel' htmlFor='lineWidth'>Line Width:</label>
+          <input type="range" id="range-slider" min="1" max="100" className="slider" value={rangeSlider} onChange={e => setRangeSlider(e.target.value)} />
+          <span id='rangeSliderNumber'>{" "}{rangeSlider}</span>
+        </div>
+      </div>
     </div>
     </>
   );
