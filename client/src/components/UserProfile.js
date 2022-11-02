@@ -2,7 +2,7 @@
 //for now just make sure the in the user and in the pokemon match
 
 import { useEffect, useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { findPokemonByUserId } from "../services/pokemon";
 import { motion } from "framer-motion";
 import PokeCard from "./PokeCard";
@@ -18,6 +18,19 @@ function UserProfile() {
     const [pokemon, setPokemon] = useState([]);
     const [index, setIndex] = useState(0);
     const history = useHistory();
+    // const [formData, setFormData] = useState(formDataDef);
+
+    // const formDataDef = {
+    //     name: ``,
+    //     height: 0,
+    //     weight: 0,
+    //     description: ``,
+    //     type: ``,
+    //     nature: ``,
+    //     ability: ``,
+    //     moves: [],
+    //     private: false
+    // }
 
     useEffect(() => {
         if(user){
@@ -26,7 +39,7 @@ function UserProfile() {
                 .then(setPokemon)
                 .catch(() => history.push("/error"));
         }
-    }, [user, pokemon]);
+    }, [user]);
 
     useEffect(() => {
         setIndex(index);
@@ -54,9 +67,16 @@ function UserProfile() {
 
     const handleEditPokemon = () => {}
 
-
     if(!pokemon.length) {
-        return <Loader />;
+        return (
+            <>
+                <Loader />
+                <div>
+                    <h3>Oops!</h3>
+                    <p>You haven't made any Pokemon! You can make a Pokemon <Link to="/create-pokemon">here</Link>.</p>
+                </div>
+            </>
+        );
     }
 
     const variants = {
@@ -75,13 +95,22 @@ function UserProfile() {
             `Delete Pokemon ${pokemon[index].name}? This action cannot be undone.`
         )){
             deleteByPokemonId(pokemon[index].id)
-            .then(() => history.push("/profile"))
+            .then(() => {
+                findPokemonByUserId(user.userId)
+                .then(setPokemon)
+            })
             .catch(() => history.push("/error"));
         }
     }
 
     return (
         <>
+            {!pokemon &&
+                <div>
+                    <h3>Oops!</h3>
+                    <p>You haven't made any Pokemon! You can make a Pokemon <Link path="/create-pokemon">here</Link>.</p>
+                </div>
+            }
             <div>
                 {/* <Pokedex PokeCard={<PokeCard pokemon={pokemon[index]} />} /> */}
                 <Pokedex pokemon={pokemon[index]}/>
@@ -97,7 +126,7 @@ function UserProfile() {
                     <motion.button  whileTap={{ scale: 0.9 }} className="nes-btn is-primary" id="d-pad-left" onClick={handlePageLeft}></motion.button>
                     <motion.button whileTap={{ scale: 0.9 }} className="nes-btn is-primary" id="d-pad-right" onClick={handlePageRight}></motion.button>
                 </nav>
-                <motion.button  whileTap={{ scale: 0.9 }} className="nes-btn is-primary" id="edit-pokemon-btn" >Edit</motion.button>
+                {/* <motion.button  whileTap={{ scale: 0.9 }} className="nes-btn is-primary" id="edit-pokemon-btn" >Edit</motion.button> */}
                 <motion.button whileTap={{ scale: 0.9 }} className="nes-btn is-warning" id="delete-pokemon-btn" onClick={handleDeletePokemon}>Delete</motion.button>
             {/* </div> */}
             </motion.div>

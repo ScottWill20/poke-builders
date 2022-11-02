@@ -33,7 +33,9 @@ public class PokemonMapper implements RowMapper<Pokemon> {
         pokemon.setUrl(rs.getString("url"));
         pokemon.setHeight(rs.getDouble("height"));
         pokemon.setWeight(rs.getDouble("weight"));
-        pokemon.setBirthday(rs.getDate("birthday").toLocalDate());
+        if(rs.getDate("birthday") != null){
+            pokemon.setBirthday(rs.getDate("birthday").toLocalDate());
+        }
         pokemon.setUser(userRepository.findById(rs.getInt("app_user_id")));
         pokemon.setAbility(abilityRepository.findByAbilityId(rs.getInt("ability_id")));
         pokemon.setType(Type.getTypeByName(rs.getString("type")));

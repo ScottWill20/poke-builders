@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { getPokemonSprites } from '../services/pokeAPI';
 import Canvas from "./Canvas";
 import CreatePokeForm from "./CreatePokeForm";
+import CreatePokemon from './CreatePokemon';
 import PokeCard from './PokeCard';
 
 function Pokedex({ pokemon }){
@@ -61,27 +63,26 @@ function Pokedex({ pokemon }){
         id="pokedex"
         >
             <div id="left-grid">
-                <div 
-                className="carousel-container"
-                >
-                    <div 
-                    className="carousel-img-container"
-                    >
+                <div className="carousel-container">
+                    <div className="carousel-img-container">
                     {/* {pokemon.map(p => <PokeCard key={p.pokemonId} pokemon={p} />)} */}
                         {/* <img src={PokeCard.url} /> */}
                         <PokeCard pokemon={pokemon} />
                         {/* {PokeCard} */}
-                <div className='user-profile-pic-border'></div>
-                <img className='user-profile-pic'/>
+                {/* <div className='user-profile-pic-border'></div>
+                <img className='user-profile-pic'>{getPokemonSprites}</img> */}
+                    </div>
+                </div>
             </div>
             <div id="right-grid">
                 <div className="form-container">
                     {/* <CreatePokeForm /> */}
-                    <CreatePokeForm currentPokemon={pokemon}/>
+                    {/* <CreatePokeForm currentPokemon={pokemon}/> */}
+                    <CreatePokemon currentPokemon={pokemon} canvas={false}/>
                 </div>
             </div>
-            </div>
-            </div>
+        
+            
         </motion.div>
         </>
     );

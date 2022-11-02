@@ -55,7 +55,7 @@ function App() {
                 <Register/>
               </Route>
               <Route exact path="/create-pokemon">
-                <CreatePokemon/>
+                <CreatePokemon currentPokemon={null} canvas={true}/>
               </Route>
               <Route exact path="/profile">
                 <UserProfile/>

@@ -55,6 +55,10 @@ Insert {
   color: #FF9914;
 }
 
+#private-checkbox {
+  color: #FF9914;
+}
+
 
 .mb-3 {
   margin-top: 1%;
@@ -65,7 +69,7 @@ Insert {
   background-color: #08BDBD;
   border: 2px solid black;
   margin-bottom: 1%;
-  border-radius: 20px;
+  border-radius: 10px;
   padding-left: 5%;
   padding-right: 8%;
 }
@@ -131,6 +135,8 @@ a:hover {
   height: 90vh;
   width: 60vw;
   display: flex;
+  flex-direction: row;
+  /* flex-direction: row; */
   /* border: 1px solid black;
   border-radius: 5%; */
   /* background-color: #F21B3F; */

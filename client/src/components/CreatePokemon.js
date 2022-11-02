@@ -1,13 +1,15 @@
 import Canvas from "./Canvas";
 import CreatePokeForm from "./CreatePokeForm";
-import { useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { createPokemon, updatePokemon } from "../services/pokemon"
+import { useHistory, Link } from "react-router-dom";
 
-function CreatePokemon() {
+function CreatePokemon({currentPokemon, canvas}) {
     
     const {user} = useContext(AuthContext);
+    const history = useHistory();
+
     const formDataDef = {
         name: ``,
         height: 0,
@@ -49,6 +51,7 @@ function CreatePokemon() {
 
     const [drawingUrl, setDrawingUrl] = useState(``);
     const [formData, setFormData] = useState(formDataDef);
+    const [errors, setErrors] = useState(false);
 
     //handleSubmit...getting all the inputs. including the canvas url
     const handleSubmit = (evt) => {
@@ -62,7 +65,11 @@ function CreatePokemon() {
             toPost.id = formData.id;
             toPost.name = formData.name;
             toPost.description = formData.description;
-            toPost.url = drawingUrl;
+            if(formData.url){
+                toPost.url = formData.url;
+            } else {
+                toPost.url = drawingUrl;
+            }
             toPost.height = formData.height;
             toPost.weight = formData.weight;
             toPost.type = formData.type.toUpperCase();
@@ -100,8 +107,10 @@ function CreatePokemon() {
                 updatePokemon(toPost).then(u=> console.log(u));
             }
             else {
-            createPokemon(toPost).then(u=> console.log(u));
+                    createPokemon(toPost).then(() => history.push("/profile"));
             }
+        } else {
+            setErrors(true);
         }
         //gotta clean up the data so I can send it in as a pokemon.
         //but also, gotta make sure the user is clean too. They ALSO
@@ -111,11 +120,24 @@ function CreatePokemon() {
 
     return (
         <div className="container">
-            {}
+            {!user && 
+                <div className="alert alert-info">
+                An account is required to save create Pokemon. Don't have an account? Create one <Link to="/register">here </Link>
+                or <Link to="/login">Login</Link>.
+                </div>
+            }
             <form onSubmit={handleSubmit}>
-            <Canvas handleChange={setDrawingUrl}/>
-            <CreatePokeForm handleClick={handleSubmit} handleChange={setFormData}/> {/**pass default object as prop. Use it in setstate? */}
+            {canvas && 
+                <Canvas handleChange={setDrawingUrl} />
+            }
+            <CreatePokeForm handleClick={handleSubmit} handleChange={setFormData} currentPokemon={currentPokemon} /> {/**pass default object as prop. Use it in setstate? */}
             </form>
+            {errors && 
+                <div className="alert alert-info">
+                An account is required to save create Pokemon. Don't have an account? Create one <Link to="/register">here </Link>
+                or <Link to="/login">Login</Link>.
+                </div>
+            }
         </div>
     );
 }

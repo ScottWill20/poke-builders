@@ -95,7 +95,7 @@ export async function updatePokemon(pokemon) {
         body: JSON.stringify(pokemon)
     };
 
-    const response = await fetch(`${POKEMON_API_URL}/${pokemon.pokemonId}`, init);
+    const response = await fetch(`${POKEMON_API_URL}/${pokemon.id}`, init);
     if (response.ok) {
         return Promise.resolve();
     } else if (response.status === 400) {

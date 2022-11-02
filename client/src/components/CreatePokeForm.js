@@ -45,10 +45,11 @@ function CreatePokeForm({handleClick, handleChange, currentPokemon}) {
     const [selectedAbility, setSelectedAbility] = useState();
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [pokemonData, setPokemonData] = useState(formDataDef);
+    const [isPrivate, setIsPrivate] = useState(true);
 
-    const [pokemon, setPokemon] = useState(POKE_DEFAULT);
+    // const [pokemon, setPokemon] = useState(POKE_DEFAULT);
     // const [editPokemonId, setEditPokemonId] = useState(0);
-    // const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState([]);
     // const { id } = useParams();
 
 
@@ -63,6 +64,7 @@ function CreatePokeForm({handleClick, handleChange, currentPokemon}) {
 
         if (currentPokemon) {
             //do stuff here
+            console.log(currentPokemon);
             const newPokemonData = {...pokemonData};
             
             newPokemonData.id = currentPokemon.id;
@@ -72,6 +74,7 @@ function CreatePokeForm({handleClick, handleChange, currentPokemon}) {
             newPokemonData.weight = currentPokemon.weight;
             newPokemonData.type = currentPokemon.type;
             newPokemonData.nature = currentPokemon.vibe;
+            newPokemonData.url = currentPokemon.url;
 
             newPokemonData.ability = { value: currentPokemon.ability.name, 
             label: currentPokemon.ability.name};
@@ -129,7 +132,8 @@ function CreatePokeForm({handleClick, handleChange, currentPokemon}) {
                 className="form-control"
                 value={pokemonData.name}
                 onChange={handleFormUpdate}
-                required />
+                required
+                maxLength="100" />
             </div>
             <div className="form-group">
                 <label htmlFor="height">Height (meters):</label>
@@ -140,7 +144,9 @@ function CreatePokeForm({handleClick, handleChange, currentPokemon}) {
                 className="form-control"
                 value={pokemonData.height}
                 onChange={handleFormUpdate}
-                required />
+                required
+                min="0.1"
+                max="1000000" />
             </div>
             <div className="form-group">
                 <label htmlFor="weight">Weight (kilograms):</label>
@@ -151,7 +157,9 @@ function CreatePokeForm({handleClick, handleChange, currentPokemon}) {
                 className="form-control"
                 value={pokemonData.weight}
                 onChange={handleFormUpdate}
-                required />
+                required
+                min="0.1"
+                max="1000000" />
             </div>
             <div className="form-group">
                 <label htmlFor="description">Description:</label>
@@ -161,6 +169,7 @@ function CreatePokeForm({handleClick, handleChange, currentPokemon}) {
                 className="form-control"
                 value={pokemonData.description}
                 onChange={handleFormUpdate}
+                maxLength="2000"
                 />
             </div>
             </div>
@@ -246,6 +255,7 @@ function CreatePokeForm({handleClick, handleChange, currentPokemon}) {
                         pokemonData.ability=o}}
                     className="basic-multi-select"
                     classNamePrefix="select"
+                    required
                     />
             </div>
             <div className="form-group">
@@ -266,52 +276,28 @@ function CreatePokeForm({handleClick, handleChange, currentPokemon}) {
                     className="basic-multi-select"
                     classNamePrefix="select" 
                     isOptionDisabled={() => selectedOptions.length === 4}
+                    required
                     />
             </div>
-            <div className="form-check form-switch">
-                <input 
-                className="form-check-input" 
-                type="checkbox" 
-                id="flexSwitchCheckChecked" 
-                name="private" 
-                checked={pokemonData.private}
-                onChange={handleFormUpdate}
-                />
-                <label 
-                className="form-check-label" 
-                htmlFor="flexSwitchCheckChecked">private</label>
+            <div className="form-group">
+                <label>
+                    <input type="checkbox" 
+                    className="nes-checkbox is-dark" 
+                    name="private" 
+                    checked={pokemonData.private}
+                    onChange={handleFormUpdate} />
+                    <span id="private-checkbox"> Private</span>
+                </label>
             </div>
-
-
-            {/* <div className="form-check">
-                <label htmlFor="private">Make Pokemon private?</label>
-                <br></br>
-                <label>
-                    <input type="radio" 
-                    className="nes-radio is-dark" 
-                    name="private" 
-                    value={true}
-                    checked={pokemonData.private === true}
-                    onChange={handleFormUpdate}/>
-                    <span id="radio">Yes</span>
-                </label>
-
-                <label>
-                    <input type="radio" 
-                    className="nes-radio is-dark" 
-                    name="private" 
-                    value={false}
-                    checked={pokemonData.private === false}
-                    onChange={handleFormUpdate}
-                    />
-                    <span id="radio">No</span>
-                </label>
-            </div> */}
 
 
             </div>
             <div className="button-container">
-                    <motion.button whileTap={{ scale: 0.9 }} className="nes-btn is-success" id="submit-poke-btn" type="submit" onSubmit={handleClick}>Submit Pokemon</motion.button>
+                    <motion.button whileTap={{ scale: 0.9 }} 
+                    className="nes-btn is-success" 
+                    id="submit-poke-btn" 
+                    type="submit" 
+                    onSubmit={handleClick}>{pokemonData.id > 0 ? "Edit Pokemon" : "Submit Pokemon"}</motion.button>
                 </div>
 
         </>
