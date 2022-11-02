@@ -7,7 +7,13 @@ import { updatePokemon } from "../services/pokemon";
 import { createPokemon } from "../services/pokemon";
 import { findByPokemonId } from "../services/pokemon";
 
-function CreatePokeForm({handleClick, handleChange}) {
+function CreatePokeForm({handleClick, handleChange, currentPokemon}) {
+    /*
+    for edit.
+    if currentPokemon has a value...is truthy
+    rig pokemonData to have the values in it.
+    setSelectedOptions and setAbility
+    */
 
     const formDataDef = {
         name: ``,
@@ -18,7 +24,7 @@ function CreatePokeForm({handleClick, handleChange}) {
         nature: ``,
         ability: ``,
         moves: [],
-        private: false
+        private: true
     }
 
     const POKE_DEFAULT = {
@@ -36,6 +42,7 @@ function CreatePokeForm({handleClick, handleChange}) {
     // const endpoint = "http://localhost:8080/api/pokemon";
     const [abilities, setAbilities] = useState([]);
     const [moves, setMoves] = useState([]);
+    const [selectedAbility, setSelectedAbility] = useState();
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [pokemonData, setPokemonData] = useState(formDataDef);
 
@@ -54,15 +61,49 @@ function CreatePokeForm({handleClick, handleChange}) {
         .then(setAbilities)
         .catch(console.log());
 
-    });
+        if (currentPokemon) {
+            //do stuff here
+            const newPokemonData = {...pokemonData};
+            
+            newPokemonData.id = currentPokemon.id;
+            newPokemonData.name = currentPokemon.name;
+            newPokemonData.description = currentPokemon.description;
+            newPokemonData.height = currentPokemon.height;
+            newPokemonData.weight = currentPokemon.weight;
+            newPokemonData.type = currentPokemon.type;
+            newPokemonData.nature = currentPokemon.vibe;
+
+            newPokemonData.ability = { value: currentPokemon.ability.name, 
+            label: currentPokemon.ability.name};
+            
+            //newPokemonData.moves = currentPokemon.moves;
+            
+            //newPokemonData.moves.push({value: currentPokemon.moves[0].name, label: currentPokemon.moves[0].name })
+            newPokemonData.moves = [];
+            currentPokemon.moves.forEach(move => {
+                newPokemonData.moves.push({value: move.name, label: move.name })
+            });
+            newPokemonData.private = currentPokemon.private;
+            console.log("Private?", newPokemonData.private);
+            setSelectedAbility(newPokemonData.ability);
+            setSelectedOptions(newPokemonData.moves);
+            setPokemonData(newPokemonData);
+        }
+    }, [currentPokemon]);
 
     const handleFormUpdate = (evt) => {
         const newPokemonData = {...pokemonData};
-        newPokemonData[evt.target.name] = evt.target.value;
+        if (evt.target.name === "private") {
+            newPokemonData[evt.target.name] = evt.target.checked;
+            console.log("Is private????", evt.target.checked);
+            console.log("Is private????", newPokemonData["private"]);
+        }
+        else {
+            newPokemonData[evt.target.name] = evt.target.value;
+        }
         newPokemonData.ability = pokemonData.ability;
         newPokemonData.moves = pokemonData.moves;
         setPokemonData(newPokemonData);
-        console.log(newPokemonData);
         handleChange(newPokemonData);
     }
 
@@ -133,24 +174,24 @@ function CreatePokeForm({handleClick, handleChange}) {
                 onChange={handleFormUpdate}
                 required >
                     <option value="" selected disabled hidden>[select a type]</option>
-                    <option value="normal">NORMAL</option>
-                    <option value="fire">FIRE</option>
-                    <option value="water">WATER</option>
-                    <option value="grass">GRASS</option>
-                    <option value="electric">ELECTRIC</option>
-                    <option value="ice">ICE</option>
-                    <option value="fighting">FIGHTING</option>
-                    <option value="poison">POISON</option>
-                    <option value="ground">GROUND</option>
-                    <option value="flying">FLYING</option>
-                    <option value="psychic">PSYCHIC</option>
-                    <option value="bug">BUG</option>
-                    <option value="rock">ROCK</option>
-                    <option value="ghost">GHOST</option>
-                    <option value="dark">DARK</option>
-                    <option value="dragon">DRAGON</option>
-                    <option value="steel">STEEL</option>
-                    <option value="fairy">FAIRY</option>
+                    <option value="NORMAL">NORMAL</option>
+                    <option value="FIRE">FIRE</option>
+                    <option value="WATER">WATER</option>
+                    <option value="GRASS">GRASS</option>
+                    <option value="ELECTRIC">ELECTRIC</option>
+                    <option value="ICE">ICE</option>
+                    <option value="FIGHTING">FIGHTING</option>
+                    <option value="POISON">POISON</option>
+                    <option value="GROUND">GROUND</option>
+                    <option value="FLYING">FLYING</option>
+                    <option value="PSYCHIC">PSYCHIC</option>
+                    <option value="BUG">BUG</option>
+                    <option value="ROCK">ROCK</option>
+                    <option value="GHOST">GHOST</option>
+                    <option value="DARK">DARK</option>
+                    <option value="DRAGON">DRAGON</option>
+                    <option value="STEEL">STEEL</option>
+                    <option value="FAIRY">FAIRY</option>
                 </select>
             </div>
             <div className="form-group">
@@ -175,18 +216,18 @@ function CreatePokeForm({handleClick, handleChange}) {
                     <option value="timid">TIMID</option>
                     <option value="hasty">HASTY</option>
                     <option value="serious">SERIOUS</option>
-                    <option value="jolly">JOLLY</option>
+                    <option value="JOLLY">JOLLY</option>
                     <option value="naive">NAIVE</option>
                     <option value="modest">MODEST</option>
                     <option value="mild">MILD</option>
                     <option value="quiet">QUIET</option>
-                    <option value="bashful">BASHFUL</option>
-                    <option value="rash">RASH</option>
-                    <option value="calm">CALM</option>
-                    <option value="gentle">GENTLE</option>
-                    <option value="sassy">SASSY</option>
-                    <option value="careful">CAREFUL</option>
-                    <option value="quirky">QUIRKY</option>
+                    <option value="BASHFUL">BASHFUL</option>
+                    <option value="RASH">RASH</option>
+                    <option value="CALM">CALM</option>
+                    <option value="GENTLE">GENTLE</option>
+                    <option value="SASSY">SASSY</option>
+                    <option value="CAREFUL">CAREFUL</option>
+                    <option value="QUIRKY">QUIRKY</option>
                 </select>
             </div>
             <div className="form-group">
@@ -199,8 +240,10 @@ function CreatePokeForm({handleClick, handleChange}) {
                             { value: ability, label: ability }
                         )
                     })}
-                    
-                    onChange={(o) => pokemonData.ability=o}
+                    value={selectedAbility}
+                    onChange={(o) =>  {
+                        setSelectedAbility(o);
+                        pokemonData.ability=o}}
                     className="basic-multi-select"
                     classNamePrefix="select"
                     />
@@ -219,6 +262,7 @@ function CreatePokeForm({handleClick, handleChange}) {
                             { value: move, label: move }
                         )
                     })}
+                    value={selectedOptions}
                     className="basic-multi-select"
                     classNamePrefix="select" 
                     isOptionDisabled={() => selectedOptions.length === 4}
@@ -229,9 +273,9 @@ function CreatePokeForm({handleClick, handleChange}) {
                 className="form-check-input" 
                 type="checkbox" 
                 id="flexSwitchCheckChecked" 
-                name="flexSwitchCheckChecked" 
-                value={pokemon.private}
-                // onChange={handleChange}
+                name="private" 
+                checked={pokemonData.private}
+                onChange={handleFormUpdate}
                 />
                 <label 
                 className="form-check-label" 

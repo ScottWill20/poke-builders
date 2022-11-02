@@ -4,7 +4,7 @@ import Canvas from "./Canvas";
 import CreatePokeForm from "./CreatePokeForm";
 import PokeCard from './PokeCard';
 
-function Pokedex({ PokeCard }){
+function Pokedex({ pokemon }){
 
     const variants = {
         hidden: { y: 1000, 
@@ -67,7 +67,8 @@ function Pokedex({ PokeCard }){
                     >
                     {/* {pokemon.map(p => <PokeCard key={p.pokemonId} pokemon={p} />)} */}
                         {/* <img src={PokeCard.url} /> */}
-                        {PokeCard}
+                        <PokeCard pokemon={pokemon} />
+                        {/* {PokeCard} */}
                     </div>
                 </div>
                 {/* <div className="d-pad-container">
@@ -82,7 +83,8 @@ function Pokedex({ PokeCard }){
             </div>
             <div id="right-grid">
                 <div className="form-container">
-                    <CreatePokeForm />
+                    {/* <CreatePokeForm /> */}
+                    <CreatePokeForm currentPokemon={pokemon}/>
                 </div>
             </div>
         </motion.div>
