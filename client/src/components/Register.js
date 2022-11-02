@@ -149,7 +149,7 @@ function Register() {
           </div>
           <div className="mb-3">
             <button type="submit" className="nes-btn is-primary">Save</button>
-            <Link to="/" className="nes-btn">Cancel</Link>
+            <Link to="/" className="nes-btn is-warning">Cancel</Link>
           </div>
         </form>
         <div className="alert alert-info">
