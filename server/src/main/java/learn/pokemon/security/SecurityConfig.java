@@ -24,7 +24,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/api/pokemon", "api/pokemon/*").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/pokemon").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/pokemon/*").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/api/pokemon/*").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/pokemon/*").hasAnyAuthority("ADMIN", "USER")
                 .antMatchers(HttpMethod.GET, "/api/pokemon/user/*").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/authenticate", "/register").permitAll()
                 .antMatchers(HttpMethod.POST, "/refresh").authenticated()

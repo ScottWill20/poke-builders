@@ -10,6 +10,7 @@ import User from "../contexts/UserContext";
 import AuthContext from "../contexts/AuthContext";
 import Pokedex from "./Pokedex";
 import Loader from "./Loader";
+import { deleteByPokemonId } from "../services/pokemon";
 
 
 function UserProfile() {
@@ -25,7 +26,7 @@ function UserProfile() {
                 .then(setPokemon)
                 .catch(() => history.push("/error"));
         }
-    }, [user]);
+    }, [user, pokemon]);
 
     useEffect(() => {
         setIndex(index);
@@ -57,6 +58,28 @@ function UserProfile() {
     if(!pokemon.length) {
         return <Loader />;
     }
+
+    const variants = {
+        hidden: { x: -900, 
+            // rotate: -180 
+        },
+        visible: { 
+            x: 0, 
+            // rotate: 0,
+            transition: { duration: 1, ease: "easeInOut" } 
+        }
+    }
+
+    function handleDeletePokemon() {
+        if(window.confirm(
+            `Delete Pokemon ${pokemon[index].name}? This action cannot be undone.`
+        )){
+            deleteByPokemonId(pokemon[index].id)
+            .then(() => history.push("/profile"))
+            .catch(() => history.push("/error"));
+        }
+    }
+
     return (
         <>
             <div>
@@ -64,12 +87,20 @@ function UserProfile() {
                 <Pokedex pokemon={pokemon[index]}/>
                 {/* <PokeCard pokemon={pokemon[index]} /> */}
             </div>
-            <div className="d-pad-container">
-            <nav className="d-pad">
-                <motion.button  whileTap={{ scale: 0.9 }} className="btn btn-warning" id="d-pad-left" onClick={handlePageLeft}></motion.button>
-                <motion.button whileTap={{ scale: 0.9 }} className="btn btn-warning" id="d-pad-right" onClick={handlePageRight}></motion.button>
-            </nav>
-            </div>
+            <motion.div 
+                variants={variants} 
+                initial="hidden" 
+                animate="visible" 
+                className="d-pad-container"
+                >
+                <nav className="d-pad">
+                    <motion.button  whileTap={{ scale: 0.9 }} className="nes-btn is-primary" id="d-pad-left" onClick={handlePageLeft}></motion.button>
+                    <motion.button whileTap={{ scale: 0.9 }} className="nes-btn is-primary" id="d-pad-right" onClick={handlePageRight}></motion.button>
+                </nav>
+                <motion.button  whileTap={{ scale: 0.9 }} className="nes-btn is-primary" id="edit-pokemon-btn" >Edit</motion.button>
+                <motion.button whileTap={{ scale: 0.9 }} className="nes-btn is-warning" id="delete-pokemon-btn" onClick={handleDeletePokemon}>Delete</motion.button>
+            {/* </div> */}
+            </motion.div>
         </>
     );
 }

@@ -8,10 +8,12 @@ function Pokedex({ pokemon }){
 
     const variants = {
         hidden: { y: 1000, 
+            x: -500
             // rotate: -180 
         },
         visible: { 
             y: 0, 
+            x: 0,
             // rotate: 0,
             transition: { duration: 1, ease: "easeInOut" } 
         }
@@ -69,23 +71,16 @@ function Pokedex({ pokemon }){
                         {/* <img src={PokeCard.url} /> */}
                         <PokeCard pokemon={pokemon} />
                         {/* {PokeCard} */}
-                    </div>
-                </div>
-                {/* <div className="d-pad-container">
-                    <nav className="d-pad">
-                        <motion.button  whileTap={{ scale: 0.9 }} className="btn btn-warning" id="d-pad-left" onClick={handlePageLeft}></motion.button>
-                        <motion.button whileTap={{ scale: 0.9 }} className="btn btn-warning" id="d-pad-right" onClick={handlePageRight}></motion.button>
-                    </nav>
-                </div>
-                <div className="button-container">
-                    <motion.submit whileTap={{ scale: 0.9 }} className="btn btn-success" id="submit-poke-btn">Submit Pokemon</motion.submit>
-                </div> */}
+                <div className='user-profile-pic-border'></div>
+                <img className='user-profile-pic'/>
             </div>
             <div id="right-grid">
                 <div className="form-container">
                     {/* <CreatePokeForm /> */}
                     <CreatePokeForm currentPokemon={pokemon}/>
                 </div>
+            </div>
+            </div>
             </div>
         </motion.div>
         </>

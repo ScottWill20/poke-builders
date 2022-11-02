@@ -281,6 +281,34 @@ function CreatePokeForm({handleClick, handleChange, currentPokemon}) {
                 className="form-check-label" 
                 htmlFor="flexSwitchCheckChecked">private</label>
             </div>
+
+
+            {/* <div className="form-check">
+                <label htmlFor="private">Make Pokemon private?</label>
+                <br></br>
+                <label>
+                    <input type="radio" 
+                    className="nes-radio is-dark" 
+                    name="private" 
+                    value={true}
+                    checked={pokemonData.private === true}
+                    onChange={handleFormUpdate}/>
+                    <span id="radio">Yes</span>
+                </label>
+
+                <label>
+                    <input type="radio" 
+                    className="nes-radio is-dark" 
+                    name="private" 
+                    value={false}
+                    checked={pokemonData.private === false}
+                    onChange={handleFormUpdate}
+                    />
+                    <span id="radio">No</span>
+                </label>
+            </div> */}
+
+
             </div>
             <div className="button-container">
                     <motion.button whileTap={{ scale: 0.9 }} className="nes-btn is-success" id="submit-poke-btn" type="submit" onSubmit={handleClick}>Submit Pokemon</motion.button>
