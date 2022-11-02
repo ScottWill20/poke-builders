@@ -35,6 +35,7 @@ function Login() {
     }
 
     return (
+        <>
         <form className="login-container" onSubmit={handleSubmit}>
             <div className="form-group">
                 <label htmlFor="email" className="form-label">Email:</label>
@@ -50,10 +51,15 @@ function Login() {
                 Bad Credentials. :(
             </div>}
             <div>
-                <button className="btn btn-primary me-2" type="submit">Login</button>
-                <Link className="btn btn-warning" to="/">Cancel</Link>
+                <button className="nes-btn is-primary mb-3" type="submit">Login</button>
+                <Link className="nes-btn is-warning mb-3" to="/">Cancel</Link>
+            </div>
+            <div className="alert alert-info">
+                 Don't have an account? Create one <Link to="/register">here</Link>.
             </div>
         </form>
+
+      </>
     );
 }
 

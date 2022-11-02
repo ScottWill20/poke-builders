@@ -46,6 +46,7 @@ Insert {
 }
 
 .login-container {
+  padding: 1.5%;
   outline-color: black;
   outline-width: 6px;
   margin-top: 2%;
@@ -53,6 +54,7 @@ Insert {
   border-radius: 10px;
   color: #FF9914;
 }
+
 
 .mb-3 {
   margin-top: 1%;
@@ -248,10 +250,11 @@ div.fourohfour-page {
 }
 
 .text-input-container {
-  padding: 10px;
+  padding: 15px;
   margin-bottom: 5%;
   background-color: #323838;
   border-radius: 10px;
+  color: #ff9914;
 }
 
 #description {
@@ -259,9 +262,10 @@ div.fourohfour-page {
 }
 
 .drop-downs-container {
-  padding: 10px;
+  padding: 15px;
   background-color: #323838;
   border-radius: 10px;
+  color: #FF9914;
 }
 
 .loader {
@@ -269,6 +273,11 @@ div.fourohfour-page {
   height: 25px; */
   margin: 40px auto;
   /* background: white; */
+}
+
+
+#radio {
+  color: #FF9914;
 }
 
 /* #pokeball-big-circle {
