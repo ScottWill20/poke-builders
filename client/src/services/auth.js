@@ -77,7 +77,7 @@ const makeUser = (jwtToken) => {
 
   return {
     username: userInfo.sub,
-    roles: userInfo.authorities.split(','),
+    authorities: userInfo.authorities.split(','),
     userId: userInfo.app_user_id
   };
 };

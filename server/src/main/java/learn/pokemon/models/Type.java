@@ -1,35 +1,29 @@
 package learn.pokemon.models;
 
 public enum Type {
-    NORMAL(1, "normal"),
-    FIRE(2, "fire"),
-    WATER(3, "water"),
-    GRASS(4, "grass"),
-    ELECTRIC(5, "electric"),
-    ICE(6, "ice"),
-    FIGHTING(7, "fighting"),
-    POISON(8, "poison"),
-    GROUND(9, "ground"),
-    FLYING(10, "flying"),
-    PSYCHIC(11, "psychic"),
-    BUG(12, "bug"),
-    ROCK(13, "rock"),
-    GHOST(14, "ghost"),
-    DARK(15, "dark"),
-    DRAGON(16, "dragon"),
-    STEEL(17, "steel"),
-    FAIRY(18, "fairy");
+    NORMAL("normal"),
+    FIRE( "fire"),
+    WATER( "water"),
+    GRASS( "grass"),
+    ELECTRIC( "electric"),
+    ICE( "ice"),
+    FIGHTING( "fighting"),
+    POISON( "poison"),
+    GROUND( "ground"),
+    FLYING( "flying"),
+    PSYCHIC( "psychic"),
+    BUG( "bug"),
+    ROCK( "rock"),
+    GHOST( "ghost"),
+    DARK( "dark"),
+    DRAGON( "dragon"),
+    STEEL( "steel"),
+    FAIRY( "fairy");
 
-    private int id;
     private String name;
 
-    Type(int id, String name) {
-        this.id = id;
+    Type(String name) {
         this.name = name;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getName() {

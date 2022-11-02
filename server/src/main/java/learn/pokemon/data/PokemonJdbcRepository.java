@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -34,6 +35,7 @@ public class PokemonJdbcRepository implements PokemonRepository {
     }
 
     @Override
+    @Transactional
     public List<Pokemon> findAllPublicPokemon() {
         final String sql = "select pokemon_id, pokemon_name, pokemon_description, url, height, weight, birthday, " +
                 "app_user_id, ability_id, `type`, vibe, private " +
@@ -51,7 +53,11 @@ public class PokemonJdbcRepository implements PokemonRepository {
                 "app_user_id, ability_id, `type`, vibe, private " +
                 "from pokemon " +
                 "where app_user_id = ?;";
-        return jdbcTemplate.query(sql, new PokemonMapper(userRepository, abilityRepository), userId);
+        List<Pokemon> allPoke = jdbcTemplate.query(sql, new PokemonMapper(userRepository, abilityRepository), userId);
+        for (Pokemon p: allPoke) {
+            attachMoves(p);
+        }
+        return allPoke;
     }
 
     @Override
@@ -95,7 +101,7 @@ public class PokemonJdbcRepository implements PokemonRepository {
             ps.setString(3, pokemon.getUrl());
             ps.setDouble(4, pokemon.getHeight());
             ps.setDouble(5, pokemon.getWeight());
-            ps.setDate(6, pokemon.getBirthday() == null ? null : Date.valueOf(pokemon.getBirthday()));
+            ps.setDate(6, pokemon.getBirthday() == null ? Date.valueOf(LocalDate.now()) : Date.valueOf(pokemon.getBirthday()));
             ps.setInt(7, pokemon.getUser().getUserId());
             ps.setInt(8, pokemon.getAbility().getId());
             ps.setString(9, pokemon.getType().getName());

@@ -12,6 +12,12 @@ public class Move {
     public Move() {
     }
 
+    public Move(String name) {
+        id = 0;
+        description = "Need to change this";
+        this.name = name;
+    }
+
     public Move(int id, String name, String description) {
         this.id = id;
         this.name = name;
@@ -40,5 +46,14 @@ public class Move {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Move{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

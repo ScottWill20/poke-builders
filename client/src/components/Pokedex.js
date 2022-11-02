@@ -4,7 +4,7 @@ import Canvas from "./Canvas";
 import CreatePokeForm from "./CreatePokeForm";
 import PokeCard from './PokeCard';
 
-function Pokedex({ PokeCard }){
+function Pokedex({ pokemon }){
 
     const variants = {
         hidden: { y: 1000, 
@@ -61,18 +61,26 @@ function Pokedex({ PokeCard }){
         id="pokedex"
         >
             <div id="left-grid">
+                <div 
+                className="carousel-container"
+                >
+                    <div 
+                    className="carousel-img-container"
+                    >
+                    {/* {pokemon.map(p => <PokeCard key={p.pokemonId} pokemon={p} />)} */}
+                        {/* <img src={PokeCard.url} /> */}
+                        <PokeCard pokemon={pokemon} />
+                        {/* {PokeCard} */}
                 <div className='user-profile-pic-border'></div>
                 <img className='user-profile-pic'/>
-                <div className="carousel-container">
-                    <div className="carousel-img-container">
-                        {PokeCard}
-                    </div>
-                </div>
             </div>
             <div id="right-grid">
                 <div className="form-container">
-                    <CreatePokeForm />
+                    {/* <CreatePokeForm /> */}
+                    <CreatePokeForm currentPokemon={pokemon}/>
                 </div>
+            </div>
+            </div>
             </div>
         </motion.div>
         </>

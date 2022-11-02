@@ -40,6 +40,23 @@ public class Pokemon {
         this.isPrivate = isPrivate;
     }
 
+    public Pokemon(int id, String name, String description, String url, int height, int weight, String type,
+    String vibe, User user, ArrayList<Move> moves, Ability ability, boolean isPrivate) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.url = url;
+        this.height = height;
+        this.weight = weight;
+        this.birthday = LocalDate.now();
+        this.type = Type.getTypeByName(type);
+        this.vibe = Vibe.getVibeByName(vibe);
+        this.user = user;
+        this.moves = moves;
+        this.ability = ability;
+        this.isPrivate = isPrivate;
+    }
+
     public int getId() {
         return id;
     }

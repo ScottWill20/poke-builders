@@ -50,6 +50,11 @@ function UserProfile() {
             setIndex(index + 1);
         }
     }
+
+
+    const handleEditPokemon = () => {}
+
+
     if(!pokemon.length) {
         return <Loader />;
     }
@@ -78,7 +83,9 @@ function UserProfile() {
     return (
         <>
             <div>
-                <Pokedex PokeCard={<PokeCard pokemon={pokemon[index]} />} />
+                {/* <Pokedex PokeCard={<PokeCard pokemon={pokemon[index]} />} /> */}
+                <Pokedex pokemon={pokemon[index]}/>
+                {/* <PokeCard pokemon={pokemon[index]} /> */}
             </div>
             <motion.div 
                 variants={variants} 

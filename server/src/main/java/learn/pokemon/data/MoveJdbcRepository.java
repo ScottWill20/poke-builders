@@ -42,15 +42,14 @@ public class MoveJdbcRepository implements MoveRepository {
 
     @Override
     public Move createMove(Move move) {
-        final String sql = "insert into move (move_id, move_name, move_description) "
-                + "values (?, ?, ?);";
+        final String sql = "insert into move (move_name, move_description) "
+                + "values (?, ?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, move.getId());
-            ps.setString(2, move.getName());
-            ps.setString(3, move.getDescription());
+            ps.setString(1, move.getName());
+            ps.setString(2, move.getDescription());
             return ps;
         }, keyHolder);
 

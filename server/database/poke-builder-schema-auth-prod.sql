@@ -133,26 +133,14 @@ insert into move (move_name, move_description) values
 
 create table poke_move (
 pokemon_id int not null,
-move_id_1 int not null,
-move_id_2 int not null,
-move_id_3 int not null,
-move_id_4 int not null,
+move_id int not null,
 constraint pk_poke_move
-	primary key (pokemon_id, move_id_1, move_id_2, move_id_3, move_id_4),
+	primary key (pokemon_id, move_id),
 constraint fk_poke_move_pokemon_id
 	foreign key (pokemon_id)
     references pokemon(pokemon_id),
-constraint fk_poke_move_move_id_1
-	foreign key (move_id_1)
-    references move(move_id),
-constraint fk_poke_move_move_id_2
-	foreign key (move_id_2)
-    references move(move_id),
-constraint fk_poke_move_move_id_3
-	foreign key (move_id_3)
-    references move(move_id),
-constraint fk_poke_move_move_id_4
-	foreign key (move_id_4)
+constraint fk_poke_move_move_id
+	foreign key (move_id)
     references move(move_id)
 );
 
