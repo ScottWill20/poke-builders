@@ -132,8 +132,8 @@ a:hover {
 
 /*POKEDEX*/
 #pokedex {
-  height: 90vh;
-  width: 60vw;
+  height: 1100px;
+  width: 1080px;
   display: flex;
   flex-direction: row;
   /* flex-direction: row; */
@@ -159,16 +159,16 @@ a:hover {
   justify-content: center;
   align-items: center;
   margin-left: 5px;
-  height: 60px;
-  width: 60px;
+  height: 210px;
+  width: 201px;
   border: solid black;
   border-radius: 50%;
-  background-color: white;
 }
 
 .user-profile-pic {
-  height: 50px;
-  width: 50px;
+  z-index: 5;
+  height: 200px;
+  width: 200px;
   border-radius: 50%;
   border: solid black;
 }
@@ -205,8 +205,8 @@ a:hover {
   display: flex;
   flex-direction: column;
   position: absolute;
-  margin-top: 30%;
-  margin-left: 12%;
+  margin-top: 550px;
+  margin-left: 210px;
   justify-content: center;
   /* border: 2px solid pink; */
 }
