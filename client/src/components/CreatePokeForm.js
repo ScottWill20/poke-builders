@@ -95,7 +95,11 @@ function CreatePokeForm({handleClick, handleChange, currentPokemon}) {
     }, [currentPokemon]);
 
     const handleFormUpdate = (evt) => {
+        console.log(evt);
         const newPokemonData = {...pokemonData};
+        if (!evt.action) {
+            
+        
         if (evt.target.name === "private") {
             newPokemonData[evt.target.name] = evt.target.checked;
             console.log("Is private????", evt.target.checked);
@@ -104,6 +108,7 @@ function CreatePokeForm({handleClick, handleChange, currentPokemon}) {
         else {
             newPokemonData[evt.target.name] = evt.target.value;
         }
+    }
         newPokemonData.ability = pokemonData.ability;
         newPokemonData.moves = pokemonData.moves;
         setPokemonData(newPokemonData);
@@ -250,9 +255,10 @@ function CreatePokeForm({handleClick, handleChange, currentPokemon}) {
                         )
                     })}
                     value={selectedAbility}
-                    onChange={(o) =>  {
+                    onChange={(o, event) =>  {
                         setSelectedAbility(o);
-                        pokemonData.ability=o}}
+                        pokemonData.ability=o;
+                        handleFormUpdate(event)}}
                     className="basic-multi-select"
                     classNamePrefix="select"
                     required
@@ -262,9 +268,10 @@ function CreatePokeForm({handleClick, handleChange, currentPokemon}) {
                 <label htmlFor="moves">Moves:</label>
                 <Select 
                     placeholder={".Select..."}
-                    onChange={(o) => {
+                    onChange={(o, event) => {
                         setSelectedOptions(o);
-                        pokemonData.moves = o;}}
+                        pokemonData.moves = o;
+                        handleFormUpdate(event)}}
                     isMulti
                     name="moves"
                     options = {moves.map(move => {
