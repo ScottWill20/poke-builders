@@ -13,10 +13,10 @@ function PokeCard( {pokemon} ) { // pass in pokemon name, username, and img as p
             <motion.div 
             drag
             dragConstraints={{ left: 0, right: 300, top: 0, bottom: 300 }}
-            // dragElastic={0.2} 
+            dragElastic={0.2} 
             dragSnapToOrigin={true}
             dragMomentum={true}
-            // dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
+            dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
             className="container poke-card" 
                 whileHover={{ 
                     scale: 1.03,
