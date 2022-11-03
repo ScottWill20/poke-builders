@@ -90,7 +90,7 @@ return (
         <div>
           <label id= 'lineWidthLabel' htmlFor='lineWidth'>Line Width:</label>
           <input type="range" id="range-slider" min="1" max="100" className="slider" value={rangeSlider} onChange={e => setRangeSlider(e.target.value)} />
-          <span id='rangeSliderNumber'>{" "}{rangeSlider}</span>
+          <span id='rangeSliderNumber'>{" "}{rangeSlider}{'px'}</span>
         </div>
       </div>
     </div>
