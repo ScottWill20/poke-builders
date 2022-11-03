@@ -62,7 +62,8 @@ insert into ability (ability_name, ability_description) values
     ('CHLOROPHYLL',	'should really get this later'),
 	('GLUTTONY', 'should really get this later'),
     ('IRON-FIST', 'should really get this later'),
-    ('DEFIANT', 'should really get this later');
+    ('DEFIANT', 'should really get this later'),
+    ('VICTORY-STAR', 'should really get this later');
     
 create table `type` (
 type_id int primary key auto_increment,
